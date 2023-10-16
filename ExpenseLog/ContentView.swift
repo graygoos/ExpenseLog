@@ -19,6 +19,14 @@ struct ContentView: View {
                     Text("Log Expense")
                 }
             })
+            .navigationTitle("ExpenseLog")
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {}) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
         }
     }
 }
