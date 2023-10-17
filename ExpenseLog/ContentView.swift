@@ -16,7 +16,7 @@ struct ContentView: View {
                 Text("You have not logged any expenses today.")
             }, actions: {
                 Button(action: {}) {
-                    Text("Log Expense")
+                    Text("Add Expense")
                 }
             })
             .navigationTitle("ExpenseLog")
