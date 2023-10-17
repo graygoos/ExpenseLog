@@ -28,6 +28,21 @@ struct ContentView: View {
                 }
             }
         }
+        
+        TabView {
+            TodayView()
+                .tabItem {
+                    Label("Today", systemImage: "calendar")
+                }
+            HistoryView()
+                .tabItem {
+                    Label("History", systemImage: "clock")
+                }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
+        }
     }
 }
 
