@@ -11,9 +11,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ContentUnavailableView(label: {
-                Label("No Expenses", systemImage: "creditcard.fill")
+                Label("No Expense logged.", systemImage: "creditcard.fill")
             }, description: {
-                Text("You have not logged any expenses today.")
+                Text("You have not logged any expense today.")
             }, actions: {
                 Button(action: {}) {
                     Text("Add Expense")
