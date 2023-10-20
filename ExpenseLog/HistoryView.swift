@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HistoryView: View {
     var body: some View {
-        Text(" ")
+        Text("History ")
+            .foregroundStyle(.blue)
     }
 }
 

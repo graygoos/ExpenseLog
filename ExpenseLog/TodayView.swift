@@ -9,7 +9,25 @@ import SwiftUI
 
 struct TodayView: View {
     var body: some View {
-        Text(" ")
+        NavigationStack {
+            ContentUnavailableView(label: {
+                Label("No Expense logged.", systemImage: "creditcard.fill")
+            }, description: {
+                Text("Logged expenses will be listed here.")
+            }, actions: {
+                Button(action: {}) {
+                    Text("Add Expense")
+                }
+            })
+            .navigationTitle("ExpenseLog")
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {}) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+        }
     }
 }
 

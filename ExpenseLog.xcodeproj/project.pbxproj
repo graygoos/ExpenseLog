@@ -105,6 +105,7 @@
 				05A6374F2ADEE36F00C47313 /* TodayView.swift */,
 				05A637512ADEE3A000C47313 /* HistoryView.swift */,
 				05A637532ADEE3B500C47313 /* SettingsView.swift */,
+				056D40EB2AE2AC2500DC628F /* Model */,
 				051C99BE2ADD836000B60C65 /* Assets.xcassets */,
 				051C99C02ADD836000B60C65 /* Preview Content */,
 			);
@@ -134,6 +135,13 @@
 				051C99D72ADD836000B60C65 /* ExpenseLogUITestsLaunchTests.swift */,
 			);
 			path = ExpenseLogUITests;
+			sourceTree = "<group>";
+		};
+		056D40EB2AE2AC2500DC628F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

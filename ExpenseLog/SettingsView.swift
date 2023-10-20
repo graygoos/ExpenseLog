@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        Text(" ")
+        Text("Settings")
+            .foregroundStyle(.blue)
     }
 }
 
