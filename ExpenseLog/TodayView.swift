@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TodayView: View {
+    @State private var showModal = false
+    
     var body: some View {
         NavigationStack {
             ContentUnavailableView(label: {
@@ -15,16 +17,23 @@ struct TodayView: View {
             }, description: {
                 Text("Logged expenses will be listed here.")
             }, actions: {
-                Button(action: {}) {
+                Button(action: {
+                    self.showModal.toggle()
+                }) {
                     Text("Add Expense")
                 }
             })
             .navigationTitle("ExpenseLog")
             .toolbar {
                 ToolbarItem {
-                    Button(action: {}) {
+                    Button(action: {
+                        self.showModal.toggle()
+                    }) {
                         Image(systemName: "plus")
                     }
+                    .sheet(isPresented: $showModal, content: {
+                        ExpenseEntryView()
+                    })
                 }
             }
         }

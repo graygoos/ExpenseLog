@@ -19,6 +19,7 @@
 		05A637542ADEE3B500C47313 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A637532ADEE3B500C47313 /* SettingsView.swift */; };
 		05F2AEA32B04CE7600AE7C7F /* ExpenseLogContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */; };
 		05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA92B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld */; };
+		05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		05A637532ADEE3B500C47313 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogContainer.swift; sourceTree = "<group>"; };
 		05F2AEAA2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensesDataModel.xcdatamodel; sourceTree = "<group>"; };
+		05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				051C99BC2ADD836000B60C65 /* ContentView.swift */,
 				05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */,
 				05A6374F2ADEE36F00C47313 /* TodayView.swift */,
+				05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */,
 				05A637512ADEE3A000C47313 /* HistoryView.swift */,
 				05A637532ADEE3B500C47313 /* SettingsView.swift */,
 				056D40EB2AE2AC2500DC628F /* Model */,
@@ -286,6 +289,7 @@
 				05A637522ADEE3A000C47313 /* HistoryView.swift in Sources */,
 				05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */,
 				05A637502ADEE36F00C47313 /* TodayView.swift in Sources */,
+				05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */,
 				051C99BB2ADD836000B60C65 /* ExpenseLogApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
