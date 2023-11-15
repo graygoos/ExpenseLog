@@ -11,7 +11,7 @@ class ExpenseLogContainer {
     let persistentContainer: NSPersistentContainer
     
     init() {
-        persistentContainer = NSPersistentContainer(name: "Expenses")
+        persistentContainer = NSPersistentContainer(name: "ExpensesDataModel")
         persistentContainer.loadPersistentStores { _, _ in }
     }
 }
