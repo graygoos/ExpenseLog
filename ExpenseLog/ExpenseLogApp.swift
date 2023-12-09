@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct ExpenseLogApp: App {
-    var body: some Scene {
+        var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, ExpenseLogContainer().persistentContainer.viewContext)
         }
     }
 }

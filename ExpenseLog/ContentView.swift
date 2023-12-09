@@ -11,15 +11,15 @@ struct ContentView: View {
     var body: some View {
         
         TabView {
-            TodayView()
+            TodayTabView()
                 .tabItem {
                     Label("Today", systemImage: "calendar")
                 }
-            HistoryView()
+            HistoryTabView()
                 .tabItem {
                     Label("History", systemImage: "clock")
                 }
-            SettingsView()
+            SettingsTabView()
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
@@ -29,4 +29,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+//        .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
 }

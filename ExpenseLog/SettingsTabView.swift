@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  SettingsTabView.swift
 //  ExpenseLog
 //
 //  Created by Femi Aliu on 17/10/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct SettingsTabView: View {
     var body: some View {
         Text("Settings")
             .foregroundStyle(.blue)
@@ -15,5 +15,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsTabView()
 }

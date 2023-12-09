@@ -1,5 +1,5 @@
 //
-//  TodayView.swift
+//  HistoryTabView.swift
 //  ExpenseLog
 //
 //  Created by Femi Aliu on 17/10/2023.
@@ -7,23 +7,24 @@
 
 import SwiftUI
 
-struct TodayView: View {
+struct HistoryTabView: View {
     @State private var showModal = false
     
     var body: some View {
         NavigationStack {
             ContentUnavailableView(label: {
-                Label("No Expense logged.", systemImage: "creditcard.fill")
+                Label("No Expense logged.", systemImage: "calendar.badge.clock")
             }, description: {
-                Text("Logged expenses will be listed here.")
+                Text("History of logged expenses will be shown here.")
             }, actions: {
-                Button(action: {
-                    self.showModal.toggle()
-                }) {
-                    Text("Add Expense")
-                }
+//                Button(action: {
+//
+//                }) {
+//                    Text("Add Expense")
+//                }
+//                .buttonStyle(.borderedProminent)
             })
-            .navigationTitle("ExpenseLog")
+            .navigationTitle("History")
             .toolbar {
                 ToolbarItem {
                     Button(action: {
@@ -31,7 +32,9 @@ struct TodayView: View {
                     }) {
                         Image(systemName: "plus")
                     }
-                    .sheet(isPresented: $showModal, content: {
+                    .sheet(isPresented: $showModal, onDismiss: {
+                        print("expenseEntryView dismissed")
+                    }, content: {
                         ExpenseEntryView()
                     })
                 }
@@ -41,5 +44,5 @@ struct TodayView: View {
 }
 
 #Preview {
-    TodayView()
+    HistoryTabView()
 }

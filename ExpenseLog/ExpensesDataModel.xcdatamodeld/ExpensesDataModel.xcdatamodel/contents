@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="ExpensesEntity" representedClassName="ExpensesEntity" syncable="YES" codeGenerationType="class"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ExpensesEntity" representedClassName="ExpensesEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="currency" optional="YES" attributeType="String"/>
+        <attribute name="dailyTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="expenseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expenseID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="expenseLocation" optional="YES" attributeType="String"/>
+        <attribute name="expenseTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isBudgeted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="itemAmount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="itemDescription" optional="YES" attributeType="String"/>
+        <attribute name="itemName" optional="YES" attributeType="String"/>
+        <attribute name="itemQuantity" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="itemUnit" optional="YES" attributeType="String"/>
+        <attribute name="payee" optional="YES" attributeType="String"/>
+        <attribute name="paymentType" optional="YES" attributeType="String"/>
+        <attribute name="recurringExpense" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="timeEntered" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
 </model>
