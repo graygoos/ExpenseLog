@@ -15,10 +15,11 @@ struct TodayTabView: View {
     
     @State private var showModal = false
     
-//    let dateFormatter = DateFormatter()
-    let todayDate = Date.now
-    
-    
+    var currentDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyy"
+        return dateFormatter.string(from: Date())
+    }
     
     var body: some View {
         NavigationStack {
@@ -34,7 +35,7 @@ struct TodayTabView: View {
                         }
                     }
                 }
-                .navigationTitle("ExpenseLog")
+                .navigationTitle(Text(currentDate))
                 .toolbar {
                     ToolbarItem {
                         Button(action: {
@@ -59,6 +60,6 @@ struct TodayTabView: View {
 #Preview {
     Group {
         TodayTabView()
-//            .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
+            .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
     }
 }
