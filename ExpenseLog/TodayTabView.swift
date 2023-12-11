@@ -25,17 +25,20 @@ struct TodayTabView: View {
         NavigationStack {
             if !expenses.isEmpty {
                 List {
-                    ForEach(expenses) { expense in
-                        VStack(alignment: .leading) {
-                            Text(expense.viewItemName)
-                                .font(.title)
-                            Text(expense.viewItemDescription)
-                                .font(.subheadline)
-                            Text(expense.paymentType ?? "nil")
+                    Section(header: TodayExpenseSectionHeader(), footer: TodayExpenseSectionFooter()) {
+                        ForEach(expenses) { expense in
+                            VStack(alignment: .leading) {
+                                Text(expense.viewItemName)
+                                    .font(.title)
+                                Text(expense.viewItemDescription)
+                                    .font(.subheadline)
+                                Text(expense.paymentType ?? "nil")
+                            }
                         }
                     }
                 }
                 .navigationTitle(Text(currentDate))
+                .listStyle(.plain)
                 .toolbar {
                     ToolbarItem {
                         Button(action: {

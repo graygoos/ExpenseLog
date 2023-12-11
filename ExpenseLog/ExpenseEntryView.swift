@@ -25,12 +25,19 @@ struct ExpenseEntryView: View {
     @State private var recurringExpense = false
     @State private var isBudgeted = false
     @State private var expenseFrequency = "One-time"
+    @State private var currency = "NGN"
     
     var itemUnits = ["Unknown", "Pack", "Tin", "Carton", "Bag", "Box", "Bottles", "Jar", "Can", "Piece", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrapper", "Foil", "Container", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Other"]
     
     var paymentMethod = ["Cash", "Credit Card", "Debit Card", "Cheque", "Electronic Funds Transfer", "Cryptocurrency"]
     
     var frequency = ["Hourly", "Daily", "Weekly", "Monthly", "Quarterly", "Annually", "One-time"]
+    
+//    var allCurrencies = [
+    let allCurrencies: [String] = {
+        let locales = Locale.availableIdentifiers.map { Locale(identifier: $0) }
+        return locales.compactMap { $0.currency?.identifier }
+    }()
     
     @State private var showModal = false
     
@@ -46,7 +53,11 @@ struct ExpenseEntryView: View {
 //                    HStack {
 //                        CurrencyPicker()
 //                    }
-                    Text("Currency")
+                    Picker("Currency", selection: $currency) {
+                        ForEach(allCurrencies, id: \.self) { unit in
+                            Text(unit)
+                        }
+                    }
                 }
                 Section {
                     Picker("Payment Method", selection: $paymentType) {

@@ -29,5 +29,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-//        .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
+        .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
 }
