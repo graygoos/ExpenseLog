@@ -118,31 +118,34 @@ struct ExpenseEntryView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        let expense = ExpensesEntity(context: moc)
-                        expense.itemName = itemName
-                        expense.itemAmount = itemAmount
-                        expense.expenseCurrency = expenseCurrency
-                        expense.paymentType = paymentType
-                        expense.recurringExpense = recurringExpense
-                        expense.isBudgeted = isBudgeted
-                        expense.itemQuantity = Int16(itemQuantity)
-                        expense.itemUnit = itemUnit
-                        expense.payee = payee
-                        expense.expenseLocation = expenseLocation
-                        expense.itemDescription = itemDescription
-                        expense.expenseFrequency = expenseFrequency
-                        expense.expenseDate = expenseDate
-                        
-                        try? moc.save()
-                        
-                        print("save button tapped")
+                        persistExpense()
                         dismiss()
+                        print("save button tapped")
                     }) {
                         Text("Add")
                     }
                 }
             }
         }
+    }
+    
+    func persistExpense() {
+        let expense = ExpensesEntity(context: moc)
+        expense.itemName = itemName
+        expense.itemAmount = itemAmount
+        expense.expenseCurrency = expenseCurrency
+        expense.paymentType = paymentType
+        expense.recurringExpense = recurringExpense
+        expense.isBudgeted = isBudgeted
+        expense.itemQuantity = Int16(itemQuantity)
+        expense.itemUnit = itemUnit
+        expense.payee = payee
+        expense.expenseLocation = expenseLocation
+        expense.itemDescription = itemDescription
+        expense.expenseFrequency = expenseFrequency
+        expense.expenseDate = expenseDate
+        
+        try? moc.save()
     }
 }
 
