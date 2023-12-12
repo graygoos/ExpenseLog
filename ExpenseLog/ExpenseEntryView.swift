@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpenseEntryView: View {
-//    let expense: ExpensesEntity?
+    //    let expense: ExpensesEntity?
     
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
@@ -33,7 +33,6 @@ struct ExpenseEntryView: View {
     
     var frequency = ["Hourly", "Daily", "Weekly", "Monthly", "Quarterly", "Annually", "One-time"]
     
-//    var allCurrencies = [
     let allCurrencies: [String] = {
         let locales = Locale.availableIdentifiers.map { Locale(identifier: $0) }
         return locales.compactMap { $0.currency?.identifier }
@@ -50,9 +49,9 @@ struct ExpenseEntryView: View {
                 Section("Enter item amount") {
                     TextField("Item Amount", value: $itemAmount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
                         .keyboardType(.decimalPad)
-//                    HStack {
-//                        CurrencyPicker()
-//                    }
+                    //                    HStack {
+                    //                        CurrencyPicker()
+                    //                    }
                     Picker("Currency", selection: $currency) {
                         ForEach(allCurrencies, id: \.self) { unit in
                             Text(unit)
@@ -83,7 +82,7 @@ struct ExpenseEntryView: View {
                     VStack {
                         HStack { // V2
                             TextField("Location", text: $expenseLocation)
-    //                        Image(systemName: "mappin.and.ellipse")
+                            //                        Image(systemName: "mappin.and.ellipse")
                             Button(action: {}) {
                                 Image(systemName: "mappin.and.ellipse")
                             }
@@ -105,45 +104,35 @@ struct ExpenseEntryView: View {
                 Section("Expense date") {
                     DatePicker("Date", selection: $expenseDate)
                 }
-                /*
-                Section {
-                    Button(action: {
-                        print(itemUnits.count)
-                        print(paymentMethod.count)
-                        self.showModal.toggle()
-//                        dismiss()
-                    }) {
-                        Text("Add another expense")
-                    }
-                    .frame(maxWidth: .infinity)
-//                    .buttonStyle(.borderedProminent)
-                }*/
             }
+            .navigationTitle("Enter expense")
             .toolbar {
-                Button(action: {
-                    print("cancel button tapped")
-                    dismiss()
-                }) {
-                    Text("Cancel")
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        print("cancel button tapped")
+                        dismiss()
+                    }) {
+                        Text("Cancel")
+                    }
                 }
-                Spacer()
                 
-                Button(action: {
-                    let expense = ExpensesEntity(context: moc)
-                    expense.itemName = itemName
-                    expense.itemUnit = itemUnit
-//                    expense.itemAmount = itemAmount
-                    expense.itemDescription = itemDescription
-                    expense.paymentType = paymentType
-                    
-                    try? moc.save()
-                    
-                    print("save button tapped")
-                    dismiss()
-                }) {
-                    Text("Add")
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        let expense = ExpensesEntity(context: moc)
+                        expense.itemName = itemName
+                        expense.itemUnit = itemUnit
+                        //                    expense.itemAmount = itemAmount
+                        expense.itemDescription = itemDescription
+                        expense.paymentType = paymentType
+                        
+                        try? moc.save()
+                        
+                        print("save button tapped")
+                        dismiss()
+                    }) {
+                        Text("Add")
+                    }
                 }
-                .navigationTitle("Enter expense")
             }
         }
     }
