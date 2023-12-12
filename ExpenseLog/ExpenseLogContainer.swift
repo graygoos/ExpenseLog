@@ -61,16 +61,16 @@ extension ExpenseLogContainer {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy"
         
-        addExpense(moc: moc, itemName: "Biscuits", itemAmount: 200, itemQuantity: 1, itemDescription: "Digestive Hobnobs", payee: "SHOPRITE", expenseTotal: 349, currency: "NGN", expenseDate: dateFormatter.date(from: "04-12-2023"), paymentType: "Cash")
+        addExpense(moc: moc, itemName: "Biscuits", itemAmount: 200, itemQuantity: 1, itemDescription: "Digestive Hobnobs", payee: "SHOPRITE", expenseTotal: 349, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "04-12-2023"), paymentType: "Cash")
         
-        addExpense(moc: moc, itemName: "Chocolate", itemAmount: 650, itemQuantity: 2, itemDescription: "Mars Chocolate", payee: "SHOPRITE", expenseTotal: 1300, currency: "NGN", expenseDate: dateFormatter.date(from: "04-12-2023"), paymentType: "Debit Card")
+        addExpense(moc: moc, itemName: "Chocolate", itemAmount: 650, itemQuantity: 2, itemDescription: "Mars Chocolate", payee: "SHOPRITE", expenseTotal: 1300, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "04-12-2023"), paymentType: "Debit Card")
         
-        addExpense(moc: moc, itemName: "Canoe Soap", itemAmount: 250, itemQuantity: 2, itemDescription: "Washing Soap", payee: "SHOPRITE", expenseTotal: 500, currency: "NGN", expenseDate: dateFormatter.date(from: "04-12-2023"), paymentType: "Cash")
+        addExpense(moc: moc, itemName: "Canoe Soap", itemAmount: 250, itemQuantity: 2, itemDescription: "Washing Soap", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "04-12-2023"), paymentType: "Cash")
         
         try? moc.save()
     }
     
-    func addExpense(moc: NSManagedObjectContext, itemName: String, itemAmount: Double, itemQuantity: Double, itemDescription: String, payee: String, expenseTotal: Double, currency: String, expenseDate: Date?, paymentType: String) {
+    func addExpense(moc: NSManagedObjectContext, itemName: String, itemAmount: Double, itemQuantity: Double, itemDescription: String, payee: String, expenseTotal: Double, expenseCurrency: String, expenseDate: Date?, paymentType: String) {
         let expense = ExpensesEntity(context: moc)
         
         expense.itemName = itemName
@@ -80,7 +80,7 @@ extension ExpenseLogContainer {
         expense.payee = payee
         expense.expenseTotal = expenseTotal
 //        expense.dailyTotal = dailyTotal
-        expense.currency = currency
+        expense.expenseCurrency = expenseCurrency
         expense.paymentType = paymentType
     }
 }

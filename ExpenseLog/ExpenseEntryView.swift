@@ -25,7 +25,7 @@ struct ExpenseEntryView: View {
     @State private var recurringExpense = false
     @State private var isBudgeted = false
     @State private var expenseFrequency = "One-time"
-    @State private var currency = "NGN"
+    @State private var expenseCurrency = "NGN"
     
     var itemUnits = ["Unknown", "Pack", "Tin", "Carton", "Bag", "Box", "Bottles", "Jar", "Can", "Piece", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrapper", "Foil", "Container", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Other"]
     
@@ -52,7 +52,7 @@ struct ExpenseEntryView: View {
                     //                    HStack {
                     //                        CurrencyPicker()
                     //                    }
-                    Picker("Currency", selection: $currency) {
+                    Picker("Currency", selection: $expenseCurrency) {
                         ForEach(allCurrencies, id: \.self) { unit in
                             Text(unit)
                         }
@@ -121,7 +121,7 @@ struct ExpenseEntryView: View {
                         let expense = ExpensesEntity(context: moc)
                         expense.itemName = itemName
                         expense.itemAmount = itemAmount
-                        expense.currency = currency
+                        expense.expenseCurrency = expenseCurrency
                         expense.paymentType = paymentType
                         expense.recurringExpense = recurringExpense
                         expense.isBudgeted = isBudgeted

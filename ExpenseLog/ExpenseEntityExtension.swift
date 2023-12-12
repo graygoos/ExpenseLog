@@ -30,7 +30,7 @@ extension ExpensesEntity {
     }
     
     var viewCurrency: String {
-        currency ?? "No currency selected"
+        expenseCurrency ?? "No currency selected"
     }
     
     var viewExpenseLocation: String {
