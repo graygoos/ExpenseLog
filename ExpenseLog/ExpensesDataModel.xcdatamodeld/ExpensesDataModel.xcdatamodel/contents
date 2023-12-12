@@ -4,6 +4,7 @@
         <attribute name="currency" optional="YES" attributeType="String"/>
         <attribute name="dailyTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="expenseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expenseFrequency" optional="YES" attributeType="String"/>
         <attribute name="expenseID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="expenseLocation" optional="YES" attributeType="String"/>
         <attribute name="expenseTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -11,7 +12,7 @@
         <attribute name="itemAmount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="itemName" optional="YES" attributeType="String"/>
-        <attribute name="itemQuantity" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="itemQuantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="itemUnit" optional="YES" attributeType="String"/>
         <attribute name="payee" optional="YES" attributeType="String"/>
         <attribute name="paymentType" optional="YES" attributeType="String"/>

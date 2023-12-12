@@ -75,7 +75,7 @@ extension ExpenseLogContainer {
         
         expense.itemName = itemName
         expense.itemAmount = itemAmount
-        expense.itemQuantity = itemQuantity
+        expense.itemQuantity = Int16(itemQuantity)
         expense.itemDescription = itemDescription
         expense.payee = payee
         expense.expenseTotal = expenseTotal
