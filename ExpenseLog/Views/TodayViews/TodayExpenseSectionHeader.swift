@@ -10,13 +10,7 @@ import SwiftUI
 struct TodayExpenseSectionHeader: View {
     var body: some View {
         HStack {
-            Text("S/No:")
-            Spacer()
             Text("Item")
-            Spacer()
-            Text("Quantity")
-            Spacer()
-            Text("Unit")
             Spacer()
             Text("Amount(₦)")
         }

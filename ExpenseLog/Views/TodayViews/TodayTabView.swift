@@ -9,11 +9,17 @@ import SwiftUI
 
 struct TodayTabView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest<ExpensesEntity>(sortDescriptors: [SortDescriptor(\.itemName)])
-    private var expenses
-    @State private var newExpense = false
+
+    @FetchRequest<ExpensesEntity>(
+        sortDescriptors: [],
+            predicate: NSPredicate(format: "%K >= %@ AND %K <= %@", argumentArray: [#keyPath(ExpensesEntity.expenseDate), Date().startDay as NSDate, #keyPath(ExpensesEntity.expenseDate), Date().endDayOf as NSDate]),
+            animation: .default
+        ) private var expenses
     
+    @State private var newExpense = false
     @State private var showModal = false
+    
+    let todayDate = Date()
     
     var currentDate: String {
         let dateFormatter = DateFormatter()
@@ -25,14 +31,12 @@ struct TodayTabView: View {
         NavigationStack {
             if !expenses.isEmpty {
                 List {
-                    Section(header: TodayExpenseSectionHeader(), footer: TodayExpenseSectionFooter()) {
+                    Section(header: TodayExpenseSectionHeader(), footer: TodayExpenseSectionFooter(expenses: expenses)) {
                         ForEach(expenses) { expense in
-                            VStack(alignment: .leading) {
+                            HStack {
                                 Text(expense.viewItemName)
-                                    .font(.title)
-                                Text(expense.viewItemDescription)
-                                    .font(.subheadline)
-                                Text(expense.paymentType ?? "nil")
+                                Spacer()
+                                Text(((expense.itemAmount))! as Decimal, format: .currency(code: "NGN"))
                             }
                         }
                     }
@@ -60,9 +64,31 @@ struct TodayTabView: View {
     }
 }
 
+// Locale.current.currency?.identifier ?? "NGN"
+
 #Preview {
     Group {
         TodayTabView()
             .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
+    }
+}
+
+extension Date {
+    var startDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    var endDayOf: Date {
+        return Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
+    }
+}
+
+extension Decimal {
+    func currencyFormattedString() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = "NGN"
+        
+        return formatter.string(from: self as NSDecimalNumber) ?? ""
     }
 }

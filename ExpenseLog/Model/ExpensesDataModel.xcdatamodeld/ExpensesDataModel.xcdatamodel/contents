@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ExpensesEntity" representedClassName="ExpensesEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="dailyTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dailyTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="expenseCurrency" optional="YES" attributeType="String"/>
         <attribute name="expenseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="expenseFrequency" optional="YES" attributeType="String"/>
         <attribute name="expenseID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="expenseLocation" optional="YES" attributeType="String"/>
-        <attribute name="expenseTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="expenseTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="isBudgeted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="itemAmount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="itemAmount" optional="YES" attributeType="Decimal" defaultValueString="0"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="itemName" optional="YES" attributeType="String"/>
         <attribute name="itemQuantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="itemUnit" optional="YES" attributeType="String"/>
-        <attribute name="monthlyTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="monthlyTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="payee" optional="YES" attributeType="String"/>
         <attribute name="paymentType" optional="YES" attributeType="String"/>
         <attribute name="recurringExpense" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="timeEntered" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="weeklyTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="weeklyTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
     </entity>
 </model>

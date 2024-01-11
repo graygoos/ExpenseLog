@@ -16,7 +16,7 @@ struct ExpenseEntryView: View {
     @State private var itemName = ""
     @State private var itemAmount = 0.00
     @State private var itemDescription = ""
-    @State private var itemUnit = "Unknown"
+    @State private var itemUnit = "Non"
     @State private var payee = ""
     @State private var expenseLocation = ""
     @State private var itemQuantity = 1
@@ -27,7 +27,7 @@ struct ExpenseEntryView: View {
     @State private var expenseFrequency = "One-time"
     @State private var expenseCurrency = "NGN"
     
-    var itemUnits = ["Unknown", "Pack", "Tin", "Carton", "Bag", "Box", "Bottles", "Jar", "Can", "Piece", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrapper", "Foil", "Container", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Other"]
+    var itemUnits = ["Non", "Pack", "Tin", "Carton", "Bag", "Box", "Bar", "Bottles", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrapper", "Foil", "Container", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Other"]
     
     var paymentMethod = ["Cash", "Credit Card", "Debit Card", "Cheque", "Electronic Funds Transfer", "Cryptocurrency"]
     
@@ -46,7 +46,7 @@ struct ExpenseEntryView: View {
                 Section("Item purchased") {
                     TextField("Item name", text: $itemName)
                 }
-                Section("Enter item amount") {
+                Section("Enter item amount (Unit Price)") {
                     TextField("Item Amount", value: $itemAmount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
                         .keyboardType(.decimalPad)
                     //                    HStack {
@@ -132,7 +132,7 @@ struct ExpenseEntryView: View {
     func persistExpense() {
         let expense = ExpensesEntity(context: moc)
         expense.itemName = itemName
-        expense.itemAmount = itemAmount
+        expense.itemAmount = NSDecimalNumber(decimal: Decimal(itemAmount))
         expense.expenseCurrency = expenseCurrency
         expense.paymentType = paymentType
         expense.recurringExpense = recurringExpense

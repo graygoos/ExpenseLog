@@ -21,6 +21,14 @@ extension ExpensesEntity {
         itemUnit ?? "No Unit"
     }
     
+    var viewItemAmount: String {
+        "\(itemAmount ?? 0)"
+    }
+    
+    var viewItemQuantity: String {
+        "\(itemQuantity)"
+    }
+    
     var viewPayee: String {
         payee ?? "No Vendor entered"
     }
