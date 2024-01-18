@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ExpenseEntryView: View {
-    //    let expense: ExpensesEntity?
-    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
@@ -49,9 +47,6 @@ struct ExpenseEntryView: View {
                 Section("Enter item amount (Unit Price)") {
                     TextField("Item Amount", value: $itemAmount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
                         .keyboardType(.decimalPad)
-                    //                    HStack {
-                    //                        CurrencyPicker()
-                    //                    }
                     Picker("Currency", selection: $expenseCurrency) {
                         ForEach(allCurrencies, id: \.self) { unit in
                             Text(unit)
