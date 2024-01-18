@@ -36,7 +36,7 @@ struct TodayTabView: View {
                             HStack {
                                 Text(expense.viewItemName)
                                 Spacer()
-                                Text(((expense.itemAmount))! as Decimal, format: .currency(code: "NGN"))
+                                Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
                             }
                         }
                     }
