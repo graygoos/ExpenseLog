@@ -18,7 +18,7 @@ struct ExpenseEntryView: View {
     @State private var payee = ""
     @State private var expenseLocation = ""
     @State private var itemQuantity = 1
-    @State private var paymentType = "Cash"
+    @State private var paymentType = "Debit Card"
     @State private var expenseDate = Date()
     @State private var recurringExpense = false
     @State private var isBudgeted = false
