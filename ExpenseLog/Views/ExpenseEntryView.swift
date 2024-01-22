@@ -27,7 +27,7 @@ struct ExpenseEntryView: View {
     
     var itemUnits = ["Non", "Pack", "Tin", "Carton", "Bag", "Box", "Bar", "Bottles", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrapper", "Foil", "Container", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Other"]
     
-    var paymentMethod = ["Cash", "Credit Card", "Debit Card", "Cheque", "Electronic Funds Transfer", "Cryptocurrency"]
+    var paymentMethod = ["Debit Card", "Cash", "Electronic Funds Transfer", "Credit Card", "Cheque",  "Cryptocurrency"]
     
     var frequency = ["Hourly", "Daily", "Weekly", "Monthly", "Quarterly", "Annually", "One-time"]
     
