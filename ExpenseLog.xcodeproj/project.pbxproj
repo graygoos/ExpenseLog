@@ -20,6 +20,8 @@
 		05A637502ADEE36F00C47313 /* TodayTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6374F2ADEE36F00C47313 /* TodayTabView.swift */; };
 		05A637522ADEE3A000C47313 /* HistoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A637512ADEE3A000C47313 /* HistoryTabView.swift */; };
 		05A637542ADEE3B500C47313 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A637532ADEE3B500C47313 /* SettingsTabView.swift */; };
+		05AC0DAE2B61572500DE0F0D /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AC0DAD2B61572500DE0F0D /* Date+Ext.swift */; };
+		05AC0DB02B61574E00DE0F0D /* Decimal+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AC0DAF2B61574E00DE0F0D /* Decimal+Ext.swift */; };
 		05CC27A32B17996200D47F4D /* CurrencyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CC27A22B17996200D47F4D /* CurrencyPicker.swift */; };
 		05D3ADB22B1E1DE80023A0E3 /* ExpenseEntityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D3ADB12B1E1DE80023A0E3 /* ExpenseEntityExtension.swift */; };
 		05D3ADB42B1F4FEB0023A0E3 /* TodaysExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D3ADB32B1F4FEB0023A0E3 /* TodaysExpensesView.swift */; };
@@ -64,6 +66,8 @@
 		05A6374F2ADEE36F00C47313 /* TodayTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTabView.swift; sourceTree = "<group>"; };
 		05A637512ADEE3A000C47313 /* HistoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabView.swift; sourceTree = "<group>"; };
 		05A637532ADEE3B500C47313 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
+		05AC0DAD2B61572500DE0F0D /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		05AC0DAF2B61574E00DE0F0D /* Decimal+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Ext.swift"; sourceTree = "<group>"; };
 		05CC27A22B17996200D47F4D /* CurrencyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPicker.swift; sourceTree = "<group>"; };
 		05D3ADB12B1E1DE80023A0E3 /* ExpenseEntityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntityExtension.swift; sourceTree = "<group>"; };
 		05D3ADB32B1F4FEB0023A0E3 /* TodaysExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysExpensesView.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				05B13EA02B34CA9900214F10 /* Views */,
 				051C99BE2ADD836000B60C65 /* Assets.xcassets */,
 				051C99C02ADD836000B60C65 /* Preview Content */,
+				05AC0DAC2B61570300DE0F0D /* Extensions */,
 				053140C52B506609002E90D9 /* Experiments */,
 			);
 			path = ExpenseLog;
@@ -187,6 +192,15 @@
 				05D3ADB12B1E1DE80023A0E3 /* ExpenseEntityExtension.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		05AC0DAC2B61570300DE0F0D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				05AC0DAD2B61572500DE0F0D /* Date+Ext.swift */,
+				05AC0DAF2B61574E00DE0F0D /* Decimal+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		05B13EA02B34CA9900214F10 /* Views */ = {
@@ -333,6 +347,7 @@
 			files = (
 				050F22AD2B28A8C000632451 /* TodayExpenseListRowView.swift in Sources */,
 				05A637542ADEE3B500C47313 /* SettingsTabView.swift in Sources */,
+				05AC0DAE2B61572500DE0F0D /* Date+Ext.swift in Sources */,
 				05D3ADB42B1F4FEB0023A0E3 /* TodaysExpensesView.swift in Sources */,
 				05D3ADB82B24B2020023A0E3 /* CurrentDayExpenses.swift in Sources */,
 				05F2AEA32B04CE7600AE7C7F /* ExpenseLogContainer.swift in Sources */,
@@ -347,6 +362,7 @@
 				05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */,
 				05D3ADB62B24B1480023A0E3 /* TodayEmptyView.swift in Sources */,
 				051C99BB2ADD836000B60C65 /* ExpenseLogApp.swift in Sources */,
+				05AC0DB02B61574E00DE0F0D /* Decimal+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

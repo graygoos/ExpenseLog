@@ -76,23 +76,3 @@ struct TodayTabView: View {
             .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
     }
 }
-
-extension Date {
-    var startDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-    
-    var endDayOf: Date {
-        return Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
-    }
-}
-
-extension Decimal {
-    func currencyFormattedString() -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencyCode = "NGN"
-        
-        return formatter.string(from: self as NSDecimalNumber) ?? ""
-    }
-}
