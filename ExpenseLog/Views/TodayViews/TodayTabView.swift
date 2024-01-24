@@ -33,10 +33,14 @@ struct TodayTabView: View {
                 List {
                     Section(header: TodayExpenseSectionHeader(), footer: TodayExpenseSectionFooter(expenses: expenses)) {
                         ForEach(expenses) { expense in
-                            HStack {
-                                Text(expense.viewItemName)
-                                Spacer()
-                                Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
+                            NavigationLink {
+                                ExpenseEntryView()
+                            } label: {
+                                HStack {
+                                    Text(expense.viewItemName)
+                                    Spacer()
+                                    Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
+                                }
                             }
                         }
                     }

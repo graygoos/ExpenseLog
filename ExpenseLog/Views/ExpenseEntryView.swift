@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ExpenseEntryView: View {
+//    let expense: ExpensesEntity?
+    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     

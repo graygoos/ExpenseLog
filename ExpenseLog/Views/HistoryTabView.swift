@@ -17,12 +17,6 @@ struct HistoryTabView: View {
             }, description: {
                 Text("History of logged expenses will be shown here.")
             }, actions: {
-//                Button(action: {
-//
-//                }) {
-//                    Text("Add Expense")
-//                }
-//                .buttonStyle(.borderedProminent)
             })
             .navigationTitle("History")
             .toolbar {
