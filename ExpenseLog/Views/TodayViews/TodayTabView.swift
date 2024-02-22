@@ -12,7 +12,7 @@ struct TodayTabView: View {
 
     @FetchRequest<ExpensesEntity>(
         sortDescriptors: [],
-            predicate: NSPredicate(format: "%K >= %@ AND %K <= %@", argumentArray: [#keyPath(ExpensesEntity.expenseDate), Date().startDay as NSDate, #keyPath(ExpensesEntity.expenseDate), Date().endDayOf as NSDate]),
+            predicate: NSPredicate(format: "%K >= %@ AND %K <= %@", argumentArray: [#keyPath(ExpensesEntity.expenseDate), Date().startOfDay as NSDate, #keyPath(ExpensesEntity.expenseDate), Date().endDayOf as NSDate]),
             animation: .default
         ) private var expenses
     
@@ -34,10 +34,12 @@ struct TodayTabView: View {
                     Section(header: TodayExpenseSectionHeader(), footer: TodayExpenseSectionFooter(expenses: expenses)) {
                         ForEach(expenses) { expense in
                             NavigationLink {
-                                ExpenseEntryView()
+                                ExpenseDetailsView(expenses: expense)
                             } label: {
                                 HStack {
                                     Text(expense.viewItemName)
+                                        .truncationMode(.tail)
+                                        .lineLimit(1)
                                     Spacer()
                                     Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
                                 }
@@ -53,6 +55,7 @@ struct TodayTabView: View {
                             self.showModal.toggle()
                         }) {
                             Image(systemName: "plus")
+                                .imageScale(.large)
                         }
                         .sheet(isPresented: $showModal, onDismiss: {
                             print("expenseEntryView dismissed")
@@ -60,6 +63,12 @@ struct TodayTabView: View {
                             ExpenseEntryView()
                         })
                     }
+//                    ToolbarItem(placement: .topBarLeading) {
+//                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+//                            Image(systemName: "calendar.circle.fill")
+//                                .imageScale(.large)
+//                        })
+//                    }
                 }
             } else {
                 TodayEmptyView()
@@ -76,3 +85,10 @@ struct TodayTabView: View {
             .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
     }
 }
+
+// ExpenseDetailsView
+// ExpenseEditView
+// ExpenseEntryView
+// ExpenseFormView
+
+// ExpenseFormModel

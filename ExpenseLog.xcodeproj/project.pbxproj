@@ -17,11 +17,14 @@
 		051C99D82ADD836000B60C65 /* ExpenseLogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051C99D72ADD836000B60C65 /* ExpenseLogUITestsLaunchTests.swift */; };
 		0559A1282B27311500001FCD /* TodayExpenseSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559A1272B27311500001FCD /* TodayExpenseSectionHeader.swift */; };
 		0559A12A2B27312C00001FCD /* TodayExpenseSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559A1292B27312C00001FCD /* TodayExpenseSectionFooter.swift */; };
+		05765C0A2B6D3C87005D2DA9 /* FilteringHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */; };
+		0583888E2B7E5988005AC0BB /* ExpenseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */; };
 		05A637502ADEE36F00C47313 /* TodayTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6374F2ADEE36F00C47313 /* TodayTabView.swift */; };
 		05A637522ADEE3A000C47313 /* HistoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A637512ADEE3A000C47313 /* HistoryTabView.swift */; };
 		05A637542ADEE3B500C47313 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A637532ADEE3B500C47313 /* SettingsTabView.swift */; };
 		05AC0DAE2B61572500DE0F0D /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AC0DAD2B61572500DE0F0D /* Date+Ext.swift */; };
 		05AC0DB02B61574E00DE0F0D /* Decimal+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AC0DAF2B61574E00DE0F0D /* Decimal+Ext.swift */; };
+		05B842B12B7121D80015DD14 /* ExpenseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B842B02B7121D80015DD14 /* ExpenseListView.swift */; };
 		05CC27A32B17996200D47F4D /* CurrencyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CC27A22B17996200D47F4D /* CurrencyPicker.swift */; };
 		05D3ADB22B1E1DE80023A0E3 /* ExpenseEntityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D3ADB12B1E1DE80023A0E3 /* ExpenseEntityExtension.swift */; };
 		05D3ADB42B1F4FEB0023A0E3 /* TodaysExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D3ADB32B1F4FEB0023A0E3 /* TodaysExpensesView.swift */; };
@@ -63,11 +66,14 @@
 		051C99D72ADD836000B60C65 /* ExpenseLogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0559A1272B27311500001FCD /* TodayExpenseSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayExpenseSectionHeader.swift; sourceTree = "<group>"; };
 		0559A1292B27312C00001FCD /* TodayExpenseSectionFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayExpenseSectionFooter.swift; sourceTree = "<group>"; };
+		05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringHistory.swift; sourceTree = "<group>"; };
+		0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsView.swift; sourceTree = "<group>"; };
 		05A6374F2ADEE36F00C47313 /* TodayTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTabView.swift; sourceTree = "<group>"; };
 		05A637512ADEE3A000C47313 /* HistoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabView.swift; sourceTree = "<group>"; };
 		05A637532ADEE3B500C47313 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
 		05AC0DAD2B61572500DE0F0D /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		05AC0DAF2B61574E00DE0F0D /* Decimal+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Ext.swift"; sourceTree = "<group>"; };
+		05B842B02B7121D80015DD14 /* ExpenseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListView.swift; sourceTree = "<group>"; };
 		05CC27A22B17996200D47F4D /* CurrencyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPicker.swift; sourceTree = "<group>"; };
 		05D3ADB12B1E1DE80023A0E3 /* ExpenseEntityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntityExtension.swift; sourceTree = "<group>"; };
 		05D3ADB32B1F4FEB0023A0E3 /* TodaysExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysExpensesView.swift; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 				05D3ADB32B1F4FEB0023A0E3 /* TodaysExpensesView.swift */,
 				05D3ADB72B24B2020023A0E3 /* CurrentDayExpenses.swift */,
 				05CC27A22B17996200D47F4D /* CurrencyPicker.swift */,
+				05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */,
 			);
 			path = Experiments;
 			sourceTree = "<group>";
@@ -209,8 +216,10 @@
 				051C99BC2ADD836000B60C65 /* ContentView.swift */,
 				05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */,
 				05A637512ADEE3A000C47313 /* HistoryTabView.swift */,
+				05B842B02B7121D80015DD14 /* ExpenseListView.swift */,
 				05A637532ADEE3B500C47313 /* SettingsTabView.swift */,
 				053140C42B506514002E90D9 /* TodayViews */,
+				0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -345,12 +354,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05765C0A2B6D3C87005D2DA9 /* FilteringHistory.swift in Sources */,
 				050F22AD2B28A8C000632451 /* TodayExpenseListRowView.swift in Sources */,
 				05A637542ADEE3B500C47313 /* SettingsTabView.swift in Sources */,
 				05AC0DAE2B61572500DE0F0D /* Date+Ext.swift in Sources */,
 				05D3ADB42B1F4FEB0023A0E3 /* TodaysExpensesView.swift in Sources */,
 				05D3ADB82B24B2020023A0E3 /* CurrentDayExpenses.swift in Sources */,
 				05F2AEA32B04CE7600AE7C7F /* ExpenseLogContainer.swift in Sources */,
+				05B842B12B7121D80015DD14 /* ExpenseListView.swift in Sources */,
 				051C99BD2ADD836000B60C65 /* ContentView.swift in Sources */,
 				05D3ADB22B1E1DE80023A0E3 /* ExpenseEntityExtension.swift in Sources */,
 				05A637522ADEE3A000C47313 /* HistoryTabView.swift in Sources */,
@@ -361,6 +372,7 @@
 				05CC27A32B17996200D47F4D /* CurrencyPicker.swift in Sources */,
 				05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */,
 				05D3ADB62B24B1480023A0E3 /* TodayEmptyView.swift in Sources */,
+				0583888E2B7E5988005AC0BB /* ExpenseDetailsView.swift in Sources */,
 				051C99BB2ADD836000B60C65 /* ExpenseLogApp.swift in Sources */,
 				05AC0DB02B61574E00DE0F0D /* Decimal+Ext.swift in Sources */,
 			);

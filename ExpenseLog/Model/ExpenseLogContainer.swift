@@ -44,15 +44,15 @@ extension ExpenseLogContainer {
         
         addExpense(moc: moc, itemName: "Biscuits", itemAmount: 200, itemQuantity: 1, itemDescription: "Digestive Hobnobs", payee: "SHOPRITE", expenseTotal: 349, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "24-01-2024"), paymentType: "Cash", itemUnit: "Pack")
         
-        addExpense(moc: moc, itemName: "Chocolate", itemAmount: 650, itemQuantity: 2, itemDescription: "Mars Chocolate", payee: "SHOPRITE", expenseTotal: 1300, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "20-12-2023"), paymentType: "Debit Card", itemUnit: "Box")
+        addExpense(moc: moc, itemName: "Chocolate", itemAmount: 650, itemQuantity: 2, itemDescription: "Mars Chocolate", payee: "SHOPRITE", expenseTotal: 1300, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "22-02-2024"), paymentType: "Debit Card", itemUnit: "Box")
         
-        addExpense(moc: moc, itemName: "Canoe Soap", itemAmount: 250, itemQuantity: 2, itemDescription: "Washing Soap", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "11-01-2024"), paymentType: "Cash", itemUnit: "Bar")
+        addExpense(moc: moc, itemName: "Canoe Soap", itemAmount: 250, itemQuantity: 2, itemDescription: "Washing Soap", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "19-02-2024"), paymentType: "Cash", itemUnit: "Bar")
         
-        addExpense(moc: moc, itemName: "AirPods", itemAmount: 1000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "17-01-2024"), paymentType: "Debit Card", itemUnit: "Pair")
+        addExpense(moc: moc, itemName: "AirPods", itemAmount: 1000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "25-01-2024"), paymentType: "Debit Card", itemUnit: "Pair")
         
-        addExpense(moc: moc, itemName: "AirPods Pro", itemAmount: 100000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "24-01-2024"), paymentType: "Debit Card", itemUnit: "Pair")
+        addExpense(moc: moc, itemName: "AirPods Pro", itemAmount: 100000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "31-01-2024"), paymentType: "Debit Card", itemUnit: "Pair")
         
-        addExpense(moc: moc, itemName: "Apple Vision Pro", itemAmount: 3500, itemQuantity: 1, itemDescription: "XR headset", payee: "www.apple.com", expenseTotal: 500, expenseCurrency: "USD", expenseDate: dateFormatter.date(from: "24-01-2024"), paymentType: "Debit Card", itemUnit: "Pair")
+        addExpense(moc: moc, itemName: "Apple Vision Pro", itemAmount: 3500, itemQuantity: 1, itemDescription: "XR headset", payee: "www.apple.com", expenseTotal: 500, expenseCurrency: "USD", expenseDate: dateFormatter.date(from: "15-02-2024"), paymentType: "Debit Card", itemUnit: "Pair")
         
         try? moc.save()
     }
@@ -71,6 +71,19 @@ extension ExpenseLogContainer {
         expense.expenseCurrency = expenseCurrency
         expense.paymentType = paymentType
         expense.itemUnit = itemUnit
-        expense.expenseDate = expenseDate
+//        expense.expenseDate = expenseDate
+        expense.expenseDate = convertToUTC(from: expenseDate!)
+    }
+    
+    
+    func convertToUTC(from date: Date) -> Date {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents(in: TimeZone.current, from: date)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        let utcCalendar = Calendar(identifier: .gregorian)
+        
+        return utcCalendar.date(from: components)!
     }
 }

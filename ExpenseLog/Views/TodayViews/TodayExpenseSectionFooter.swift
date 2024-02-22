@@ -32,11 +32,11 @@ struct TodayExpenseSectionFooter: View {
 }
 
 #Preview {
-    let moc = ExpenseLogContainer(forPreview: true).persistentContainer.viewContext
+//    let moc = ExpenseLogContainer(forPreview: true).persistentContainer.viewContext
     
     @FetchRequest<ExpensesEntity>(
         sortDescriptors: [],
-            predicate: NSPredicate(format: "%K >= %@ AND %K <= %@", argumentArray: [#keyPath(ExpensesEntity.expenseDate), Date().startDay as NSDate, #keyPath(ExpensesEntity.expenseDate), Date().endDayOf as NSDate]),
+            predicate: NSPredicate(format: "%K >= %@ AND %K <= %@", argumentArray: [#keyPath(ExpensesEntity.expenseDate), Date().startOfDay as NSDate, #keyPath(ExpensesEntity.expenseDate), Date().endDayOf as NSDate]),
             animation: .default
         ) var expenses
     

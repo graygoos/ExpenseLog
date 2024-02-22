@@ -17,3 +17,12 @@ struct SettingsTabView: View {
 #Preview {
     SettingsTabView()
 }
+
+
+/*
+ ```swift
+ if UserDefaults.includePaymentMethod {
+   // payment method field
+ }
+ ```
+ */
