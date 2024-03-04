@@ -26,6 +26,8 @@ struct ExpenseListView: View {
                 ForEach(expenses, id: \.self) { expense in
                     HStack {
                         Text("\(expense.viewItemName)")
+                            .truncationMode(.tail)
+                            .lineLimit(1)
                         Spacer()
                         Text("\(expense.itemAmount ?? 0)")
                     }
