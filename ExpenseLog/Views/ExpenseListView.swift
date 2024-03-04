@@ -24,7 +24,11 @@ struct ExpenseListView: View {
 
             List {
                 ForEach(expenses, id: \.self) { expense in
-                    Text("\(expense.itemAmount ?? 0)")
+                    HStack {
+                        Text("\(expense.viewItemName)")
+                        Spacer()
+                        Text("\(expense.itemAmount ?? 0)")
+                    }
                 }
             }
             .navigationTitle("Expenses for \(date.formattedDay)")
