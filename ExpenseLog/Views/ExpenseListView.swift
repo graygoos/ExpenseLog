@@ -31,6 +31,7 @@ struct ExpenseListView: View {
                     }
                 }
             }
+            TodayExpenseSectionFooter(expenses: expenses)
             .navigationTitle("Expenses for \(date.formattedDay)")
         }
     }
