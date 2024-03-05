@@ -17,10 +17,9 @@ struct GroupedExpense: Identifiable {
 struct HistoryTabView: View {
     @Environment(\.managedObjectContext) var moc
     @State private var showModal = false
+    @State private var searchText = ""
     
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
-    
-//    var expense: ExpensesEntity
     
     var body: some View {
         NavigationStack {
@@ -32,6 +31,10 @@ struct HistoryTabView: View {
                 section(for: "Older", predicate: predicate(forOlderThan: 181))
             }
             .navigationTitle("History")
+            .searchable(text: $searchText)
+            .onChange(of: searchText) {_, text in
+                expenses.nsPredicate = text.isEmpty ? nil : NSPredicate(format: "expense CONTAINS %@", text)
+            }
             .toolbar {
                 ToolbarItem {
                     Button(action: {
@@ -43,7 +46,6 @@ struct HistoryTabView: View {
                         print("expenseEntryView dismissed")
                     }, content: {
                         ExpenseEntryView()
-//                        ExpenseDetailsView(expenses: expense)
                     })
                 }
             }
@@ -55,7 +57,6 @@ struct HistoryTabView: View {
         let calendar = Calendar.current
         let now = Date()
         let startDate = calendar.date(byAdding: .day, value: -days, to: now)!
-//        let endDate = now
         let endDate = calendar.date(byAdding: .day, value: -offset, to: now)!
         
         return NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", startDate as NSDate, endDate as NSDate)
@@ -96,10 +97,6 @@ struct HistoryTabView: View {
             return Calendar.current.startOfDay(for: date)
         }
         
-//        let sortedGroupExpenses = groupedDictionary.map { (key, value) in
-//            let sortedExpenses = value.sorted { $0.expenseDate ?? Date() > $1.expenseDate ?? Date() }
-//            return GroupedExpense(date: key, expenses: sortedExpenses)
-//        }
         let sortedDays = groupedDictionary.keys.sorted { lhs, rhs in
             lhs > rhs
         }
@@ -109,10 +106,6 @@ struct HistoryTabView: View {
         }
         
         return sortedGroupExpenses
-        
-//        return groupedDictionary.map { (key, value) in
-//            return GroupedExpense(date: key, expenses: value)
-//        }
     }
     
 }
