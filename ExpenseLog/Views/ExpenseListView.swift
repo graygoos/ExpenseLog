@@ -24,12 +24,16 @@ struct ExpenseListView: View {
 
             List {
                 ForEach(expenses, id: \.self) { expense in
-                    HStack {
-                        Text("\(expense.viewItemName)")
-                            .truncationMode(.tail)
-                            .lineLimit(1)
-                        Spacer()
-                        Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
+                    NavigationLink {
+                        ExpenseDetailsView(expenses: expense)
+                    } label: {
+                        HStack {
+                            Text("\(expense.viewItemName)")
+                                .truncationMode(.tail)
+                                .lineLimit(1)
+                            Spacer()
+                            Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
+                        }
                     }
                 }
                 TodayExpenseSectionFooter(expenses: expenses)
