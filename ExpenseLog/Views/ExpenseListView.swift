@@ -29,7 +29,7 @@ struct ExpenseListView: View {
                             .truncationMode(.tail)
                             .lineLimit(1)
                         Spacer()
-                        Text("\(expense.itemAmount ?? 0)")
+                        Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
                     }
                 }
                 TodayExpenseSectionFooter(expenses: expenses)
