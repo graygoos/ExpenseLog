@@ -32,9 +32,10 @@ struct ExpenseListView: View {
                         Text("\(expense.itemAmount ?? 0)")
                     }
                 }
+                TodayExpenseSectionFooter(expenses: expenses)
             }
-            TodayExpenseSectionFooter(expenses: expenses)
             .navigationTitle("Expenses for \(date.formattedDay)")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
