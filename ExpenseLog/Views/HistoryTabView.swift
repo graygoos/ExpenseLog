@@ -84,7 +84,15 @@ struct HistoryTabView: View {
                     Text(groupedExpense.date.formattedDay) // format date
                 }
             }
+            .onDelete(perform: deleteExpense)
         }
+    }
+    
+    private func deleteExpense(offsets: IndexSet) {
+        for offset in offsets {
+            moc.delete(expenses[offset])
+        }
+        try? moc.save()
     }
     
     // Function to group expenses by date

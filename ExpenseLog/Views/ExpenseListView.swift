@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ExpenseListView: View {
+    @Environment(\.managedObjectContext) var moc
     let date: Date
     
     @FetchRequest var expenses: FetchedResults<ExpensesEntity>
@@ -21,7 +22,6 @@ struct ExpenseListView: View {
 
     var body: some View {
         VStack {
-
             List {
                 ForEach(expenses, id: \.self) { expense in
                     NavigationLink {
@@ -36,11 +36,19 @@ struct ExpenseListView: View {
                         }
                     }
                 }
+                .onDelete(perform: deleteExpense)
                 TodayExpenseSectionFooter(expenses: expenses)
             }
             .navigationTitle("Expenses for \(date.formattedDay)")
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+    
+    private func deleteExpense(offsets: IndexSet) {
+        for offset in offsets {
+            moc.delete(expenses[offset])
+        }
+        try? moc.save()
     }
 }
 
