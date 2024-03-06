@@ -45,6 +45,7 @@ struct TodayTabView: View {
                                 }
                             }
                         }
+                        .onDelete(perform: deleteExpense)
                     }
                 }
                 .navigationTitle(Text(currentDate))
@@ -74,6 +75,13 @@ struct TodayTabView: View {
                 TodayEmptyView()
             }
         }
+    }
+    
+    private func deleteExpense(offsets: IndexSet) {
+        for offset in offsets {
+            moc.delete(expenses[offset])
+        }
+        try? moc.save()
     }
 }
 
