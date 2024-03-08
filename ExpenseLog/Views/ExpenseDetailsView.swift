@@ -8,21 +8,51 @@
 import SwiftUI
 
 struct ExpenseDetailsView: View {
+    @Environment(\.managedObjectContext) var moc
     var expenses: ExpensesEntity
     
     var body: some View {
-        VStack {
-            HStack {
-                Text(expenses.viewItemName)
+        NavigationStack {
+            VStack {
+                HStack {
+                    Text(expenses.viewItemName)
+                    Spacer()
+        //            Text(((expenses.viewItemAmount)) as Decimal, format: .currency(code: expenses.expenseCurrency ?? "NGN"))
+                    Text(Decimal(string: expenses.viewItemAmount) ?? 0, format: .currency(code: expenses.expenseCurrency ?? "NGN"))
+                }
+                
+                Text(expenses.viewItemDescription)
+                Text(expenses.viewExpenseLocation)
+                
                 Spacer()
-    //            Text(((expenses.viewItemAmount)) as Decimal, format: .currency(code: expenses.expenseCurrency ?? "NGN"))
-                Text(Decimal(string: expenses.viewItemAmount) ?? 0, format: .currency(code: expenses.expenseCurrency ?? "NGN"))
+                
+                Button(action: {
+                    deleteExpense()
+                }) {
+                    Text("Delete Entry")
+                }
+                
+                Spacer()
+                Spacer()
             }
-            
-            Text(expenses.viewItemDescription)
-            Text(expenses.viewExpenseLocation)
+            .padding()
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {
+                    }) {
+                        Text("Edit")
+                    }
+                }
+            }
         }
-        .padding()
+    }
+    
+    private func deleteExpense() {
+        moc.delete(expenses)
+        
+        try? moc.save()
+        
+        
     }
 }
 

@@ -32,9 +32,9 @@ struct HistoryTabView: View {
             }
             .navigationTitle("History")
             .searchable(text: $searchText)
-            .onChange(of: searchText) {_, text in
-                expenses.nsPredicate = text.isEmpty ? nil : NSPredicate(format: "expense CONTAINS %@", text)
-            }
+//            .onChange(of: searchText) {_, text in
+//                expenses.nsPredicate = text.isEmpty ? nil : NSPredicate(format: "expense CONTAINS %@", text)
+//            }
             .toolbar {
                 ToolbarItem {
                     Button(action: {
@@ -59,7 +59,11 @@ struct HistoryTabView: View {
         let startDate = calendar.date(byAdding: .day, value: -days, to: now)!
         let endDate = calendar.date(byAdding: .day, value: -offset, to: now)!
         
-        return NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", startDate as NSDate, endDate as NSDate)
+        if searchText.isEmpty {
+            return NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", startDate as NSDate, endDate as NSDate)
+        }
+        
+        return NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@ AND (itemName CONTAINS[cd] %@ OR itemDescription CONTAINS[cd] %@ OR itemUnit CONTAINS[cd] %@ OR payee CONTAINS[cd] %@ OR expenseLocation CONTAINS[cd] %@ OR paymentType CONTAINS[cd] %@)", startDate as NSDate, endDate as NSDate, searchText, searchText, searchText, searchText, searchText, searchText)
     }
     
     // Function to create a predicate for expenses for older than  a given number of days
@@ -68,7 +72,10 @@ struct HistoryTabView: View {
         let now = Date()
         let endDate = calendar.date(byAdding: .day, value: -days, to: now)!
         
-        return NSPredicate(format: "expenseDate < %@", endDate as NSDate)
+        if searchText.isEmpty {
+            return NSPredicate(format: "expenseDate < %@", endDate as NSDate)
+        }
+        return NSPredicate(format: "expenseDate < %@ AND (itemName CONTAINS[cd] %@ OR itemDescription CONTAINS[cd] %@ OR itemUnit CONTAINS[cd] %@ OR payee CONTAINS[cd] %@ OR expenseLocation CONTAINS[cd] %@ OR paymentType CONTAINS[cd] %@)", endDate as NSDate, searchText, searchText, searchText, searchText, searchText, searchText)
     }
     
     // Create a section for specific time range
