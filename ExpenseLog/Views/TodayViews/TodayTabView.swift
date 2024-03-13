@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TodayTabView: View {
+    @State private var navPath: [String] = []
     @Environment(\.managedObjectContext) var moc
 
     @FetchRequest<ExpensesEntity>(

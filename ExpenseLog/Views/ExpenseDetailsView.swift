@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ExpenseDetailsView: View {
+//    @Binding var path: [String]
     @Environment(\.managedObjectContext) var moc
     var expenses: ExpensesEntity
     
@@ -52,11 +53,11 @@ struct ExpenseDetailsView: View {
         
         try? moc.save()
         
-        
+//        path.removeAll()
     }
 }
 
-#Preview {
-    ExpenseDetailsView(expenses: ExpensesEntity())
-        .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
-}
+//#Preview {
+//    ExpenseDetailsView(expenses: ExpensesEntity())
+//        .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
+//}

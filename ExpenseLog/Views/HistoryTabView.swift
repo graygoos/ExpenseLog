@@ -15,14 +15,16 @@ struct GroupedExpense: Identifiable {
 }
 
 struct HistoryTabView: View {
+    @State private var navPath: [String] = []
     @Environment(\.managedObjectContext) var moc
     @State private var showModal = false
     @State private var searchText = ""
+//    let date: Date
     
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navPath) {
             List {          // offset ❓
                 section(for: "Previous 7 Days", predicate: predicate(forLastNDays: 7, offset: 1)) // 1
                 section(for: "Previous 30 Days", predicate: predicate(forLastNDays: 31, offset: 8)) // 8
@@ -31,6 +33,13 @@ struct HistoryTabView: View {
                 section(for: "Older", predicate: predicate(forOlderThan: 181))
             }
             .navigationTitle("History")
+//            .navigationDestination(for: String.self) { pathValue in
+//                if pathValue == "Expenses for " {
+//                    ExpenseListView(date: $navPath)
+//                } else {
+//                    ExpenseDetailsView(navPath: $navPath)
+//                }
+//            }
             .searchable(text: $searchText)
 //            .onChange(of: searchText) {_, text in
 //                expenses.nsPredicate = text.isEmpty ? nil : NSPredicate(format: "expense CONTAINS %@", text)

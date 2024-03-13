@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ExpenseListView: View {
+//    @Binding var path: [String]
     @Environment(\.managedObjectContext) var moc
     let date: Date
     
@@ -19,6 +20,13 @@ struct ExpenseListView: View {
         let predicate = NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", argumentArray: [date, Calendar.current.date(byAdding: .day, value: 1, to: date)!])
         _expenses = FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], predicate: predicate, animation: .default)
     }
+    
+//    @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
+//    
+//    init(date: Date, path: [String]) {
+//        self.date = date
+//        self._path = Binding.constant(path)
+//    }
 
     var body: some View {
         VStack {
