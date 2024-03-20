@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/*
 struct StepperWithTextFieldView: View {
     @Binding var itemQty: Int
     @State private var textValue: String = ""
@@ -47,7 +47,7 @@ struct StepperWithTextFieldView: View {
         textValue = "\(itemQty)"
     }
 }
-
+*/
 //#Preview {
 //    @State var quantity: Int = 1
 //    

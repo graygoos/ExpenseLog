@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpenseEntryView: View {
-//    let expense: ExpensesEntity?
+    //    let expense: ExpensesEntity?
     
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
@@ -42,87 +42,28 @@ struct ExpenseEntryView: View {
     
     var body: some View {
         NavigationStack {
-            Form {
-                Section("Item purchased") {
-                    TextField("Item name", text: $itemName)
-                }
-                Section("Enter item amount (Unit Price)") {
-                    TextField("Item Amount", value: $itemAmount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
-                        .keyboardType(.decimalPad)
-                    Picker("Currency", selection: $expenseCurrency) {
-                        ForEach(allCurrencies, id: \.self) { unit in
-                            Text(unit)
+            ExpenseFormView()
+                .navigationTitle("Enter expense")
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            print("cancel button tapped")
+                            dismiss()
+                        }) {
+                            Text("Cancel")
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            persistExpense()
+                            dismiss()
+                            print("save button tapped")
+                        }) {
+                            Text("Add")
                         }
                     }
                 }
-                Section {
-                    Picker("Payment Method", selection: $paymentType) {
-                        ForEach(paymentMethod, id: \.self) { unit in
-                            Text(unit)
-                        }
-                    }
-                    Toggle("Recurring expense", isOn: $recurringExpense)
-                    Toggle("Budgeted", isOn: $isBudgeted)
-                }
-                Section("Item quantity") {
-                    Stepper("Quantity: \(itemQuantity)", value: $itemQuantity, in: 1...Int.max)
-                    Picker("Item Unit", selection: $itemUnit) {
-                        ForEach(itemUnits, id: \.self) { unit in
-                            Text(unit)
-                        }
-                    }
-                }
-                Section("vendor/payee/recipient") {
-                    TextField("Vendor", text: $payee)
-                }
-                Section("location") {
-                    VStack {
-                        HStack { // V2
-                            TextField("Location", text: $expenseLocation)
-                            //                        Image(systemName: "mappin.and.ellipse")
-                            Button(action: {}) {
-                                Image(systemName: "mappin.and.ellipse")
-                            }
-                        }
-                    }
-                }
-                Section("Item description") {
-                    TextField("Description", text: $itemDescription, axis: .vertical)
-                        .textFieldStyle(.plain)
-                        .lineLimit(5, reservesSpace: true)
-                }
-                Section {
-                    Picker("Expense Frequency", selection: $expenseFrequency) {
-                        ForEach(frequency, id: \.self) { item in
-                            Text(item)
-                        }
-                    }
-                }
-                Section("Expense date") {
-                    DatePicker("Date", selection: $expenseDate)
-                }
-            }
-            .navigationTitle("Enter expense")
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        print("cancel button tapped")
-                        dismiss()
-                    }) {
-                        Text("Cancel")
-                    }
-                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        persistExpense()
-                        dismiss()
-                        print("save button tapped")
-                    }) {
-                        Text("Add")
-                    }
-                }
-            }
         }
     }
     
