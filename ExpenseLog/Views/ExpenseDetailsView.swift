@@ -12,6 +12,8 @@ struct ExpenseDetailsView: View {
     @Environment(\.managedObjectContext) var moc
     var expenses: ExpensesEntity
     
+    @State private var showModal = false
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -42,9 +44,15 @@ struct ExpenseDetailsView: View {
             .toolbar {
                 ToolbarItem {
                     Button(action: {
+                        self.showModal.toggle()
                     }) {
                         Text("Edit")
                     }
+                    .sheet(isPresented: $showModal, onDismiss: {
+//                        print("expenseEntryView dismissed")
+                    }, content: {
+                        ExpenseEditScreen()
+                    })
                 }
             }
         }
