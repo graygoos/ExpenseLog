@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ExpenseFormView: View {
     
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.dismiss) var dismiss
+//    @Environment(\.managedObjectContext) var moc
+//    @Environment(\.dismiss) var dismiss
     
     @State private var itemName = ""
     @State private var itemAmount = 0.00

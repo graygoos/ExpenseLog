@@ -36,6 +36,8 @@ struct ExpenseDetailsView: View {
                 Spacer()
                 Spacer()
             }
+            .navigationTitle("Expense Details")
+            .navigationBarTitleDisplayMode(.inline)
             .padding()
             .toolbar {
                 ToolbarItem {
