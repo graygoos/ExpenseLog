@@ -20,6 +20,8 @@
 		05765C0A2B6D3C87005D2DA9 /* FilteringHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */; };
 		0583888E2B7E5988005AC0BB /* ExpenseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */; };
 		058740042BA1967900C5B4F9 /* StepperWithTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058740032BA1967900C5B4F9 /* StepperWithTextFieldView.swift */; };
+		058740062BAB2DD800C5B4F9 /* ExpenseEditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058740052BAB2DD800C5B4F9 /* ExpenseEditScreen.swift */; };
+		058740082BAB2E6D00C5B4F9 /* ExpenseFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058740072BAB2E6D00C5B4F9 /* ExpenseFormView.swift */; };
 		05A637502ADEE36F00C47313 /* TodayTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6374F2ADEE36F00C47313 /* TodayTabView.swift */; };
 		05A637522ADEE3A000C47313 /* HistoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A637512ADEE3A000C47313 /* HistoryTabView.swift */; };
 		05A637542ADEE3B500C47313 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A637532ADEE3B500C47313 /* SettingsTabView.swift */; };
@@ -70,6 +72,8 @@
 		05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringHistory.swift; sourceTree = "<group>"; };
 		0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsView.swift; sourceTree = "<group>"; };
 		058740032BA1967900C5B4F9 /* StepperWithTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperWithTextFieldView.swift; sourceTree = "<group>"; };
+		058740052BAB2DD800C5B4F9 /* ExpenseEditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpenseEditScreen.swift; path = ExpenseLog/Views/ExpenseEditScreen.swift; sourceTree = SOURCE_ROOT; };
+		058740072BAB2E6D00C5B4F9 /* ExpenseFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpenseFormView.swift; path = ExpenseLog/Views/ExpenseFormView.swift; sourceTree = SOURCE_ROOT; };
 		05A6374F2ADEE36F00C47313 /* TodayTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTabView.swift; sourceTree = "<group>"; };
 		05A637512ADEE3A000C47313 /* HistoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabView.swift; sourceTree = "<group>"; };
 		05A637532ADEE3B500C47313 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
@@ -216,7 +220,9 @@
 			isa = PBXGroup;
 			children = (
 				051C99BC2ADD836000B60C65 /* ContentView.swift */,
+				058740072BAB2E6D00C5B4F9 /* ExpenseFormView.swift */,
 				05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */,
+				058740052BAB2DD800C5B4F9 /* ExpenseEditScreen.swift */,
 				058740032BA1967900C5B4F9 /* StepperWithTextFieldView.swift */,
 				05A637512ADEE3A000C47313 /* HistoryTabView.swift */,
 				05B842B02B7121D80015DD14 /* ExpenseListView.swift */,
@@ -364,8 +370,10 @@
 				05D3ADB42B1F4FEB0023A0E3 /* TodaysExpensesView.swift in Sources */,
 				05D3ADB82B24B2020023A0E3 /* CurrentDayExpenses.swift in Sources */,
 				05F2AEA32B04CE7600AE7C7F /* ExpenseLogContainer.swift in Sources */,
+				058740082BAB2E6D00C5B4F9 /* ExpenseFormView.swift in Sources */,
 				05B842B12B7121D80015DD14 /* ExpenseListView.swift in Sources */,
 				051C99BD2ADD836000B60C65 /* ContentView.swift in Sources */,
+				058740062BAB2DD800C5B4F9 /* ExpenseEditScreen.swift in Sources */,
 				05D3ADB22B1E1DE80023A0E3 /* ExpenseEntityExtension.swift in Sources */,
 				05A637522ADEE3A000C47313 /* HistoryTabView.swift in Sources */,
 				05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */,

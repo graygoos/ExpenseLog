@@ -16,7 +16,7 @@ struct StepperWithTextFieldView: View {
             Button("-") {
                 if itemQty > 1 {
                     itemQty -= 1
-//                    textValue = "\(itemQty)"
+                    textValue = "\(itemQty)"
                     updateTextValue()
                 }
             }
@@ -36,7 +36,7 @@ struct StepperWithTextFieldView: View {
             
             Button("+") {
                 itemQty += 1
-//                textValue = "\(textValue)"
+                textValue = "\(textValue)"
                 updateTextValue()
             }
             .padding()
