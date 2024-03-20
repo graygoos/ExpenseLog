@@ -42,7 +42,7 @@ struct ExpenseEditScreen: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-//                            persistExpense()
+                            persistExpense()
                             dismiss()
                             print("save button tapped")
                         }) {
