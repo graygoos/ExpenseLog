@@ -224,11 +224,11 @@
 				05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */,
 				058740052BAB2DD800C5B4F9 /* ExpenseEditScreen.swift */,
 				058740032BA1967900C5B4F9 /* StepperWithTextFieldView.swift */,
-				05A637512ADEE3A000C47313 /* HistoryTabView.swift */,
 				05B842B02B7121D80015DD14 /* ExpenseListView.swift */,
+				0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */,
+				05A637512ADEE3A000C47313 /* HistoryTabView.swift */,
 				05A637532ADEE3B500C47313 /* SettingsTabView.swift */,
 				053140C42B506514002E90D9 /* TodayViews */,
-				0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

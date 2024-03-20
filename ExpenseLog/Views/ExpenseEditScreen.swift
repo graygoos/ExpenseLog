@@ -15,6 +15,27 @@ struct ExpenseEditScreen: View {
         NavigationStack {
             ExpenseFormView()
                 .navigationTitle("Edit Expense")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            print("cancel button tapped")
+                            dismiss()
+                        }) {
+                            Text("Cancel")
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+//                            persistExpense()
+                            dismiss()
+                            print("save button tapped")
+                        }) {
+                            Text("Save")
+                        }
+                    }
+                }
         }
     }
 }
