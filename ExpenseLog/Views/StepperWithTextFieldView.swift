@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-/*
+
 struct StepperWithTextFieldView: View {
     @Binding var itemQty: Int
     @State private var textValue: String = ""
@@ -17,9 +17,11 @@ struct StepperWithTextFieldView: View {
                 if itemQty > 1 {
                     itemQty -= 1
                     textValue = "\(itemQty)"
-                    updateTextValue()
+                    print("✅ - " , textValue)
+//                    updateTextValue()
                 }
             }
+            .buttonStyle(BorderlessButtonStyle())
             .padding()
             
             TextField("Quantity", text: $textValue)
@@ -27,7 +29,11 @@ struct StepperWithTextFieldView: View {
                 .onAppear {
                     textValue = "\(itemQty)"
                 }
+                .onTapGesture {
+                    print("👍🏽 tapped Field")
+                }
                 .onChange(of: textValue) { newValue in
+                    print("❓what's" , newValue)
                     if let quantity = Int(newValue) {
                         itemQty = quantity
                     }
@@ -36,18 +42,20 @@ struct StepperWithTextFieldView: View {
             
             Button("+") {
                 itemQty += 1
-                textValue = "\(textValue)"
-                updateTextValue()
+                textValue = "\(itemQty)"
+                print("✅ + " , textValue)
+//                updateTextValue()
             }
+            .buttonStyle(BorderlessButtonStyle())
             .padding()
         }
     }
     
-    private func updateTextValue() {
-        textValue = "\(itemQty)"
-    }
+//    private func updateTextValue() {
+//        textValue = "\(itemQty)"
+//    }
 }
-*/
+
 //#Preview {
 //    @State var quantity: Int = 1
 //    

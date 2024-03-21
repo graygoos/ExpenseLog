@@ -10,8 +10,16 @@ import SwiftUI
 struct SettingsTabView: View {
     var body: some View {
         NavigationStack {
-            Text("Beginnings of the Settings Screen")
-                .foregroundStyle(.blue)
+            Form {
+                Section {
+                    Text("About")
+                }
+                Section {
+                    ShowOrHideSectionsView()
+                }
+                
+            }
+            .navigationTitle("Settings")
         }
     }
 }

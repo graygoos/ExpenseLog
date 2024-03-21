@@ -75,7 +75,8 @@ struct ExpenseFormView: View {
                 }
                 if showQuantitySection {
                     Section("Item quantity") {
-                        Stepper("Quantity: \(itemQuantity)", value: $itemQuantity, in: 1...Int.max)
+//                        Stepper("Quantity: \(itemQuantity)", value: $itemQuantity, in: 1...Int.max)
+                        StepperWithTextFieldView(itemQty: $itemQuantity)
                         Picker("Item Unit", selection: $itemUnit) {
                             ForEach(itemUnits, id: \.self) { unit in
                                 Text(unit)
