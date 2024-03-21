@@ -9,8 +9,10 @@ import SwiftUI
 
 struct SettingsTabView: View {
     var body: some View {
-        Text("Settings")
-            .foregroundStyle(.blue)
+        NavigationStack {
+            Text("Beginnings of the Settings Screen")
+                .foregroundStyle(.blue)
+        }
     }
 }
 
