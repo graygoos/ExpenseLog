@@ -40,8 +40,8 @@ struct ExpenseEntryView: View {
     
     @State private var showModal = false
     
-    @State private var showPaymentSection =     true
-    @State private var showRecurringSection =   true
+    @State private var showPaymentDetailsSection =     true
+//    @State private var showRecurringSection =   true
     @State private var showQuantitySection =    true
     @State private var showVendorSection =      true
     @State private var showLocationSection =    true
@@ -53,7 +53,7 @@ struct ExpenseEntryView: View {
             ExpenseFormView()
                 .navigationTitle("Enter expense")
                 .onAppear {
-                    showPaymentSection = UserDefaults.standard.bool(forKey: "showPaymentSection")
+                    showPaymentDetailsSection = UserDefaults.standard.bool(forKey: "showPaymentSection")
                 }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
