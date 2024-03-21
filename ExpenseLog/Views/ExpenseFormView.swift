@@ -39,6 +39,14 @@ struct ExpenseFormView: View {
     
     @State private var showModal = false
     
+    @State private var showPaymentSection =     true
+    @State private var showRecurringSection =   true
+    @State private var showQuantitySection =    true
+    @State private var showVendorSection =      true
+    @State private var showLocationSection =    true
+    @State private var showDescriptionSection = true
+    @State private var showFrequencySection =   true
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -54,46 +62,58 @@ struct ExpenseFormView: View {
                         }
                     }
                 }
-                Section {
-                    Picker("Payment Method", selection: $paymentType) {
-                        ForEach(paymentMethod, id: \.self) { unit in
-                            Text(unit)
+                if showPaymentSection {
+                    Section {
+                        Picker("Payment Method", selection: $paymentType) {
+                            ForEach(paymentMethod, id: \.self) { unit in
+                                Text(unit)
+                            }
                         }
-                    }
-                    Toggle("Recurring expense", isOn: $recurringExpense)
-                    Toggle("Budgeted", isOn: $isBudgeted)
-                }
-                Section("Item quantity") {
-                    Stepper("Quantity: \(itemQuantity)", value: $itemQuantity, in: 1...Int.max)
-                    Picker("Item Unit", selection: $itemUnit) {
-                        ForEach(itemUnits, id: \.self) { unit in
-                            Text(unit)
-                        }
+                        Toggle("Recurring expense", isOn: $recurringExpense)
+                        Toggle("Budgeted", isOn: $isBudgeted)
                     }
                 }
-                Section("vendor/payee/recipient") {
-                    TextField("Vendor", text: $payee)
-                }
-                Section("location") {
-                    VStack {
-                        HStack { // V2
-                            TextField("Location", text: $expenseLocation)
-                            //                        Image(systemName: "mappin.and.ellipse")
-                            Button(action: {}) {
-                                Image(systemName: "mappin.and.ellipse")
+                if showQuantitySection {
+                    Section("Item quantity") {
+                        Stepper("Quantity: \(itemQuantity)", value: $itemQuantity, in: 1...Int.max)
+                        Picker("Item Unit", selection: $itemUnit) {
+                            ForEach(itemUnits, id: \.self) { unit in
+                                Text(unit)
                             }
                         }
                     }
                 }
-                Section("Item description") {
-                    TextField("Description", text: $itemDescription, axis: .vertical)
-                        .textFieldStyle(.plain)
-                        .lineLimit(5, reservesSpace: true)
+                if showVendorSection {
+                    Section("vendor/payee/recipient") {
+                        TextField("Vendor", text: $payee)
+                    }
                 }
-                Section {
-                    Picker("Expense Frequency", selection: $expenseFrequency) {
-                        ForEach(frequency, id: \.self) { item in
-                            Text(item)
+                if showLocationSection {
+                    Section("location") {
+                        VStack {
+                            HStack { // V2
+                                TextField("Location", text: $expenseLocation)
+                                //                        Image(systemName: "mappin.and.ellipse")
+                                Button(action: {}) {
+                                    Image(systemName: "mappin.and.ellipse")
+                                }
+                            }
+                        }
+                    }
+                }
+                if showDescriptionSection {
+                    Section("Item description") {
+                        TextField("Description", text: $itemDescription, axis: .vertical)
+                            .textFieldStyle(.plain)
+                            .lineLimit(5, reservesSpace: true)
+                    }
+                }
+                if showFrequencySection {
+                    Section {
+                        Picker("Expense Frequency", selection: $expenseFrequency) {
+                            ForEach(frequency, id: \.self) { item in
+                                Text(item)
+                            }
                         }
                     }
                 }

@@ -40,6 +40,14 @@ struct ExpenseEntryView: View {
     
     @State private var showModal = false
     
+    @State private var showPaymentSection =     true
+    @State private var showRecurringSection =   true
+    @State private var showQuantitySection =    true
+    @State private var showVendorSection =      true
+    @State private var showLocationSection =    true
+    @State private var showDescriptionSection = true
+    @State private var showFrequencySection =   true
+    
     var body: some View {
         NavigationStack {
             ExpenseFormView()
