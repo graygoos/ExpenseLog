@@ -52,6 +52,9 @@ struct ExpenseEntryView: View {
         NavigationStack {
             ExpenseFormView()
                 .navigationTitle("Enter expense")
+                .onAppear {
+                    showPaymentSection = UserDefaults.standard.bool(forKey: "showPaymentSection")
+                }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: {
