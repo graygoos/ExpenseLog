@@ -11,6 +11,8 @@ struct ExpenseEditScreen: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
+    @State private var model = ExpenseParameters()
+    
     @State private var itemName = ""
     @State private var itemAmount = 0.00
     @State private var itemDescription = ""
@@ -27,7 +29,7 @@ struct ExpenseEditScreen: View {
     
     var body: some View {
         NavigationStack {
-            ExpenseFormView()
+            ExpenseFormView(model: $model)
                 .navigationTitle("Edit Expense")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -42,7 +44,7 @@ struct ExpenseEditScreen: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-                            persistExpense()
+//                            persistExpense()
                             dismiss()
                             print("save button tapped")
                         }) {
