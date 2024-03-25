@@ -21,7 +21,7 @@ struct SettingsTabView: View {
                 }
                 Section {
                     NavigationLink(destination: ExportExpenseDetailsScreen()) {
-                        Text("Export Expense Details")
+                        Text("Export Data")
                     }
                 }
                 Section {
