@@ -12,7 +12,9 @@ struct SettingsTabView: View {
         NavigationStack {
             Form {
                 Section {
-                    Text("About")
+                    NavigationLink(destination: AboutScreen()) {
+                        Text("About")
+                    }
                 }
                 Section("Show or hide input entry fields") {
                     ShowOrHideSectionsView()
