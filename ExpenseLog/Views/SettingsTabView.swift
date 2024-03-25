@@ -14,7 +14,7 @@ struct SettingsTabView: View {
                 Section {
                     Text("About")
                 }
-                Section {
+                Section("Show or hide input entry fields") {
                     ShowOrHideSectionsView()
                 }
                 

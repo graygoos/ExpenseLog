@@ -18,7 +18,6 @@ struct StepperWithTextFieldView: View {
                     itemQty -= 1
                     textValue = "\(itemQty)"
                     print("✅ - " , textValue)
-//                    updateTextValue()
                 }
             }
             .buttonStyle(BorderlessButtonStyle())
@@ -32,7 +31,7 @@ struct StepperWithTextFieldView: View {
                 .onTapGesture {
                     print("👍🏽 tapped Field")
                 }
-                .onChange(of: textValue) { newValue in
+                .onChange(of: textValue) { _, newValue in
                     print("❓what's" , newValue)
                     if let quantity = Int(newValue) {
                         itemQty = quantity
@@ -44,20 +43,15 @@ struct StepperWithTextFieldView: View {
                 itemQty += 1
                 textValue = "\(itemQty)"
                 print("✅ + " , textValue)
-//                updateTextValue()
             }
             .buttonStyle(BorderlessButtonStyle())
             .padding()
         }
     }
-    
-//    private func updateTextValue() {
-//        textValue = "\(itemQty)"
-//    }
 }
 
-//#Preview {
-//    @State var quantity: Int = 1
-//    
-//    StepperWithTextFieldView(itemQty: $quantity)
-//}
+#Preview {
+    @State var quantity: Int = 1
+    
+    return StepperWithTextFieldView(itemQty: $quantity)
+}

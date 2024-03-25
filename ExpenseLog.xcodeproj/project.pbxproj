@@ -15,6 +15,8 @@
 		051C99CC2ADD836000B60C65 /* ExpenseLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051C99CB2ADD836000B60C65 /* ExpenseLogTests.swift */; };
 		051C99D62ADD836000B60C65 /* ExpenseLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051C99D52ADD836000B60C65 /* ExpenseLogUITests.swift */; };
 		051C99D82ADD836000B60C65 /* ExpenseLogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051C99D72ADD836000B60C65 /* ExpenseLogUITestsLaunchTests.swift */; };
+		05528CFC2BAF5BF400DE277B /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05528CFB2BAF5BF400DE277B /* ToggleView.swift */; };
+		05528CFE2BAF63EE00DE277B /* SettingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05528CFD2BAF63EE00DE277B /* SettingKeys.swift */; };
 		0559A1282B27311500001FCD /* TodayExpenseSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559A1272B27311500001FCD /* TodayExpenseSectionHeader.swift */; };
 		0559A12A2B27312C00001FCD /* TodayExpenseSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559A1292B27312C00001FCD /* TodayExpenseSectionFooter.swift */; };
 		05765C0A2B6D3C87005D2DA9 /* FilteringHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */; };
@@ -69,6 +71,8 @@
 		051C99D12ADD836000B60C65 /* ExpenseLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpenseLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		051C99D52ADD836000B60C65 /* ExpenseLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogUITests.swift; sourceTree = "<group>"; };
 		051C99D72ADD836000B60C65 /* ExpenseLogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		05528CFB2BAF5BF400DE277B /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
+		05528CFD2BAF63EE00DE277B /* SettingKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingKeys.swift; sourceTree = "<group>"; };
 		0559A1272B27311500001FCD /* TodayExpenseSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayExpenseSectionHeader.swift; sourceTree = "<group>"; };
 		0559A1292B27312C00001FCD /* TodayExpenseSectionFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayExpenseSectionFooter.swift; sourceTree = "<group>"; };
 		05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringHistory.swift; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 				05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */,
 				05D3ADB12B1E1DE80023A0E3 /* ExpenseEntityExtension.swift */,
 				0587400B2BACBA8000C5B4F9 /* ExpenseParameters.swift */,
+				05528CFD2BAF63EE00DE277B /* SettingKeys.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				05A637512ADEE3A000C47313 /* HistoryTabView.swift */,
 				05A637532ADEE3B500C47313 /* SettingsTabView.swift */,
 				058740092BAC974F00C5B4F9 /* ShowOrHideSectionsView.swift */,
+				05528CFB2BAF5BF400DE277B /* ToggleView.swift */,
 				053140C42B506514002E90D9 /* TodayViews */,
 			);
 			path = Views;
@@ -385,7 +391,9 @@
 				05D3ADB22B1E1DE80023A0E3 /* ExpenseEntityExtension.swift in Sources */,
 				05A637522ADEE3A000C47313 /* HistoryTabView.swift in Sources */,
 				05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */,
+				05528CFC2BAF5BF400DE277B /* ToggleView.swift in Sources */,
 				0559A12A2B27312C00001FCD /* TodayExpenseSectionFooter.swift in Sources */,
+				05528CFE2BAF63EE00DE277B /* SettingKeys.swift in Sources */,
 				05A637502ADEE36F00C47313 /* TodayTabView.swift in Sources */,
 				0559A1282B27311500001FCD /* TodayExpenseSectionHeader.swift in Sources */,
 				05CC27A32B17996200D47F4D /* CurrencyPicker.swift in Sources */,
