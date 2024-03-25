@@ -22,6 +22,6 @@ struct ToggleView: View {
     }
 }
 
-//#Preview {
-//    ToggleView(isOn: <#Bool#>, key: <#SettingKeys#>)
-//}
+#Preview {
+    ToggleView(key: .location)
+}
