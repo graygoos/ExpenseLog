@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ExpenseEditScreen: View {
+    let expense: ExpensesEntity?
+    @Binding var model: ExpenseParameters
+    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
-    
-    @State private var model = ExpenseParameters()
     
     @State private var itemName = ""
     @State private var itemAmount = 0.00
@@ -44,7 +45,7 @@ struct ExpenseEditScreen: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-//                            persistExpense()
+//                            persistEditedExpense()
                             dismiss()
                             print("save button tapped")
                         }) {
@@ -55,7 +56,7 @@ struct ExpenseEditScreen: View {
         }
     }
     
-    func persistExpense() {
+    func persistEditedExpense() {
         let expense = ExpensesEntity(context: moc)
         expense.itemName = itemName
         expense.itemAmount = NSDecimalNumber(decimal: Decimal(itemAmount))
@@ -75,6 +76,6 @@ struct ExpenseEditScreen: View {
     }
 }
 
-#Preview {
-    ExpenseEditScreen()
-}
+//#Preview {
+//    ExpenseEditScreen()
+//}

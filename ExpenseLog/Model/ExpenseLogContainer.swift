@@ -52,7 +52,7 @@ extension ExpenseLogContainer {
         
         addExpense(moc: moc, itemName: "AirPods Pro", itemAmount: 100000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "31-01-2024"), paymentType: "Debit Card", itemUnit: "Pair")
         
-        addExpense(moc: moc, itemName: "Apple Vision Pro", itemAmount: 3500, itemQuantity: 1, itemDescription: "XR headset", payee: "www.apple.com", expenseTotal: 500, expenseCurrency: "USD", expenseDate: dateFormatter.date(from: "12-03-2024"), paymentType: "Debit Card", itemUnit: "Pair")
+        addExpense(moc: moc, itemName: "Apple Vision Pro", itemAmount: 3500, itemQuantity: 1, itemDescription: "XR headset", payee: "www.apple.com", expenseTotal: 500, expenseCurrency: "USD", expenseDate: dateFormatter.date(from: "25-03-2024"), paymentType: "Debit Card", itemUnit: "Pair")
         
         try? moc.save()
     }

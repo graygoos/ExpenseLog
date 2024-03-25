@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ExpenseDetailsView: View {
-//    @Binding var path: [String]
     @Environment(\.managedObjectContext) var moc
     var expenses: ExpensesEntity
+    
+    @State private var model = ExpenseParameters()
     
     @State private var showModal = false
     
@@ -20,7 +21,6 @@ struct ExpenseDetailsView: View {
                 HStack {
                     Text(expenses.viewItemName)
                     Spacer()
-        //            Text(((expenses.viewItemAmount)) as Decimal, format: .currency(code: expenses.expenseCurrency ?? "NGN"))
                     Text(Decimal(string: expenses.viewItemAmount) ?? 0, format: .currency(code: expenses.expenseCurrency ?? "NGN"))
                 }
                 
@@ -51,7 +51,7 @@ struct ExpenseDetailsView: View {
                     .sheet(isPresented: $showModal, onDismiss: {
 //                        print("expenseEntryView dismissed")
                     }, content: {
-                        ExpenseEditScreen()
+                        ExpenseEditScreen(expense: expenses, model: $model)
                     })
                 }
             }
