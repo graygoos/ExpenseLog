@@ -24,6 +24,11 @@ struct SettingsTabView: View {
                         Text("Export Expense Details")
                     }
                 }
+                Section {
+                    NavigationLink(destination: FeedbackForm()) {
+                        Text("Give developer feedback")
+                    }
+                }
                 
             }
             .navigationTitle("Settings")
