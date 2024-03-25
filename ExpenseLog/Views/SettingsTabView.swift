@@ -19,6 +19,11 @@ struct SettingsTabView: View {
                 Section("Show or hide input entry fields") {
                     ShowOrHideSectionsView()
                 }
+                Section {
+                    NavigationLink(destination: ExportExpenseDetailsScreen()) {
+                        Text("Export Expense Details")
+                    }
+                }
                 
             }
             .navigationTitle("Settings")
