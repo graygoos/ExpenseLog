@@ -6,10 +6,81 @@
 //
 
 import SwiftUI
+import CoreData
+
+enum ExportFormat {
+    case csv
+    case json
+}
+
+struct Expenses: Identifiable {
+    var id = UUID()
+    var expenseDate: Date
+    var ItemAmount: Double
+//    var category: String?
+//    let expenses: [ExpensesEntity]
+}
 
 struct ExportDataScreen: View {
+    @Environment(\.managedObjectContext) var moc
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    @State private var exportFormat = ExportFormat.csv
+    
+//    @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
+            DatePicker("End Date", selection: $endDate, displayedComponents: .date)
+            Picker("Export Format", selection: $exportFormat) {
+                Text("CSV").tag(ExportFormat.csv)
+                Text("JSON").tag(ExportFormat.json)
+            }
+            Button("Export", systemImage: "square.and.arrow.up.badge.clock.fill") {
+                exportData()
+            }
+        }
+        .padding()
+    }
+    
+    func exportData() {
+        // Fetch data from Core Data based on date range
+        let fetchRequest: NSFetchRequest<ExpensesEntity> = ExpensesEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startDate as NSDate, endDate as NSDate)
+        
+        do {
+            let expenses = try moc.fetch(fetchRequest)
+            if exportFormat == .csv {
+                exportCSV(expenses: expenses)
+            } else if exportFormat == .json {
+                exportJSON(expenses: expenses)
+            }
+        } catch {
+            print("Error fetching data: \(error)")
+        }
+    }
+    
+    func exportCSV(expenses: [ExpensesEntity]) {
+        // Convert expenses array into CSV format
+        var csvString = "Date, Amount\n"
+        for expense in expenses {
+            csvString += "\(expense.expenseDate ?? Date()), \(expense.itemAmount ?? 0)) \n"
+        }
+        // Save or share csvString as needed
+    }
+    
+    func exportJSON(expenses: [ExpensesEntity]) {
+        /*
+        // Convert expenses array into JSON format
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(expenses)
+            // Save or share jsonData as needed
+        } catch {
+            print("Error encoding JSON: \(error)")
+        }
+         */
     }
 }
 
