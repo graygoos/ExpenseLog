@@ -20,7 +20,7 @@ struct SettingsTabView: View {
                     ShowOrHideSectionsView()
                 }
                 Section {
-                    NavigationLink(destination: ExportExpenseDetailsScreen()) {
+                    NavigationLink(destination: ExportDataScreen()) {
                         Text("Export Data")
                     }
                 }
