@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AboutScreen: View {
+    let aboutText = "ExpenseLog is an expense logging app"
+    
     var body: some View {
         HStack {
             Text("ExpenseLog ")
