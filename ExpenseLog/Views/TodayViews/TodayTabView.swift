@@ -35,7 +35,7 @@ struct TodayTabView: View {
                     Section(header: TodayExpenseSectionHeader(), footer: TodayExpenseSectionFooter(expenses: expenses)) {
                         ForEach(expenses) { expense in
                             NavigationLink {
-                                ExpenseDetailsView(expenses: expense)
+                                ExpenseDetailsView(expense: expense)
                             } label: {
                                 HStack {
                                     Text(expense.viewItemName)

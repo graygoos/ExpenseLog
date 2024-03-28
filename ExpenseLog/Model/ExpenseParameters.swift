@@ -12,6 +12,31 @@ import CoreData
 @Observable
 class ExpenseParameters {
     var moc: NSManagedObjectContext?
+    var expense: ExpensesEntity? {
+        didSet {
+            self.itemName = expense?.itemName ?? ""
+            self.itemAmount = Double(expense?.viewItemAmount ?? "0")!
+            self.itemDescription = expense?.viewItemDescription ?? ""
+            self.itemUnit = expense?.itemUnit ?? ""
+            self.payee = expense?.viewPayee ?? ""
+            self.expenseLocation = expense?.viewExpenseLocation ?? ""
+            self.itemQuantity = Int(expense?.viewItemQuantity ?? "0")!
+            self.paymentType = expense?.viewPaymentType ?? ""
+            if let dateString = expense?.viewExpenseDate {
+                let maybeDate = try? Date(dateString , strategy: .dateTime) //ISO8601 - database/record //fixing date format
+                if let maybeDate {
+                    self.expenseDate = maybeDate
+                } else {
+                    self.expenseDate = Date.now
+                }
+            } else {
+                self.expenseDate = Date.now
+            }
+            
+//            self.recurringExpense = expense.vie
+//            self.isBudgeted = expense
+        }
+    }
     
     init(moc: NSManagedObjectContext? = nil) {
         self.moc = moc
@@ -22,12 +47,12 @@ class ExpenseParameters {
 //    }
     
     var itemName = ""
-    var itemAmount = 0.00
+    var itemAmount: Double = 0.00
     var itemDescription = ""
     var itemUnit = "Non"
     var payee = ""
     var expenseLocation = ""
-    var itemQuantity = 1
+    var itemQuantity: Int = 1
     var paymentType = "Debit Card"
     var expenseDate = Date()
     var recurringExpense = false
@@ -59,7 +84,8 @@ class ExpenseParameters {
         guard let moc else {
             return
         }
-        let expense = ExpensesEntity(context: moc)
+        var expense = self.expense ?? ExpensesEntity(context: moc)
+        
         expense.itemName = itemName
         expense.itemAmount = NSDecimalNumber(decimal: Decimal(itemAmount))
         expense.expenseCurrency = expenseCurrency

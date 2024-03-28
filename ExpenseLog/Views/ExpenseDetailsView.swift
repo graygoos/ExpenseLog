@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExpenseDetailsView: View {
     @Environment(\.managedObjectContext) var moc
-    var expenses: ExpensesEntity
+    var expense: ExpensesEntity
     
     @State private var model = ExpenseParameters()
     
@@ -19,13 +19,13 @@ struct ExpenseDetailsView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text(expenses.viewItemName)
+                    Text(expense.viewItemName)
                     Spacer()
-                    Text(Decimal(string: expenses.viewItemAmount) ?? 0, format: .currency(code: expenses.expenseCurrency ?? "NGN"))
+                    Text(Decimal(string: expense.viewItemAmount) ?? 0, format: .currency(code: expense.expenseCurrency ?? "NGN"))
                 }
                 
-                Text(expenses.viewItemDescription)
-                Text(expenses.viewExpenseLocation)
+                Text(expense.viewItemDescription)
+                Text(expense.viewExpenseLocation)
                 
                 Spacer()
                 
@@ -51,15 +51,18 @@ struct ExpenseDetailsView: View {
                     .sheet(isPresented: $showModal, onDismiss: {
 //                        print("expenseEntryView dismissed")
                     }, content: {
-                        ExpenseEditScreen(expense: expenses, model: $model)
+                        ExpenseEditScreen(expense: expense, model: $model)
                     })
                 }
             }
         }
+        .onAppear {
+            self.model.expense = self.expense
+        }
     }
     
     private func deleteExpense() {
-        moc.delete(expenses)
+        moc.delete(expense)
         
         try? moc.save()
         

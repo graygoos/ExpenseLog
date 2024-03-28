@@ -33,7 +33,7 @@ struct ExpenseListView: View {
             List {
                 ForEach(expenses, id: \.self) { expense in
                     NavigationLink {
-                        ExpenseDetailsView(expenses: expense)
+                        ExpenseDetailsView(expense: expense)
                     } label: {
                         HStack {
                             Text("\(expense.viewItemName)")
