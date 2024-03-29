@@ -103,3 +103,5 @@ class ExpenseParameters {
         try? moc.save()
     }
 }
+
+// make persist expense throwing function

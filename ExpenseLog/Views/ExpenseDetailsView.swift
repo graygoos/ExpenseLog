@@ -58,6 +58,7 @@ struct ExpenseDetailsView: View {
         }
         .onAppear {
             self.model.expense = self.expense
+            self.model.moc = self.moc
         }
     }
     

@@ -31,13 +31,15 @@ struct ExportDataScreen: View {
     
     var body: some View {
         VStack {
-            DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
+            DatePicker("Start Date", selection: $startDate, displayedComponents: .date) // earliest date in database
+            // put limiter, you cannot pick a date earlier than start date above    
             DatePicker("End Date", selection: $endDate, displayedComponents: .date)
+            Text("Found 200 entries")
             Picker("Export Format", selection: $exportFormat) {
                 Text("CSV").tag(ExportFormat.csv)
                 Text("JSON").tag(ExportFormat.json)
             }
-            Button("Export", systemImage: "square.and.arrow.up.badge.clock.fill") {
+            Button("Export", systemImage: "square.and.arrow.up.fill") {
                 exportData()
             }
         }
@@ -47,7 +49,7 @@ struct ExportDataScreen: View {
     func exportData() {
         // Fetch data from Core Data based on date range
         let fetchRequest: NSFetchRequest<ExpensesEntity> = ExpensesEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startDate as NSDate, endDate as NSDate)
+        fetchRequest.predicate = NSPredicate(format: "(expenseDate >= %@) AND (expenseDate <= %@)", startDate as NSDate, endDate as NSDate)
         
         do {
             let expenses = try moc.fetch(fetchRequest)
