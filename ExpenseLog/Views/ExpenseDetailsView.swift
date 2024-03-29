@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExpenseDetailsView: View {
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.dismiss) var dismiss
     var expense: ExpensesEntity
     
     @State private var model = ExpenseParameters()
@@ -31,6 +32,7 @@ struct ExpenseDetailsView: View {
                 
                 Button(action: {
                     deleteExpense()
+                    dismiss()
                 }) {
                     Text("Delete Entry")
                 }
