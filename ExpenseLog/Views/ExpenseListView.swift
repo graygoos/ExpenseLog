@@ -11,6 +11,7 @@ import SwiftUI
 struct ExpenseListView: View {
 //    @Binding var path: [String]
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.dismiss) var dismiss
     let date: Date
     
     @FetchRequest var expenses: FetchedResults<ExpensesEntity>
@@ -57,6 +58,7 @@ struct ExpenseListView: View {
             moc.delete(expenses[offset])
         }
         try? moc.save()
+        dismiss()
     }
 }
 
