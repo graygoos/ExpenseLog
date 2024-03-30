@@ -27,8 +27,31 @@ struct TodayExpenseSectionFooter: View {
             Spacer()
             Text("\(dailyTotal, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))")
                 .font(.bold(.title2)())
+            // Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
+        }
+        /*
+        VStack(alignment: .trailing) {
+            ForEach(Array(Set(expenses.compactMap { $0.expenseCurrency })), id: \.self) { currency in
+                if let currency = currency {
+                    Text("\(currency): \(totalForCurrency(currency: currency), format: .currency(code: currency))")
+                        .font(.bold(.title2)())
+                }
+            }
+        }
+         */
+    }
+    /*
+    // Function to calculate the total for each currency
+    func totalForCurrency(currency: String) -> Decimal {
+        expenses.reduce(Decimal(0)) { result, expense in
+            if expense.expenseCurrency == currency {
+                return (expense.itemAmount! as Decimal) + result
+            } else {
+                return result
+            }
         }
     }
+     */
 }
 
 #Preview {
