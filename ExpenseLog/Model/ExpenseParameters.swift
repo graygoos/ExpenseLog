@@ -59,6 +59,7 @@ class ExpenseParameters {
     var isBudgeted = false
     var expenseFrequency = "One-time"
     var expenseCurrency = "NGN"
+    var expenseCategory = "Non"
     
     var itemUnits = ["Non", "Pack", "Tin", "Carton", "Bag", "Box", "Bar", "Bottle", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrapper", "Foil", "Container", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Kilogram", "Roll", "Pound", "Ounce", "Litre", "Centilitre", "Tube", "Bucket", "Sachet", "Cup", "Other"]
     
@@ -66,7 +67,7 @@ class ExpenseParameters {
     
     var frequency = ["Hourly", "Daily", "Weekly", "Monthly", "Quarterly", "Annually", "One-time"]
     
-    var category = ["Food & Dining", "Groceries", "Transportation", "Utilities (Electricity, Water, Gas)", "Rent",
+    var category = ["Non", "Food & Dining", "Groceries", "Transportation", "Utilities (Electricity, Water, Gas)", "Rent",
                     "Mortgage", "Entertainment", "Healthcare", "Health & Fitness", "Shopping", "Personal Care", "Travel", "Insurance", "Education", "Debt Payments", "Investments", "Gifts & Donations", "Home Maintenance", "Pet Care", "Taxes", "Subscriptions & Memberships", "Miscellaneous"]
     
     let allCurrencies: [String] = {
@@ -76,13 +77,13 @@ class ExpenseParameters {
     
     var showModal = false
     
-    var showPaymentDetailsSection =     true
-    var showQuantitySection =           true
-    var showVendorSection =             true
-    var showLocationSection =           true
-    var showDescriptionSection =        true
-    var showFrequencySection =          true
-    var showCategorySection =           true
+    var showPaymentDetailsSection =     false
+    var showQuantitySection =           false
+    var showVendorSection =             false
+    var showLocationSection =           false
+    var showDescriptionSection =        false
+    var showFrequencySection =          false
+    var showCategorySection =           false
     
     func persistExpense() {
         guard let moc else {
