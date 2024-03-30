@@ -66,6 +66,9 @@ class ExpenseParameters {
     
     var frequency = ["Hourly", "Daily", "Weekly", "Monthly", "Quarterly", "Annually", "One-time"]
     
+    var category = ["Food & Dining", "Groceries", "Transportation", "Utilities (Electricity, Water, Gas)", "Rent",
+                    "Mortgage", "Entertainment", "Healthcare", "Health & Fitness", "Shopping", "Personal Care", "Travel", "Insurance", "Education", "Debt Payments", "Investments", "Gifts & Donations", "Home Maintenance", "Pet Care", "Taxes", "Subscriptions & Memberships", "Miscellaneous"]
+    
     let allCurrencies: [String] = {
         let locales = Locale.availableIdentifiers.map { Locale(identifier: $0) }
         return locales.compactMap { $0.currency?.identifier }
@@ -79,6 +82,7 @@ class ExpenseParameters {
     var showLocationSection =           true
     var showDescriptionSection =        true
     var showFrequencySection =          true
+    var showCategorySection =           true
     
     func persistExpense() {
         guard let moc else {
