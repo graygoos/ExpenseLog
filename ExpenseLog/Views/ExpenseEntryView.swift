@@ -49,6 +49,7 @@ struct ExpenseEntryView: View {
     @State private var showLocationSection =    true
     @State private var showDescriptionSection = true
     @State private var showFrequencySection =   true
+    @State private var showCategorySection =    true
     
     var body: some View {
         NavigationStack {
