@@ -111,6 +111,15 @@ struct ExpenseFormView: View {
                             .lineLimit(5, reservesSpace: true)
                     }
                 }
+                if model.showCategorySection {
+                    Section("Expense Category") {
+                        Picker("Category", selection: $model.expenseCategory) {
+                            ForEach(model.category, id: \.self) { category in
+                                Text(category)
+                            }
+                        }
+                    }
+                }
                 if model.showFrequencySection {
                     Section {
                         Picker("Expense Frequency", selection: $model.expenseFrequency) {
