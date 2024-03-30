@@ -11,6 +11,10 @@ enum SettingKeys: CustomStringConvertible, CaseIterable {
     case quantity
     case vendor
     case location
+    case description
+    case paymentDetails
+    case frequency
+    case category
     
     var description: String {
         get {
@@ -18,6 +22,10 @@ enum SettingKeys: CustomStringConvertible, CaseIterable {
             case .quantity: return "showQuantitySection"
             case .vendor: return "showVendorSection"
             case .location: return "showLocationSection"
+            case .description: return "showDescriptionSection"
+            case .paymentDetails: return "showPaymentDetailsSection"
+            case .frequency: return "showFrequencySection"
+            case .category: return "showCategorySection"
             }
         }
     }
@@ -27,6 +35,10 @@ enum SettingKeys: CustomStringConvertible, CaseIterable {
             case .quantity: return "Quantity Section"
             case .vendor: return "Vendor Section"
             case .location: return "Location Section"
+            case .description: return "Item Description"
+            case .paymentDetails: return "Payment Details Section"
+            case .frequency: return "Frequency Section"
+            case .category: return "Category Section"
             }
         }
     }
