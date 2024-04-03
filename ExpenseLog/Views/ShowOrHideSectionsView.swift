@@ -9,6 +9,9 @@ import SwiftUI
 
 
 struct ShowOrHideSectionsView: View {
+    @Environment(\.managedObjectContext) private var moc
+    
+    @FetchRequest(entity: SettingsEntity.entity(), sortDescriptors: []) var settings: FetchedResults<SettingsEntity>
     
 //    @State private var showPaymentDetailsSection = UserDefaults.standard.bool(forKey: "showPaymentSection")
 ////    @State private var showRecurringSection = UserDefaults.standard.bool(forKey: "showRecurringSection")
@@ -28,7 +31,7 @@ struct ShowOrHideSectionsView: View {
 //                Toggle("Expense Frequency", isOn: $showFrequencySection)
                 
                 ForEach(SettingKeys.allCases, id: \.self) { key in
-                    ToggleView(key: key)
+                    ToggleView(settings: settings.first ?? createDefaultSettings(), key: key)
                 }
             }
 //            .onDisappear {
@@ -40,6 +43,19 @@ struct ShowOrHideSectionsView: View {
 //                UserDefaults.standard.set(showDescriptionSection, forKey: "showDescriptionSection")
 //                UserDefaults.standard.set(showFrequencySection, forKey: "showFrequencySection")
 //            }
+    }
+    
+    private func createDefaultSettings() -> SettingsEntity {
+        let settings = SettingsEntity(context: moc)
+        settings.showPaymentDetailsSection = SettingKeys.paymentDetails.defaultValue
+        settings.showQuantitySection = SettingKeys.quantity.defaultValue
+        settings.showVendorSection = SettingKeys.vendor.defaultValue
+        settings.showLocationSection = SettingKeys.location.defaultValue
+        settings.showDescriptionSection = SettingKeys.description.defaultValue
+        settings.showFrequencySection = SettingKeys.frequency.defaultValue
+        settings.showCategorySection = SettingKeys.frequency.defaultValue
+        
+        return settings
     }
 }
 

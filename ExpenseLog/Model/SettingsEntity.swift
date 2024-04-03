@@ -7,13 +7,13 @@
 
 import Foundation
 import CoreData
-
-class SettingsEntity: NSManagedObject {
-    @NSManaged var showPaymentDetailsSection: Bool
-    @NSManaged var showQuantitySection: Bool
-    @NSManaged var showVendorSection: Bool
-    @NSManaged var showLocationSection: Bool
-    @NSManaged var showDescriptionSection: Bool
-    @NSManaged var showFrequencySection: Bool
-    @NSManaged var showCategorySection: Bool
-}
+//
+//class SettingsEntity: NSManagedObject {
+//    @NSManaged var showPaymentDetailsSection: Bool
+//    @NSManaged var showQuantitySection: Bool
+//    @NSManaged var showVendorSection: Bool
+//    @NSManaged var showLocationSection: Bool
+//    @NSManaged var showDescriptionSection: Bool
+//    @NSManaged var showFrequencySection: Bool
+//    @NSManaged var showCategorySection: Bool
+//}

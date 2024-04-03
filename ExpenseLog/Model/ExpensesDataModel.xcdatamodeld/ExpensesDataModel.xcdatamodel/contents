@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23E214" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ExpensesEntity" representedClassName="ExpensesEntity" syncable="YES" codeGenerationType="class">
         <attribute name="dailyTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="expenseCategory" optional="YES" attributeType="String"/>
@@ -21,5 +21,14 @@
         <attribute name="recurringExpense" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="timeEntered" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="weeklyTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+    </entity>
+    <entity name="SettingsEntity" representedClassName="SettingsEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="showCategorySection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showDescriptionSection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showFrequencySection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showLocationSection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showPaymentDetailsSection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showQuantitySection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showVendorSection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
 </model>
