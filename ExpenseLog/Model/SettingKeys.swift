@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum SettingKeys: CustomStringConvertible, CaseIterable {
     case quantity
@@ -53,23 +54,73 @@ enum SettingKeys: CustomStringConvertible, CaseIterable {
     var defaultValue: Bool {
         get {
             switch self {
-            case .quantity: return true
-            default: return false
+            case .quantity: return false
+            case .vendor: return false
+            case .location: return false
+            case .description: return false
+            case .paymentDetails: return false
+            case .frequency: return false
+            case.category: return false
+//            default: return false
             }
         }
     }
     
     
-    var value: Bool {
-        get {
-            UserDefaults.standard.bool(forKey: self.description)
-        }
-        set(newValue) {
-            UserDefaults.standard.set(newValue, forKey: self.description)
-        }
-    }
+//    var value: Bool {
+//        get {
+//            UserDefaults.standard.bool(forKey: self.description)
+//        }
+//        set(newValue) {
+//            UserDefaults.standard.set(newValue, forKey: self.description)
+//        }
+//    }
+//    
+//    func assign(_ value: Bool) {
+//        UserDefaults.standard.set(value, forKey: self.description)
+//    }
     
-    func assign(_ value: Bool) {
-        UserDefaults.standard.set(value, forKey: self.description)
-    }
+    // Fetch setting from CoreData
+        func fetchSetting(using moc: NSManagedObjectContext) -> Bool {
+            let fetchRequest: NSFetchRequest<SettingsEntity> = SettingsEntity.fetchRequest()
+            do {
+                let result = try moc.fetch(fetchRequest)
+                if let settingsEntity = result.first {
+                    switch self {
+                    case .quantity: return settingsEntity.showQuantitySection
+                    case .vendor: return settingsEntity.showVendorSection
+                    case .location: return settingsEntity.showLocationSection
+                    case .description: return settingsEntity.showDescriptionSection
+                    case .paymentDetails: return settingsEntity.showPaymentDetailsSection
+                    case .frequency: return settingsEntity.showFrequencySection
+                    case .category: return settingsEntity.showCategorySection
+                    }
+                }
+            } catch {
+                print("Error fetching settings: \(error.localizedDescription)")
+            }
+            return false
+        }
+        
+        // Update setting in CoreData
+        func updateSetting(using moc: NSManagedObjectContext, value: Bool) {
+            let fetchRequest: NSFetchRequest<SettingsEntity> = SettingsEntity.fetchRequest()
+            do {
+                let result = try moc.fetch(fetchRequest)
+                if let settingsEntity = result.first {
+                    switch self {
+                    case .quantity: settingsEntity.showQuantitySection = value
+                    case .vendor: settingsEntity.showVendorSection = value
+                    case .location: settingsEntity.showLocationSection = value
+                    case .description: settingsEntity.showDescriptionSection = value
+                    case .paymentDetails: settingsEntity.showPaymentDetailsSection = value
+                    case .frequency: settingsEntity.showFrequencySection = value
+                    case .category: settingsEntity.showCategorySection = value
+                    }
+                    try moc.save()
+                }
+            } catch {
+                print("Error updating setting: \(error.localizedDescription)")
+            }
+        }
 }

@@ -11,32 +11,27 @@ struct ToggleView: View {
     @State private var isOn: Bool = false
     @ObservedObject var settings: SettingsEntity
     var key: SettingKeys
+    @Environment(\.managedObjectContext) private var moc
     
     var body: some View {
-        Toggle(key.title, isOn: $isOn)
-            .onAppear {
-                self.isOn = self.key.value
-            }
-            .onChange(of: isOn) {
-                self.key.assign(isOn)
-            }
+        Toggle(key.title, isOn: toggleBinding(for: key))
+//            .onAppear {
+//                self.isOn = key.fetchSetting(using: settings)
+//            }
+//            .onChange(of: isOn) { oldVal, newValue in 
+//                key.updateSetting(using: moc, value: newValue)
+//            }
     }
     
     private func toggleBinding(for key: SettingKeys) -> Binding<Bool> {
         switch key {
-        case .quantity: return $settings.showQuantitySection
-        case .vendor:
-            return $settings.showVendorSection
-        case .location:
-            return $settings.showLocationSection
-        case .description:
-            return $settings.showDescriptionSection
-        case .paymentDetails:
-            return $settings.showPaymentDetailsSection
-        case .frequency:
-            return $settings.showFrequencySection
-        case .category:
-            return $settings.showCategorySection
+        case .quantity:         return $settings.showQuantitySection
+        case .vendor:           return $settings.showVendorSection
+        case .location:         return $settings.showLocationSection
+        case .description:      return $settings.showDescriptionSection
+        case .paymentDetails:   return $settings.showPaymentDetailsSection
+        case .frequency:        return $settings.showFrequencySection
+        case .category:         return $settings.showCategorySection
         }
     }
     
