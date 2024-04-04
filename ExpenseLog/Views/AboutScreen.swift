@@ -16,6 +16,8 @@ We value your insights and invite you to actively participate in testing Expense
 Thank you for joining us on this journey!
 
 Femi
+
+Copyright ©2024 Femi Aliu. All rights reserved.
 """
     
     var body: some View {
