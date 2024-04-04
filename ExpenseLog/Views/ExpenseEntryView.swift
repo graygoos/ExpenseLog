@@ -17,13 +17,13 @@ struct ExpenseEntryView: View {
     @FetchRequest(entity: SettingsEntity.entity(), sortDescriptors: []) var settings: FetchedResults<SettingsEntity>
         
     
-    @State private var showPaymentDetailsSection =      false
-    @State private var showQuantitySection =            false
-    @State private var showVendorSection =              false
-    @State private var showLocationSection =            false
-    @State private var showDescriptionSection =         false
-    @State private var showFrequencySection =           false
-    @State private var showCategorySection =            false
+//    @State private var showPaymentDetailsSection =      false
+//    @State private var showQuantitySection =            false
+//    @State private var showVendorSection =              false
+//    @State private var showLocationSection =            false
+//    @State private var showDescriptionSection =         false
+//    @State private var showFrequencySection =           false
+//    @State private var showCategorySection =            false
     
     var body: some View {
         NavigationStack {
@@ -65,6 +65,12 @@ struct ExpenseEntryView: View {
             model.showDescriptionSection = settingsEntity.showDescriptionSection
             model.showFrequencySection = settingsEntity.showFrequencySection
             model.showCategorySection = settingsEntity.showCategorySection
+        }
+        do {
+            try moc.save()
+            
+        } catch {
+            print("Error updating setting: \(error.localizedDescription)")
         }
     }
 }

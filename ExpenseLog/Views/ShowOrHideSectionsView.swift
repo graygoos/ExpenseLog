@@ -29,7 +29,7 @@ struct ShowOrHideSectionsView: View {
         settings.showLocationSection = SettingKeys.location.defaultValue
         settings.showDescriptionSection = SettingKeys.description.defaultValue
         settings.showFrequencySection = SettingKeys.frequency.defaultValue
-        settings.showCategorySection = SettingKeys.frequency.defaultValue
+        settings.showCategorySection = SettingKeys.category.defaultValue
         
         return settings
     }
