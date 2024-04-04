@@ -19,12 +19,16 @@ Femi
 """
     
     var body: some View {
-        ScrollView {
-            HStack {
-                Text(aboutText)
+        NavigationStack {
+            ScrollView {
+                HStack {
+                    Text(aboutText)
+                }
+                .padding()
             }
-            .padding()
         }
+        .navigationTitle("About")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
