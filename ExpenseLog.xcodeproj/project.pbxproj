@@ -43,6 +43,7 @@
 		05F2AEA32B04CE7600AE7C7F /* ExpenseLogContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */; };
 		05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA92B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld */; };
 		05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */; };
+		05FF4A672BC01789007F2CF5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF4A662BC01789007F2CF5 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogContainer.swift; sourceTree = "<group>"; };
 		05F2AEAA2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensesDataModel.xcdatamodel; sourceTree = "<group>"; };
 		05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntryView.swift; sourceTree = "<group>"; };
+		05FF4A662BC01789007F2CF5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 				05D3ADB12B1E1DE80023A0E3 /* ExpenseEntityExtension.swift */,
 				0587400B2BACBA8000C5B4F9 /* ExpenseParameters.swift */,
 				05528CFD2BAF63EE00DE277B /* SettingKeys.swift */,
+				05FF4A662BC01789007F2CF5 /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				0559A1282B27311500001FCD /* TodayExpenseSectionHeader.swift in Sources */,
 				05CC27A32B17996200D47F4D /* CurrencyPicker.swift in Sources */,
 				058740042BA1967900C5B4F9 /* StepperWithTextFieldView.swift in Sources */,
+				05FF4A672BC01789007F2CF5 /* Settings.swift in Sources */,
 				05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */,
 				05D3ADB62B24B1480023A0E3 /* TodayEmptyView.swift in Sources */,
 				0583888E2B7E5988005AC0BB /* ExpenseDetailsView.swift in Sources */,
