@@ -7,5 +7,12 @@
 
 import Foundation
 
-class Settings {
+class Settings: ObservableObject {
+    @Published var showFormSection: Bool = false
+    
+//    init(showFormSection: Bool) {
+//        self.showFormSection = showFormSection
+//    }
+    
+    init() {}
 }

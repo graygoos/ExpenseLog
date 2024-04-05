@@ -15,6 +15,7 @@ struct ShowOrHideSectionsView: View {
     
     @State private var setting: SettingsEntity?
     
+    
     var body: some View {
         VStack {
             Text("\(settings.count) settings entities")

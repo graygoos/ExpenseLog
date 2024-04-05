@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct ToggleView: View {
-    @State private var isOn: Bool = false
+//    @State private var isOn: Bool = false
     @ObservedObject var settings: SettingsEntity
     var key: SettingKeys
-    @Environment(\.managedObjectContext) private var moc
+//    @Environment(\.managedObjectContext) private var moc
     
     var body: some View {
         Toggle(key.title, isOn: toggleBinding(for: key))
+            .onChange(of: settings) { oldValue, newValue in
+                
+            }
 //            .onAppear {
 //                self.isOn = key.fetchSetting(using: settings)
 //            }
@@ -35,13 +38,13 @@ struct ToggleView: View {
         }
     }
     
-    private func saveSettings() {
-        do {
-            try settings.managedObjectContext?.save()
-        } catch {
-            print("Error saving settings: \(error.localizedDescription)")
-        }
-    }
+//    private func saveSettings() {
+//        do {
+//            try settings.managedObjectContext?.save()
+//        } catch {
+//            print("Error saving settings: \(error.localizedDescription)")
+//        }
+//    }
 }
 
 //#Preview {

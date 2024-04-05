@@ -11,6 +11,7 @@ struct ExpenseFormView: View {
     
     @Environment(\.managedObjectContext) var moc
     @Binding var model: ExpenseParameters
+    @ObservedObject var settings: Settings
     
     var body: some View {
         NavigationStack {

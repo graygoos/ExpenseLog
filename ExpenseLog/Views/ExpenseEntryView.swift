@@ -27,7 +27,7 @@ struct ExpenseEntryView: View {
     
     var body: some View {
         NavigationStack {
-            ExpenseFormView(model: $model)
+            ExpenseFormView(model: $model, settings: Settings())
                 .navigationTitle("Enter expense")
                 .onAppear {
                     self.model.moc = moc
@@ -67,11 +67,11 @@ struct ExpenseEntryView: View {
             model.showCategorySection = settingsEntity.showCategorySection
         }
         do {
-            try moc.save()
-            
-        } catch {
-            print("Error updating setting: \(error.localizedDescription)")
-        }
+        try moc.save()
+        
+    } catch {
+        print("Error updating setting: \(error.localizedDescription)")
+    }
     }
 }
 
