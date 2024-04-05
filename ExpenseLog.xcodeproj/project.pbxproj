@@ -44,6 +44,7 @@
 		05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA92B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld */; };
 		05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */; };
 		05FF4A672BC01789007F2CF5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF4A662BC01789007F2CF5 /* Settings.swift */; };
+		05FF4A692BC035E1007F2CF5 /* HistoryEmptyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF4A682BC035E1007F2CF5 /* HistoryEmptyScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		05F2AEAA2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensesDataModel.xcdatamodel; sourceTree = "<group>"; };
 		05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntryView.swift; sourceTree = "<group>"; };
 		05FF4A662BC01789007F2CF5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		05FF4A682BC035E1007F2CF5 /* HistoryEmptyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEmptyScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 				058740092BAC974F00C5B4F9 /* ShowOrHideSectionsView.swift */,
 				05528CFB2BAF5BF400DE277B /* ToggleView.swift */,
 				053140C42B506514002E90D9 /* TodayViews */,
+				05FF4A682BC035E1007F2CF5 /* HistoryEmptyScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */,
 				05D3ADB62B24B1480023A0E3 /* TodayEmptyView.swift in Sources */,
 				0583888E2B7E5988005AC0BB /* ExpenseDetailsView.swift in Sources */,
+				05FF4A692BC035E1007F2CF5 /* HistoryEmptyScreen.swift in Sources */,
 				051C99BB2ADD836000B60C65 /* ExpenseLogApp.swift in Sources */,
 				05AC0DB02B61574E00DE0F0D /* Decimal+Ext.swift in Sources */,
 			);
