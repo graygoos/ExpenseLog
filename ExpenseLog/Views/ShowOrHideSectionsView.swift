@@ -13,16 +13,32 @@ struct ShowOrHideSectionsView: View {
     
     @FetchRequest(entity: SettingsEntity.entity(), sortDescriptors: []) var settings: FetchedResults<SettingsEntity>
     
+    @State private var setting: SettingsEntity?
+    
     var body: some View {
-            Section {
-                ForEach(SettingKeys.allCases, id: \.self) { key in
-                    ToggleView(settings: settings.first ?? createDefaultSettings(), key: key)
-                }
+        VStack {
+            Text("\(settings.count) settings entities")
+            Button("Clean data") {
+                cleanUpExcessSettings()
             }
+            Section {
+                    ForEach(SettingKeys.allCases, id: \.self) { key in
+                        ToggleView(settings: createDefaultSettings(), key: key)
+                    }
+            }
+        }
     }
     
     private func createDefaultSettings() -> SettingsEntity {
+        if self.setting != nil { return self.setting! }
+        self.setting = self.settings.first
+        if self.setting != nil { return self.setting! }
         let settings = SettingsEntity(context: moc)
+        self.setting = settings
+//        if !self.settings.isEmpty {
+//            settings = self.settings.first!
+//        }
+//        let settings = SettingsEntity(context: moc)
         settings.showPaymentDetailsSection = SettingKeys.paymentDetails.defaultValue
         settings.showQuantitySection = SettingKeys.quantity.defaultValue
         settings.showVendorSection = SettingKeys.vendor.defaultValue
@@ -31,7 +47,28 @@ struct ShowOrHideSectionsView: View {
         settings.showFrequencySection = SettingKeys.frequency.defaultValue
         settings.showCategorySection = SettingKeys.category.defaultValue
         
+        do {
+            try moc.save()
+        } catch {
+            print("Error saving settings: \(error.localizedDescription)")
+        }
+        
         return settings
+    }
+    
+    /* create Settings Model file */
+    
+    private func cleanUpExcessSettings() {
+        print("✅❓✅😂", settings.count)
+        for entity in self.settings {
+            moc.delete(entity)
+        }
+        do {
+            try moc.save()
+        } catch {
+            print("Error saving settings: \(error.localizedDescription)")
+        }
+        print(settings.count)
     }
 }
 
