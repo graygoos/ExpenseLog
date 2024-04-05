@@ -25,14 +25,45 @@ struct HistoryTabView: View {
     
     var body: some View {
         NavigationStack(path: $navPath) {
-            List {          // offset ❓
-                section(for: "Previous 7 Days", predicate: predicate(forLastNDays: 7, offset: 1)) // 1
-                section(for: "Previous 30 Days", predicate: predicate(forLastNDays: 31, offset: 8)) // 8
-                section(for: "Previous 90 Days", predicate: predicate(forLastNDays: 91, offset: 31)) // 38
-                section(for: "Previous 180", predicate: predicate(forLastNDays: 181, offset: 91)) // 128
-                section(for: "Older", predicate: predicate(forOlderThan: 181))
+            if expenses.isEmpty {
+                HistoryEmptyScreen()
+            } else {
+                List {          // offset ❓
+                    if hasExpensesForLastNDays(7) {
+                        section(for: "Previous 7 Days", predicate: predicate(forLastNDays: 7, offset: 1))
+                    }
+                    if hasExpensesForLastNDays(30) {
+                        section(for: "Previous 30 Days", predicate: predicate(forLastNDays: 31, offset: 8))
+                    }
+                    if hasExpensesForLastNDays(90) {
+                        section(for: "Previous 90 Days", predicate: predicate(forLastNDays: 91, offset: 31))
+                    }
+                    if hasExpensesForLastNDays(180) {
+                        section(for: "Previous 180", predicate: predicate(forLastNDays: 181, offset: 91))
+                    }
+                    if hasExpensesOlderThan(180) {
+                        section(for: "Older", predicate: predicate(forOlderThan: 181))
+                    }
+                }
+                .navigationTitle("History")
+                .searchable(text: $searchText)
+                .toolbar {
+                    ToolbarItem {
+                        Button(action: {
+                            self.showModal.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                        }
+                        .sheet(isPresented: $showModal, onDismiss: {
+                            print("expenseEntryView dismissed")
+                        }, content: {
+                            ExpenseEntryView()
+                        })
+                    }
+                }
             }
-            .navigationTitle("History")
+            
+            
 //            .navigationDestination(for: String.self) { pathValue in
 //                if pathValue == "Expenses for " {
 //                    ExpenseListView(date: $navPath)
@@ -40,26 +71,30 @@ struct HistoryTabView: View {
 //                    ExpenseDetailsView(navPath: $navPath)
 //                }
 //            }
-            .searchable(text: $searchText)
+            
 //            .onChange(of: searchText) {_, text in
 //                expenses.nsPredicate = text.isEmpty ? nil : NSPredicate(format: "expense CONTAINS %@", text)
 //            }
-            .toolbar {
-                ToolbarItem {
-                    Button(action: {
-                        self.showModal.toggle()
-                    }) {
-                        Image(systemName: "plus")
-                    }
-                    .sheet(isPresented: $showModal, onDismiss: {
-                        print("expenseEntryView dismissed")
-                    }, content: {
-                        ExpenseEntryView()
-                    })
-                }
-            }
+            
         }
     }           // ❓always test for boundaries // view that shows all the records
+    
+    private func hasExpensesForLastNDays(_ days: Int) -> Bool {
+        let calendar = Calendar.current
+        let now = Date()
+        let startDate = calendar.date(byAdding: .day, value: -days, to: now)!
+        
+        return expenses.contains { $0.expenseDate ?? Date() >= startDate }
+    }
+    
+    private func hasExpensesOlderThan(_ days: Int) -> Bool {
+        let calendar = Calendar.current
+        let now = Date()
+        let endDate = calendar.date(byAdding: .day, value: -days, to: now)!
+        
+        return expenses.contains { $0.expenseDate ?? Date() < endDate }
+        
+    }
     
     // Create a predicate for expenses in the last N days
     private func predicate(forLastNDays days: Int, offset: Int = 1) -> NSPredicate {
