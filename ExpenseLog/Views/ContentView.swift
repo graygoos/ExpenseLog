@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var settings = Settings()
+    
     var body: some View {
         
         TabView {
-            TodayTabView()
+            TodayTabView(settings: $settings)
                 .tabItem {
                     Label("Today", systemImage: "calendar")
                 }
-            HistoryTabView()
+            HistoryTabView(settings: $settings)
                 .tabItem {
                     Label("History", systemImage: "clock")
                 }
-            SettingsTabView()
+            SettingsTabView(settings: $settings)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }

@@ -18,7 +18,7 @@ struct ExpenseEditScreen: View {
     
     var body: some View {
         NavigationStack {
-            ExpenseFormView(model: $model, settings: Settings(showFormSection: false))
+            ExpenseFormView(model: $model, settings: $settings)
                 .navigationTitle("Edit Expense")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {

@@ -10,7 +10,7 @@ import SwiftUI
 struct HistoryEmptyScreen: View {
     @State private var showModal = false
     
-    @State private var settings = Settings(showFormSection: false)
+    @Binding var settings: Settings
     
     var body: some View {
         ContentUnavailableView(label: {
@@ -34,5 +34,6 @@ struct HistoryEmptyScreen: View {
 }
 
 #Preview {
-    HistoryEmptyScreen()
+    @State var settings = Settings()
+    return HistoryEmptyScreen(settings: $settings)
 }

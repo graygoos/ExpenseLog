@@ -15,7 +15,7 @@ struct ShowOrHideSectionsView: View {
     
 //    @State private var setting: SettingsEntity?
     
-    @State private var settings = Settings(showFormSection: false)
+    @Binding var settings: Settings
     
     var body: some View {
         VStack {
@@ -78,5 +78,6 @@ struct ShowOrHideSectionsView: View {
 }
 
 #Preview {
-    ShowOrHideSectionsView()
+    @State var settings = Settings()
+    return ShowOrHideSectionsView(settings: $settings)
 }

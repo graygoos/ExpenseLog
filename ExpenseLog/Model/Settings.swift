@@ -11,7 +11,7 @@ import Combine
 @Observable
 class Settings: ObservableObject, Equatable {
     static func == (lhs: Settings, rhs: Settings) -> Bool {
-        return lhs.showFormSection == rhs.showFormSection &&
+//        return lhs.showFormSection == rhs.showFormSection &&
         lhs.showQuantitySection == rhs.showQuantitySection &&
         lhs.showVendorSection == rhs.showVendorSection &&
         lhs.showLocationSection == rhs.showLocationSection &&
@@ -21,20 +21,20 @@ class Settings: ObservableObject, Equatable {
         lhs.showCategorySection == rhs.showCategorySection
     }
     
-    var showFormSection: Bool
+//    var showFormSection: Bool
     
-    var showQuantitySection =       Bool()
-    var showVendorSection =         Bool()
-    var showLocationSection =       Bool()
-    var showDescriptionSection =    Bool()
-    var showPaymentDetailsSection = Bool()
-    var showFrequencySection =      Bool()
-    var showCategorySection =       Bool()
+    var showQuantitySection =       false
+    var showVendorSection =         false
+    var showLocationSection =       false
+    var showDescriptionSection =    false
+    var showPaymentDetailsSection = false
+    var showFrequencySection =      false
+    var showCategorySection =       false
     
-    init(showFormSection: Bool) {
-        self.showFormSection = showFormSection
-        
-    }
+//    init(showFormSection: Bool) {
+//        self.showQuantitySection = s
+//        
+//    }
     
     
     

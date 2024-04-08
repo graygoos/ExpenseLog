@@ -11,7 +11,7 @@ struct TodayTabView: View {
     @State private var navPath: [String] = []
     @Environment(\.managedObjectContext) var moc
     
-    @State private var settings = Settings(showFormSection: false)
+    @Binding var settings: Settings
 
     @FetchRequest<ExpensesEntity>(
         sortDescriptors: [],
@@ -37,7 +37,7 @@ struct TodayTabView: View {
                     Section(header: TodayExpenseSectionHeader(), footer: TodayExpenseSectionFooter(expenses: expenses)) {
                         ForEach(expenses) { expense in
                             NavigationLink {
-                                ExpenseDetailsView(expense: expense)
+                                ExpenseDetailsView(expense: expense, settings: $settings)
                             } label: {
                                 HStack {
                                     Text(expense.viewItemName)
@@ -75,7 +75,7 @@ struct TodayTabView: View {
 //                    }
                 }
             } else {
-                TodayEmptyView()
+                TodayEmptyView(settings: $settings)
             }
         }
     }
@@ -91,8 +91,9 @@ struct TodayTabView: View {
 // Locale.current.currency?.identifier ?? "NGN"
 
 #Preview {
-    Group {
-        TodayTabView()
+    @State var settings = Settings()
+    return Group {
+        TodayTabView(settings: $settings)
             .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
     }
 }

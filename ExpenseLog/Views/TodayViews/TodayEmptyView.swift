@@ -10,8 +10,7 @@ import SwiftUI
 struct TodayEmptyView: View {
     @State private var showModal = false
     
-    @State private var settings = Settings(showFormSection: false)
-    
+    @Binding var settings: Settings
     var body: some View {
         ContentUnavailableView(label: {
             Label("No Expense logged today.", systemImage: "creditcard.fill")
@@ -34,5 +33,6 @@ struct TodayEmptyView: View {
 }
 
 #Preview {
-    TodayEmptyView()
+    @State var settings = Settings()
+    return TodayEmptyView(settings: $settings)
 }

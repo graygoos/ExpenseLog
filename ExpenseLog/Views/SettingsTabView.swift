@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettingsTabView: View {
+    @Binding var settings: Settings
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -17,7 +19,7 @@ struct SettingsTabView: View {
                     }
                 }
                 Section("Show or hide input entry fields") {
-                    ShowOrHideSectionsView()
+                    ShowOrHideSectionsView(settings: $settings)
                 }
                 Section {
                     NavigationLink(destination: ExportDataScreen()) {
@@ -37,7 +39,8 @@ struct SettingsTabView: View {
 }
 
 #Preview {
-    SettingsTabView()
+    @State var settings = Settings()
+    return SettingsTabView(settings: $settings)
 }
 
 

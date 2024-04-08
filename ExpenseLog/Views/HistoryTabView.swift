@@ -21,14 +21,14 @@ struct HistoryTabView: View {
     @State private var searchText = ""
 //    let date: Date
     
-    @State private var settings = Settings(showFormSection: false)
+    @Binding var settings: Settings
     
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
     
     var body: some View {
         NavigationStack(path: $navPath) {
             if shouldShowEmptyState {
-                HistoryEmptyScreen()
+                HistoryEmptyScreen(settings: $settings)
             } else {
                 List {          // offset ❓
                     if hasExpensesForLastNDays(7) {
@@ -146,7 +146,7 @@ struct HistoryTabView: View {
         
         return Section(header: Text(title)) {
             ForEach(groupedExpenses, id: \.date) { groupedExpense in
-                NavigationLink(destination: ExpenseListView(date: groupedExpense.date)) {
+                NavigationLink(destination: ExpenseListView(date: groupedExpense.date, settings: $settings)) {
                     Text(groupedExpense.date.formattedDay) // format date
                 }
             }
@@ -185,7 +185,8 @@ struct HistoryTabView: View {
 }
 
 #Preview {
-    HistoryTabView()
+    @State var settings = Settings()
+    return HistoryTabView(settings: $settings)
 }
 
 

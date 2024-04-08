@@ -15,7 +15,7 @@ struct CurrentDayExpenses: View {
     
     @State private var showModal = false
     
-    @State var settings = Settings(showFormSection: false)
+    @Binding var settings: Settings
     
     var body: some View {
         List {
@@ -48,5 +48,6 @@ struct CurrentDayExpenses: View {
 }
 
 #Preview {
-    CurrentDayExpenses()
+    @State var settings = Settings()
+    return CurrentDayExpenses(settings: $settings)
 }

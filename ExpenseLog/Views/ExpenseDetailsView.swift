@@ -16,7 +16,7 @@ struct ExpenseDetailsView: View {
     
     @State private var showModal = false
     
-    @State private var settings = Settings(showFormSection: false)
+    @Binding var settings: Settings
     
     var body: some View {
         NavigationStack {

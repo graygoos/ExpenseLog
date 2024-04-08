@@ -29,7 +29,7 @@ struct ExpenseEntryView: View {
     
     var body: some View {
         NavigationStack {
-            ExpenseFormView(model: $model, settings: Settings(showFormSection: false))
+            ExpenseFormView(model: $model, settings: $settings)
                 .navigationTitle("Enter expense")
                 .onAppear {
                     self.model.moc = moc
@@ -78,7 +78,7 @@ struct ExpenseEntryView: View {
 }
 
 #Preview {
-    @State var settings = Settings(showFormSection: false)
+    @State var settings = Settings()
     return ExpenseEntryView(settings: $settings)
 //    ExpenseEntryView()
 }
