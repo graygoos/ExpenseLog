@@ -41,7 +41,7 @@ struct HistoryTabView: View {
                         section(for: "Previous 90 Days", predicate: predicate(forLastNDays: 91, offset: 31))
                     }
                     if hasExpensesForLastNDays(180) {
-                        section(for: "Previous 180", predicate: predicate(forLastNDays: 181, offset: 91))
+                        section(for: "Previous 180 Days", predicate: predicate(forLastNDays: 181, offset: 91))
                     }
                     if hasExpensesOlderThan(180) {
                         section(for: "Older", predicate: predicate(forOlderThan: 181))
