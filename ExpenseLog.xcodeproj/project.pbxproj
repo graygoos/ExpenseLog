@@ -254,8 +254,8 @@
 				05528D012BB1DD1F00DE277B /* ExportDataScreen.swift */,
 				058740092BAC974F00C5B4F9 /* ShowOrHideSectionsView.swift */,
 				05528CFB2BAF5BF400DE277B /* ToggleView.swift */,
-				053140C42B506514002E90D9 /* TodayViews */,
 				05FF4A682BC035E1007F2CF5 /* HistoryEmptyScreen.swift */,
+				053140C42B506514002E90D9 /* TodayViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";

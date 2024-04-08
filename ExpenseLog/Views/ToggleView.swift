@@ -9,12 +9,14 @@ import SwiftUI
 
 struct ToggleView: View {
 //    @State private var isOn: Bool = false
-    @ObservedObject var settings: SettingsEntity
+//    @ObservedObject var settings: SettingsEntity
     var key: SettingKeys
 //    @Environment(\.managedObjectContext) private var moc
     
+    @Binding var settings: Settings
+    
     var body: some View {
-        Toggle(key.title, isOn: toggleBinding(for: key))
+        Toggle(key.title, isOn: self.$settings.showFormSection)
             .onChange(of: settings) { oldValue, newValue in
                 
             }
@@ -25,6 +27,7 @@ struct ToggleView: View {
 //                key.updateSetting(using: moc, value: newValue)
 //            }
     }
+    
     
     private func toggleBinding(for key: SettingKeys) -> Binding<Bool> {
         switch key {

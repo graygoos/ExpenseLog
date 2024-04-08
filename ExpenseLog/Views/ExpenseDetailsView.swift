@@ -16,6 +16,8 @@ struct ExpenseDetailsView: View {
     
     @State private var showModal = false
     
+    @State private var settings = Settings(showFormSection: false)
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -53,7 +55,7 @@ struct ExpenseDetailsView: View {
                     .sheet(isPresented: $showModal, onDismiss: {
 //                        print("expenseEntryView dismissed")
                     }, content: {
-                        ExpenseEditScreen(expense: expense, model: $model)
+                        ExpenseEditScreen(expense: expense, model: $model, settings: $settings)
                     })
                 }
             }

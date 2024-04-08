@@ -11,12 +11,14 @@ struct ExpenseEditScreen: View {
     let expense: ExpensesEntity?
     @Binding var model: ExpenseParameters
     
+    @Binding var settings: Settings
+    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
-            ExpenseFormView(model: $model, settings: Settings())
+            ExpenseFormView(model: $model, settings: Settings(showFormSection: false))
                 .navigationTitle("Edit Expense")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {

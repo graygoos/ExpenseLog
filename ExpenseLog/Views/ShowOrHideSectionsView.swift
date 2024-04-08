@@ -11,25 +11,27 @@ import SwiftUI
 struct ShowOrHideSectionsView: View {
     @Environment(\.managedObjectContext) private var moc
     
-    @FetchRequest(entity: SettingsEntity.entity(), sortDescriptors: []) var settings: FetchedResults<SettingsEntity>
+//    @FetchRequest(entity: SettingsEntity.entity(), sortDescriptors: []) var settings: FetchedResults<SettingsEntity>
     
-    @State private var setting: SettingsEntity?
+//    @State private var setting: SettingsEntity?
     
+    @State private var settings = Settings(showFormSection: false)
     
     var body: some View {
         VStack {
-            Text("\(settings.count) settings entities")
-            Button("Clean data") {
-                cleanUpExcessSettings()
-            }
+//            Text("\(settings.count) settings entities")
+//            Button("Clean data") {
+//                cleanUpExcessSettings()
+//            }
             Section {
                     ForEach(SettingKeys.allCases, id: \.self) { key in
-                        ToggleView(settings: createDefaultSettings(), key: key)
+                        ToggleView(key: key, settings: $settings)
                     }
             }
         }
     }
     
+    /*
     private func createDefaultSettings() -> SettingsEntity {
         if self.setting != nil { return self.setting! }
         self.setting = self.settings.first
@@ -56,9 +58,10 @@ struct ShowOrHideSectionsView: View {
         
         return settings
     }
-    
+    */
     /* create Settings Model file */
     
+    /*
     private func cleanUpExcessSettings() {
         print("✅❓✅😂", settings.count)
         for entity in self.settings {
@@ -71,6 +74,7 @@ struct ShowOrHideSectionsView: View {
         }
         print(settings.count)
     }
+    */
 }
 
 #Preview {

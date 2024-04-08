@@ -28,7 +28,7 @@ struct ExpenseFormView: View {
                         }
                     }
                 }
-                if model.showPaymentDetailsSection {
+                if settings.showPaymentDetailsSection {
                     Section {
                         Picker("Payment Method", selection: $model.paymentType) {
                             ForEach(model.paymentMethod, id: \.self) { unit in
@@ -39,7 +39,7 @@ struct ExpenseFormView: View {
                         Toggle("Budgeted", isOn: $model.isBudgeted)
                     }
                 }
-                if model.showQuantitySection {
+                if settings.showQuantitySection {
                     Section("Item quantity") {
                         Stepper("Quantity: \(model.itemQuantity)", value: $model.itemQuantity, in: 1...Int.max)
 //                        StepperWithTextFieldView(itemQty: $model.itemQuantity)
@@ -50,12 +50,12 @@ struct ExpenseFormView: View {
                         }
                     }
                 }
-                if model.showVendorSection {
+                if settings.showVendorSection {
                     Section("vendor/payee/recipient") {
                         TextField("Vendor", text: $model.payee)
                     }
                 }
-                if model.showLocationSection {
+                if settings.showLocationSection {
                     Section("location") {
                         VStack {
                             HStack { // V2
@@ -68,14 +68,14 @@ struct ExpenseFormView: View {
                         }
                     }
                 }
-                if model.showDescriptionSection {
+                if settings.showDescriptionSection {
                     Section("Item description") {
                         TextField("Description", text: $model.itemDescription, axis: .vertical)
                             .textFieldStyle(.plain)
                             .lineLimit(5, reservesSpace: true)
                     }
                 }
-                if model.showCategorySection {
+                if settings.showCategorySection {
                     Section("Expense Category") {
                         Picker("Category", selection: $model.expenseCategory) {
                             ForEach(model.category, id: \.self) { category in
@@ -84,7 +84,7 @@ struct ExpenseFormView: View {
                         }
                     }
                 }
-                if model.showFrequencySection {
+                if settings.showFrequencySection {
                     Section {
                         Picker("Expense Frequency", selection: $model.expenseFrequency) {
                             ForEach(model.frequency, id: \.self) { item in

@@ -10,6 +10,8 @@ import SwiftUI
 struct HistoryEmptyScreen: View {
     @State private var showModal = false
     
+    @State private var settings = Settings(showFormSection: false)
+    
     var body: some View {
         ContentUnavailableView(label: {
             Label("No previous expense logged.", systemImage: "clock.fill")
@@ -25,7 +27,7 @@ struct HistoryEmptyScreen: View {
             .sheet(isPresented: $showModal, onDismiss: {
                 print("expenseEntryView dismissed")
             }, content: {
-                ExpenseEntryView()
+                ExpenseEntryView(settings: $settings)
             })
         })
     }

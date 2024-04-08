@@ -15,6 +15,8 @@ struct CurrentDayExpenses: View {
     
     @State private var showModal = false
     
+    @State var settings = Settings(showFormSection: false)
+    
     var body: some View {
         List {
             ForEach(expenses) { expense in
@@ -38,7 +40,7 @@ struct CurrentDayExpenses: View {
                 .sheet(isPresented: $showModal, onDismiss: {
                     print("expenseEntryView dismissed")
                 }, content: {
-                    ExpenseEntryView()
+                    ExpenseEntryView(settings: $settings)
                 })
             }
         }

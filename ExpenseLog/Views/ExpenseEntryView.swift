@@ -14,7 +14,9 @@ struct ExpenseEntryView: View {
     
     @State private var model = ExpenseParameters()
     
-    @FetchRequest(entity: SettingsEntity.entity(), sortDescriptors: []) var settings: FetchedResults<SettingsEntity>
+//    @FetchRequest(entity: SettingsEntity.entity(), sortDescriptors: []) var settings: FetchedResults<SettingsEntity>
+    
+    @Binding var settings: Settings
         
     
 //    @State private var showPaymentDetailsSection =      false
@@ -27,11 +29,11 @@ struct ExpenseEntryView: View {
     
     var body: some View {
         NavigationStack {
-            ExpenseFormView(model: $model, settings: Settings())
+            ExpenseFormView(model: $model, settings: Settings(showFormSection: false))
                 .navigationTitle("Enter expense")
                 .onAppear {
                     self.model.moc = moc
-                    updateSettings()
+//                    updateSettings()
                 }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -56,27 +58,29 @@ struct ExpenseEntryView: View {
         }
     }
     
-    private func updateSettings() {
-        if let settingsEntity = settings.first {
-            model.showPaymentDetailsSection = settingsEntity.showPaymentDetailsSection
-            model.showQuantitySection = settingsEntity.showQuantitySection
-            model.showVendorSection = settingsEntity.showVendorSection
-            model.showLocationSection = settingsEntity.showLocationSection
-            model.showDescriptionSection = settingsEntity.showDescriptionSection
-            model.showFrequencySection = settingsEntity.showFrequencySection
-            model.showCategorySection = settingsEntity.showCategorySection
-        }
-        do {
-        try moc.save()
-        
-    } catch {
-        print("Error updating setting: \(error.localizedDescription)")
-    }
-    }
+//    private func updateSettings() {
+//        if let settingsEntity = $settings.first {
+//            model.showPaymentDetailsSection = settingsEntity.showPaymentDetailsSection
+//            model.showQuantitySection = settingsEntity.showQuantitySection
+//            model.showVendorSection = settingsEntity.showVendorSection
+//            model.showLocationSection = settingsEntity.showLocationSection
+//            model.showDescriptionSection = settingsEntity.showDescriptionSection
+//            model.showFrequencySection = settingsEntity.showFrequencySection
+//            model.showCategorySection = settingsEntity.showCategorySection
+//        }
+//        do {
+//        try moc.save()
+//        
+//    } catch {
+//        print("Error updating setting: \(error.localizedDescription)")
+//    }
+//    }
 }
 
 #Preview {
-    ExpenseEntryView()
+    @State var settings = Settings(showFormSection: false)
+    return ExpenseEntryView(settings: $settings)
+//    ExpenseEntryView()
 }
 
 

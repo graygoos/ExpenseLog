@@ -6,13 +6,39 @@
 //
 
 import Foundation
+import Combine
 
-class Settings: ObservableObject {
-    @Published var showFormSection: Bool = false
+@Observable
+class Settings: ObservableObject, Equatable {
+    static func == (lhs: Settings, rhs: Settings) -> Bool {
+        return lhs.showFormSection == rhs.showFormSection &&
+        lhs.showQuantitySection == rhs.showQuantitySection &&
+        lhs.showVendorSection == rhs.showVendorSection &&
+        lhs.showLocationSection == rhs.showLocationSection &&
+        lhs.showDescriptionSection == rhs.showDescriptionSection &&
+        lhs.showPaymentDetailsSection == rhs.showPaymentDetailsSection &&
+        lhs.showFrequencySection == rhs.showFrequencySection &&
+        lhs.showCategorySection == rhs.showCategorySection
+    }
     
-//    init(showFormSection: Bool) {
-//        self.showFormSection = showFormSection
-//    }
+    var showFormSection: Bool
     
-    init() {}
+    var showQuantitySection =       Bool()
+    var showVendorSection =         Bool()
+    var showLocationSection =       Bool()
+    var showDescriptionSection =    Bool()
+    var showPaymentDetailsSection = Bool()
+    var showFrequencySection =      Bool()
+    var showCategorySection =       Bool()
+    
+    init(showFormSection: Bool) {
+        self.showFormSection = showFormSection
+        
+    }
+    
+    
+    
+    func saveExpenseFormSetting() {
+        
+    }
 }

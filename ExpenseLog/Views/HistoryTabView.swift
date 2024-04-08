@@ -21,6 +21,8 @@ struct HistoryTabView: View {
     @State private var searchText = ""
 //    let date: Date
     
+    @State private var settings = Settings(showFormSection: false)
+    
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
     
     var body: some View {
@@ -57,7 +59,7 @@ struct HistoryTabView: View {
                         .sheet(isPresented: $showModal, onDismiss: {
                             print("expenseEntryView dismissed")
                         }, content: {
-                            ExpenseEntryView()
+                            ExpenseEntryView(settings: $settings)
                         })
                     }
                 }

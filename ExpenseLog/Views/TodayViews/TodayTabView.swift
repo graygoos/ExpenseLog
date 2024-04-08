@@ -10,6 +10,8 @@ import SwiftUI
 struct TodayTabView: View {
     @State private var navPath: [String] = []
     @Environment(\.managedObjectContext) var moc
+    
+    @State private var settings = Settings(showFormSection: false)
 
     @FetchRequest<ExpensesEntity>(
         sortDescriptors: [],
@@ -62,7 +64,7 @@ struct TodayTabView: View {
                         .sheet(isPresented: $showModal, onDismiss: {
                             print("expenseEntryView dismissed")
                         }, content: {
-                            ExpenseEntryView()
+                            ExpenseEntryView(settings: $settings)
                         })
                     }
 //                    ToolbarItem(placement: .topBarLeading) {
