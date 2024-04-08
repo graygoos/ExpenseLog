@@ -27,7 +27,7 @@ struct HistoryTabView: View {
     
     var body: some View {
         NavigationStack(path: $navPath) {
-            if expenses.isEmpty {
+            if shouldShowEmptyState {
                 HistoryEmptyScreen()
             } else {
                 List {          // offset ❓
@@ -81,12 +81,21 @@ struct HistoryTabView: View {
         }
     }           // ❓always test for boundaries // view that shows all the records
     
+    private var shouldShowEmptyState: Bool {
+        return !hasExpensesForLastNDays(1) && !hasExpensesOlderThan(1)
+    }
+    
     private func hasExpensesForLastNDays(_ days: Int) -> Bool {
         let calendar = Calendar.current
         let now = Date()
         let startDate = calendar.date(byAdding: .day, value: -days, to: now)!
+        let endDate = calendar.startOfDay(for: now)
         
-        return expenses.contains { $0.expenseDate ?? Date() >= startDate }
+        return expenses.contains { expense in
+            guard let expenseDate = expense.expenseDate else { return false }
+            let expenseDateStartOfDay = calendar.startOfDay(for: expenseDate)
+            return expenseDateStartOfDay >= startDate && expenseDateStartOfDay < endDate
+        }
     }
     
     private func hasExpensesOlderThan(_ days: Int) -> Bool {
@@ -94,7 +103,11 @@ struct HistoryTabView: View {
         let now = Date()
         let endDate = calendar.date(byAdding: .day, value: -days, to: now)!
         
-        return expenses.contains { $0.expenseDate ?? Date() < endDate }
+        return expenses.contains { expense in
+            guard let expenseDate = expense.expenseDate else { return false }
+            let expenseDateStartOfDay = calendar.startOfDay(for: expenseDate)
+            return expenseDateStartOfDay < endDate
+        }
         
     }
     
