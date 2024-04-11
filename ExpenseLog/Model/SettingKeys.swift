@@ -104,24 +104,59 @@ enum SettingKeys: CustomStringConvertible, CaseIterable {
         }
         
         // Update setting in CoreData
-        func updateSetting(using moc: NSManagedObjectContext, value: Bool) {
-            let fetchRequest: NSFetchRequest<SettingsEntity> = SettingsEntity.fetchRequest()
-            do {
-                let result = try moc.fetch(fetchRequest)
-                if let settingsEntity = result.first {
-                    switch self {
-                    case .quantity: settingsEntity.showQuantitySection = value
-                    case .vendor: settingsEntity.showVendorSection = value
-                    case .location: settingsEntity.showLocationSection = value
-                    case .description: settingsEntity.showDescriptionSection = value
-                    case .paymentDetails: settingsEntity.showPaymentDetailsSection = value
-                    case .frequency: settingsEntity.showFrequencySection = value
-                    case .category: settingsEntity.showCategorySection = value
-                    }
-                    try moc.save()
+    func updateSetting(using moc: NSManagedObjectContext, key: SettingKeys, value: Bool) {
+        let fetchRequest: NSFetchRequest<SettingsEntity> = SettingsEntity.fetchRequest()
+        do {
+            let result = try moc.fetch(fetchRequest)
+            if let settingsEntity = result.first {
+                switch key {
+                case .quantity: settingsEntity.showQuantitySection = value
+                case .vendor: settingsEntity.showVendorSection = value
+                case .location: settingsEntity.showLocationSection = value
+                case .description: settingsEntity.showDescriptionSection = value
+                case .paymentDetails: settingsEntity.showPaymentDetailsSection = value
+                case .frequency: settingsEntity.showFrequencySection = value
+                case .category: settingsEntity.showCategorySection = value
                 }
-            } catch {
-                print("Error updating setting: \(error.localizedDescription)")
+                try moc.save() // Save changes to Core Data
+            } else {
+                // If settings entity doesn't exist, create and save new settings entity
+                let newSettingsEntity = SettingsEntity(context: moc)
+                newSettingsEntity.showQuantitySection = key == .quantity ? value : false
+                newSettingsEntity.showVendorSection = key == .vendor ? value : false
+                newSettingsEntity.showLocationSection = key == .location ? value : false
+                newSettingsEntity.showDescriptionSection = key == .description ? value : false
+                newSettingsEntity.showPaymentDetailsSection = key == .paymentDetails ? value : false
+                newSettingsEntity.showFrequencySection = key == .frequency ? value : false
+                newSettingsEntity.showCategorySection = key == .category ? value : false
+                try moc.save() // Save changes to Core Data
             }
+        } catch {
+            print("Error updating setting: \(error.localizedDescription)")
         }
+    }
+    
+    
+//        func updateSetting(using moc: NSManagedObjectContext, value: Bool) {
+//            let fetchRequest: NSFetchRequest<SettingsEntity> = SettingsEntity.fetchRequest()
+//            do {
+//                let result = try moc.fetch(fetchRequest)
+//                if let settingsEntity = result.first {
+//                    switch self {
+//                    case .quantity: settingsEntity.showQuantitySection = value
+//                    case .vendor: settingsEntity.showVendorSection = value
+//                    case .location: settingsEntity.showLocationSection = value
+//                    case .description: settingsEntity.showDescriptionSection = value
+//                    case .paymentDetails: settingsEntity.showPaymentDetailsSection = value
+//                    case .frequency: settingsEntity.showFrequencySection = value
+//                    case .category: settingsEntity.showCategorySection = value
+//                    }
+//                    try moc.save()
+//                } else {
+//                    // create and save new settings entity
+//                }
+//            } catch {
+//                print("Error updating setting: \(error.localizedDescription)")
+//            }
+//        }
 }
