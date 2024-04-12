@@ -91,7 +91,8 @@ struct TodayTabView: View {
 // Locale.current.currency?.identifier ?? "NGN"
 
 #Preview {
-    @State var settings = Settings()
+    @Environment(\.managedObjectContext) var moc
+    @State var settings = Settings(moc: moc)
     return Group {
         TodayTabView(settings: $settings)
             .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)

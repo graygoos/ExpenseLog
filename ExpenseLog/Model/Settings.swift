@@ -7,11 +7,11 @@
 
 import Foundation
 import Combine
+import CoreData
 
 @Observable
 class Settings: ObservableObject, Equatable {
     static func == (lhs: Settings, rhs: Settings) -> Bool {
-//        return lhs.showFormSection == rhs.showFormSection &&
         lhs.showQuantitySection == rhs.showQuantitySection &&
         lhs.showVendorSection == rhs.showVendorSection &&
         lhs.showLocationSection == rhs.showLocationSection &&
@@ -21,8 +21,6 @@ class Settings: ObservableObject, Equatable {
         lhs.showCategorySection == rhs.showCategorySection
     }
     
-//    var showFormSection: Bool
-    
     var showQuantitySection =       false
     var showVendorSection =         false
     var showLocationSection =       false
@@ -30,15 +28,22 @@ class Settings: ObservableObject, Equatable {
     var showPaymentDetailsSection = false
     var showFrequencySection =      false
     var showCategorySection =       false
-    
-//    init(showFormSection: Bool) {
-//        self.showQuantitySection = s
-//        
-//    }
-    
-    
-    
-    func saveExpenseFormSetting() {
-        
+
+    init(moc: NSManagedObjectContext) {
+        let fetchRequest: NSFetchRequest<SettingsEntity> = SettingsEntity.fetchRequest()
+        do {
+            let result = try moc.fetch(fetchRequest)
+            if let entity = result.first {
+                self.showQuantitySection = entity.showQuantitySection
+                self.showVendorSection = entity.showVendorSection
+                self.showLocationSection = entity.showLocationSection
+                self.showDescriptionSection = entity.showDescriptionSection
+                self.showPaymentDetailsSection = entity.showPaymentDetailsSection
+                self.showFrequencySection = entity.showFrequencySection
+                self.showCategorySection = entity.showCategorySection
+            }
+        } catch {
+            print("Eror")
+        }
     }
 }

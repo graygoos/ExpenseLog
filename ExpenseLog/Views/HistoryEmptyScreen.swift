@@ -34,6 +34,7 @@ struct HistoryEmptyScreen: View {
 }
 
 #Preview {
-    @State var settings = Settings()
+    @Environment(\.managedObjectContext) var moc
+    @State var settings = Settings(moc: moc)
     return HistoryEmptyScreen(settings: $settings)
 }

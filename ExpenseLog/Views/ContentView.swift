@@ -8,24 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var settings = Settings()
+    @Environment(\.managedObjectContext) var moc
+    @State private var settings: Settings?
+    
+    init() {
+        // Initialize settings after moc is available
+        _settings = State(initialValue: nil)
+    }
+    
     
     var body: some View {
-        
         TabView {
-            TodayTabView(settings: $settings)
+            TodayTabView(settings: settingsBinding)
                 .tabItem {
                     Label("Today", systemImage: "calendar")
                 }
-            HistoryTabView(settings: $settings)
+            HistoryTabView(settings: settingsBinding)
                 .tabItem {
                     Label("History", systemImage: "clock")
                 }
-            SettingsTabView(settings: $settings)
+            SettingsTabView(settings: settingsBinding)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
         }
+        .onAppear {
+            // Initialize settings when the view appears
+            settings = Settings(moc: moc)
+        }
+    }
+    
+    private var settingsBinding: Binding<Settings> {
+        Binding(
+            get: { settings ?? Settings(moc: moc) },
+            set: { settings = $0 }
+        )
     }
 }
 

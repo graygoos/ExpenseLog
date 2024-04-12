@@ -48,6 +48,7 @@ struct CurrentDayExpenses: View {
 }
 
 #Preview {
-    @State var settings = Settings()
+    @Environment(\.managedObjectContext) var moc
+    @State var settings = Settings(moc: moc)
     return CurrentDayExpenses(settings: $settings)
 }

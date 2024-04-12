@@ -19,6 +19,7 @@ struct ToggleView: View {
         Toggle(key.title, isOn: self.toggleBinding(for: key))
             .onChange(of: self.keySetting(for: key)) { oldValue, newValue in
                 key.updateSetting(using: moc, key: key, value: newValue)
+
             }
 //            .onAppear {
 //                self.isOn = key.fetchSetting(using: settings)
