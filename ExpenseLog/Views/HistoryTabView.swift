@@ -15,7 +15,6 @@ struct GroupedExpense: Identifiable {
 }
 
 struct HistoryTabView: View {
-    @State private var navPath: [String] = []
     @Environment(\.managedObjectContext) var moc
     @State private var showModal = false
     @State private var searchText = ""
@@ -26,7 +25,7 @@ struct HistoryTabView: View {
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
     
     var body: some View {
-        NavigationStack(path: $navPath) {
+        NavigationStack {
             if shouldShowEmptyState {
                 HistoryEmptyScreen(settings: $settings)
             } else {
