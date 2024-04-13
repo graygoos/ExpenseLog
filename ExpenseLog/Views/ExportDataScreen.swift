@@ -27,14 +27,31 @@ struct ExportDataScreen: View {
     @State private var endDate = Date()
     @State private var exportFormat = ExportFormat.csv
     
+    @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: []) var expenses: FetchedResults<ExpensesEntity>
+        
+    
 //    @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
     
     var body: some View {
         VStack {
-            DatePicker("Start Date", selection: $startDate, displayedComponents: .date) // earliest date in database
-            // put limiter, you cannot pick a date earlier than start date above    
+            DatePicker("Start Date", selection: $startDate, in: ...endDate, displayedComponents: .date)
+                .onChange(of: startDate) { oldValue ,newValue in
+                    // Ensure the start date does not go beyond the end date
+                    if newValue > endDate {
+                        startDate = endDate
+                    }
+                    
+                }
+                .onAppear {
+                    // Set the default start date to the date of the first expense
+                    if let firstExpenseDate = expenses.first?.expenseDate {
+                        startDate = firstExpenseDate
+                    }
+                }
+            // earliest date in database
+            // put limiter, you cannot pick a date earlier than start date above
             DatePicker("End Date", selection: $endDate, displayedComponents: .date)
-            Text("Found 200 entries")
+            Text("Found \(expenses.count)")
             Picker("Export Format", selection: $exportFormat) {
                 Text("CSV").tag(ExportFormat.csv)
                 Text("JSON").tag(ExportFormat.json)
