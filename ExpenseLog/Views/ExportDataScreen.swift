@@ -27,7 +27,7 @@ struct ExportDataScreen: View {
     @State private var endDate = Date()
     @State private var exportFormat = ExportFormat.csv
     
-    @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: []) var expenses: FetchedResults<ExpensesEntity>
+    @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: true)]) var expenses: FetchedResults<ExpensesEntity>
         
     
 //    @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
