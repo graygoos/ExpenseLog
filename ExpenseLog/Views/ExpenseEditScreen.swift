@@ -15,6 +15,7 @@ struct ExpenseEditScreen: View {
     
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
+    @State private var showAlert = false
     
     var body: some View {
         NavigationStack {
@@ -33,13 +34,29 @@ struct ExpenseEditScreen: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-                            model.persistExpense()
-                            dismiss()
-                            print("save button tapped ✅")
+                            if model.itemName.isEmpty || model.itemAmount == 0 {
+                                showAlert = true
+                            } else {
+                                model.persistExpense()
+                                dismiss()
+                                print("save button tapped ✅")
+                            }
                         }) {
                             Text("Save")
                         }
                     }
+                }
+                .alert(
+                    "Title",
+                    isPresented: $showAlert
+                ) {
+                    Button(role: .cancel) {
+                        showAlert = false
+                    } label: {
+                        Text("Ok")
+                    }
+                } message: {
+                    Text("Please fill in the item name and amount")
                 }
         }
     }
