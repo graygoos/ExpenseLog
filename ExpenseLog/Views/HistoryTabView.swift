@@ -18,7 +18,6 @@ struct HistoryTabView: View {
     @Environment(\.managedObjectContext) var moc
     @State private var showModal = false
     @State private var searchText = ""
-//    let date: Date
     
     @Binding var settings: Settings
     
@@ -63,20 +62,6 @@ struct HistoryTabView: View {
                     }
                 }
             }
-            
-            
-//            .navigationDestination(for: String.self) { pathValue in
-//                if pathValue == "Expenses for " {
-//                    ExpenseListView(date: $navPath)
-//                } else {
-//                    ExpenseDetailsView(navPath: $navPath)
-//                }
-//            }
-            
-//            .onChange(of: searchText) {_, text in
-//                expenses.nsPredicate = text.isEmpty ? nil : NSPredicate(format: "expense CONTAINS %@", text)
-//            }
-            
         }
     }           // ❓always test for boundaries // view that shows all the records
     
@@ -180,7 +165,6 @@ struct HistoryTabView: View {
         
         return sortedGroupExpenses
     }
-    
 }
 
 #Preview {
