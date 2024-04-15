@@ -52,15 +52,8 @@ struct ExpenseEntryView: View {
                     "Title",
                     isPresented: $showAlert
                 ) {
-//                    Button(role: .destructive) {
-//                        showAlert = false
-//                    } label: {
-//                        Text("OK")
-//                    }
-                    
                     Button(role: .cancel) {
                         showAlert = false
-//                        dismiss()
                     } label: {
                         Text("Ok")
                     }
