@@ -73,7 +73,7 @@ struct ExportDataScreen: View {
             if exportFormat == .csv {
                 exportCSV(expenses: expenses)
             } else if exportFormat == .json {
-                exportJSON(expenses: expenses)
+//                exportJSON(expenses: expenses)
             }
         } catch {
             print("Error fetching data: \(error)")
@@ -86,21 +86,48 @@ struct ExportDataScreen: View {
         for expense in expenses {
             csvString += "\(expense.expenseDate ?? Date()), \(expense.itemAmount ?? 0)) \n"
         }
+        print(csvString)
         // Save or share csvString as needed
+        
     }
     
+    /*
     func exportJSON(expenses: [ExpensesEntity]) {
-        /*
         // Convert expenses array into JSON format
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(expenses)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print(jsonString)
+            }
             // Save or share jsonData as needed
+            
         } catch {
             print("Error encoding JSON: \(error)")
         }
-         */
     }
+ */
+    /*
+    func shareFile(content: String, type: String) {
+        // Create a temporary file URL
+        guard let tempURL = NSURL(fileURLWithPath: NSTemporaryDirectory().appendingPathComponent("export.csv") else {
+            return
+        }
+                                  
+                                  do {
+            // Write the content to the temporary file
+            try content.write(to: tempURL, atomically: true, encoding: .utf8)
+            
+            // Create a UIActivityViewController to share the file
+            let activityViewController = UIActivityViewController(activityItems: [tempURL], applicationActivities: nil)
+            
+            // Present the UIActivityViewController
+            UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        } catch {
+            print("Error writing file: \(error)")
+        }
+                                  }
+     */
 }
 
 #Preview {
