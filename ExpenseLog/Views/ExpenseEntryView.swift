@@ -13,6 +13,7 @@ struct ExpenseEntryView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var model = ExpenseParameters()
+    @State private var showAlert = false
     
     @Binding var settings: Settings
 
@@ -35,13 +36,36 @@ struct ExpenseEntryView: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-                            model.persistExpense()
-                            dismiss()
-                            print("save button tapped")
+                            if model.itemName.isEmpty || model.itemAmount == 0 {
+                                showAlert = true
+                            } else {
+                                model.persistExpense()
+                                dismiss()
+                                print("save button tapped")
+                            }
                         }) {
                             Text("Add")
                         }
                     }
+                }
+                .alert(
+                    "Title",
+                    isPresented: $showAlert
+                ) {
+//                    Button(role: .destructive) {
+//                        showAlert = false
+//                    } label: {
+//                        Text("OK")
+//                    }
+                    
+                    Button(role: .cancel) {
+                        showAlert = false
+//                        dismiss()
+                    } label: {
+                        Text("Ok")
+                    }
+                } message: {
+                    Text("You need to have an item name and amount to save an expense")
                 }
         }
     }
