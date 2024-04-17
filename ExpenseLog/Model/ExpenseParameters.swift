@@ -77,14 +77,6 @@ class ExpenseParameters {
     
     var showModal = false
     
-    var showPaymentDetailsSection =     false
-    var showQuantitySection =           false
-    var showVendorSection =             false
-    var showLocationSection =           false
-    var showDescriptionSection =        false
-    var showFrequencySection =          false
-    var showCategorySection =           false
-    
     func persistExpense() {
         guard let moc else {
             return

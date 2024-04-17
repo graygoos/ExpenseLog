@@ -70,8 +70,6 @@ struct ExpenseDetailsView: View {
         moc.delete(expense)
         
         try? moc.save()
-        
-//        path.removeAll()
     }
 }
 
