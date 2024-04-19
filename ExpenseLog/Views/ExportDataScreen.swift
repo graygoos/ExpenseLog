@@ -57,17 +57,6 @@ struct ExportDataScreen: View {
             predicate: predicate
         )
     }
-
-    
-//    func updateFetchRequestPredicate() {
-//        let predicate = NSPredicate(format: "(expenseDate >= %@) AND (expenseDate <= %@)", argumentArray: [startDate, endDate])
-//        filteredExpenses = FetchRequest(
-//            entity: ExpensesEntity.entity(),
-//            sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: true)],
-//            predicate: predicate
-//        )
-//    }
-
     
     func generateCSV() -> URL? {
         // Filter expenses based on the selected date range
