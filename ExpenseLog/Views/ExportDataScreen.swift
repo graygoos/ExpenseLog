@@ -22,7 +22,7 @@ struct ExportDataScreen: View {
     var body: some View {
         VStack {
             DatePicker("Start Date", selection: $startDate, in: ...endDate, displayedComponents: .date)
-                .onChange(of: startDate) { _ in
+                .onChange(of: startDate) { oldValue, newValue in
                     updateFetchRequestPredicate()
                 }
                 .onAppear {
@@ -34,7 +34,7 @@ struct ExportDataScreen: View {
                 }
 
             DatePicker("End Date", selection: $endDate, in: startDate..., displayedComponents: .date)
-                .onChange(of: endDate) { _ in
+                .onChange(of: endDate) { oldValue, newValue in
                     updateFetchRequestPredicate()
                 }
             Spacer()
@@ -91,7 +91,7 @@ struct ExportDataScreen: View {
         var csvString = "Expense Date, Item Name, Currency, Amount\n"
         for expense in sortedExpenses {
             if let expenseDate = expense.expenseDate {
-                csvString += "\(expenseDate), \(expense.itemAmount)\n"
+                csvString += "\(expenseDate), \(String(describing: expense.itemAmount))\n"
             }
         }
         
