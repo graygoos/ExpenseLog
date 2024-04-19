@@ -12,6 +12,7 @@ struct ExpenseFormView: View {
     @Environment(\.managedObjectContext) var moc
     @Binding var model: ExpenseParameters
     @Binding var settings: Settings
+    @ObservedObject var currencyManager = CurrencyManager()
     
     var body: some View {
         NavigationStack {

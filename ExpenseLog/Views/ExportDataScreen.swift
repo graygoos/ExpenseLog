@@ -17,20 +17,19 @@ struct Expenses: Identifiable {
     var id = UUID()
     var expenseDate: Date
     var ItemAmount: Double
-//    var category: String?
-//    let expenses: [ExpensesEntity]
 }
+
+//var csvFileURL: URL?
 
 struct ExportDataScreen: View {
     @Environment(\.managedObjectContext) var moc
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State private var exportFormat = ExportFormat.csv
+    @State private var csvFileURL: URL?
     
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: true)]) var expenses: FetchedResults<ExpensesEntity>
         
-    
-//    @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
     
     var body: some View {
         VStack {
@@ -51,83 +50,46 @@ struct ExportDataScreen: View {
             // earliest date in database
             // put limiter, you cannot pick a date earlier than start date above
             DatePicker("End Date", selection: $endDate, displayedComponents: .date)
-            Text("Found \(expenses.count)")
-            Picker("Export Format", selection: $exportFormat) {
-                Text("CSV").tag(ExportFormat.csv)
-                Text("JSON").tag(ExportFormat.json)
+            Spacer()
+            Text("\(expenses.count) expenses logged in ExpenseLog")
+            Spacer()
+            ShareLink(item: generateCSV(expenses: expenses.map { $0 }) ?? URL(string: "https://example.com")!) {
+                Label("Export CSV", systemImage: "square.and.arrow.up.fill")
             }
-            Button("Export", systemImage: "square.and.arrow.up.fill") {
-                exportData()
-            }
+            
+            Spacer()
+            Spacer()
+
         }
         .padding()
     }
     
-    func exportData() {
-        // Fetch data from Core Data based on date range
-        let fetchRequest: NSFetchRequest<ExpensesEntity> = ExpensesEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "(expenseDate >= %@) AND (expenseDate <= %@)", startDate as NSDate, endDate as NSDate)
+    func generateCSV(expenses: [ExpensesEntity]) -> URL? {
+        // heading of CSV file.
+        let heading = "Expense Date, Item Amount\n"
+        
+        // file rows
+        let rows = expenses.map { "\($0.expenseDate ?? Date()),\($0.itemAmount)\n" }
+        
+        // rows to string data
+        let stringData = heading + rows.joined()
+        
+        // Print the contents of the CSV file
+        print("CSV File Content:")
+        print(stringData)
         
         do {
-            let expenses = try moc.fetch(fetchRequest)
-            if exportFormat == .csv {
-                exportCSV(expenses: expenses)
-            } else if exportFormat == .json {
-//                exportJSON(expenses: expenses)
-            }
+            let path = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let fileURL = path.appendingPathComponent("Expenses.csv")
+            
+            // append string data to file
+            try stringData.write(to: fileURL, atomically: true , encoding: .utf8)
+            return fileURL
         } catch {
-            print("Error fetching data: \(error)")
+            print("Error generating CSV file: \(error)")
+            return nil
         }
     }
-    
-    func exportCSV(expenses: [ExpensesEntity]) {
-        // Convert expenses array into CSV format
-        var csvString = "Date, Amount\n"
-        for expense in expenses {
-            csvString += "\(expense.expenseDate ?? Date()), \(expense.itemAmount ?? 0)) \n"
-        }
-        print(csvString)
-        // Save or share csvString as needed
-        
-    }
-    
-    /*
-    func exportJSON(expenses: [ExpensesEntity]) {
-        // Convert expenses array into JSON format
-        let jsonEncoder = JSONEncoder()
-        do {
-            let jsonData = try jsonEncoder.encode(expenses)
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                print(jsonString)
-            }
-            // Save or share jsonData as needed
-            
-        } catch {
-            print("Error encoding JSON: \(error)")
-        }
-    }
- */
-    /*
-    func shareFile(content: String, type: String) {
-        // Create a temporary file URL
-        guard let tempURL = NSURL(fileURLWithPath: NSTemporaryDirectory().appendingPathComponent("export.csv") else {
-            return
-        }
-                                  
-                                  do {
-            // Write the content to the temporary file
-            try content.write(to: tempURL, atomically: true, encoding: .utf8)
-            
-            // Create a UIActivityViewController to share the file
-            let activityViewController = UIActivityViewController(activityItems: [tempURL], applicationActivities: nil)
-            
-            // Present the UIActivityViewController
-            UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
-        } catch {
-            print("Error writing file: \(error)")
-        }
-                                  }
-     */
 }
 
 #Preview {

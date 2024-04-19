@@ -40,6 +40,7 @@ class ExpenseParameters {
     
     init(moc: NSManagedObjectContext? = nil) {
         self.moc = moc
+        print("expenseParameters init 🤣 ") // 3
     }
     
 //    init(moc: NSManagedObjectContext? = nil, ) {
