@@ -19,14 +19,11 @@ struct Expenses: Identifiable {
     var ItemAmount: Double
 }
 
-//var csvFileURL: URL?
-
 struct ExportDataScreen: View {
     @Environment(\.managedObjectContext) var moc
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State private var exportFormat = ExportFormat.csv
-    @State private var csvFileURL: URL?
     
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: true)]) var expenses: FetchedResults<ExpensesEntity>
         
