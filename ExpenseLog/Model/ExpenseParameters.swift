@@ -33,8 +33,6 @@ class ExpenseParameters {
                 self.expenseDate = Date.now
             }
             
-//            self.recurringExpense = expense.vie
-//            self.isBudgeted = expense
         }
     }
     
@@ -42,10 +40,6 @@ class ExpenseParameters {
         self.moc = moc
         print("expenseParameters init 🤣 ") // 3
     }
-    
-//    init(moc: NSManagedObjectContext? = nil, ) {
-//        
-//    }
     
     var itemName = ""
     var itemAmount: Double = 0.00
@@ -71,10 +65,6 @@ class ExpenseParameters {
     var category = ["Non", "Food & Dining", "Groceries", "Transportation", "Utilities (Electricity, Water, Gas)", "Rent",
                     "Mortgage", "Entertainment", "Healthcare", "Health & Fitness", "Shopping", "Personal Care", "Travel", "Insurance", "Education", "Debt Payments", "Investments", "Gifts & Donations", "Home Maintenance", "Pet Care", "Taxes", "Subscriptions & Memberships", "Miscellaneous"]
     
-    let allCurrencies: [String] = {
-        let locales = Locale.availableIdentifiers.map { Locale(identifier: $0) }
-        return locales.compactMap { $0.currency?.identifier }
-    }()
     
     var showModal = false
     

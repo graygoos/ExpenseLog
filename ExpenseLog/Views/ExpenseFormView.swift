@@ -24,7 +24,7 @@ struct ExpenseFormView: View {
                     TextField("Item Amount", value: $model.itemAmount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
                         .keyboardType(.decimalPad)
                     Picker("Currency", selection: $model.expenseCurrency) {
-                        ForEach(model.allCurrencies, id: \.self) { unit in
+                        ForEach(currencyManager.allCurrencies, id: \.self) { unit in
                             Text(unit)
                         }
                     }
