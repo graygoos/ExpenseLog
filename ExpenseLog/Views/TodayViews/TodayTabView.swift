@@ -3,7 +3,6 @@
 //  ExpenseLog
 //
 //  Created by Femi Aliu on 17/10/2023.
-// Group { if { ... } else { ...} } .sheet(...)
 
 import SwiftUI
 
@@ -12,6 +11,8 @@ struct TodayTabView: View {
     @Environment(\.managedObjectContext) var moc
     
     @Binding var settings: Settings
+    @State private var model = ExpenseParameters()
+
 
     @FetchRequest<ExpensesEntity>(
         sortDescriptors: [],
@@ -37,7 +38,7 @@ struct TodayTabView: View {
                     Section(header: TodayExpenseSectionHeader(), footer: TodayExpenseSectionFooter(expenses: expenses)) {
                         ForEach(expenses) { expense in
                             NavigationLink {
-                                ExpenseDetailsView(expense: expense/*, settings: $settings*/)
+                                ExpenseDetailsView(expense: expense, model: $model, settings: $settings)
                             } label: {
                                 HStack {
                                     Text(expense.viewItemName)

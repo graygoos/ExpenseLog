@@ -13,13 +13,15 @@ struct ExpenseListView: View {
     @Environment(\.dismiss) var dismiss
     let date: Date
     
-//    @Binding var settings: Settings
+    @Binding var settings: Settings
+    @State private var model = ExpenseParameters()
+
     
     @FetchRequest var expenses: FetchedResults<ExpensesEntity>
     
     init(date: Date, settings: Binding<Settings>) {
         self.date = date
-//        self._settings = settings
+        self._settings = settings
         let predicate = NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", argumentArray: [date, Calendar.current.date(byAdding: .day, value: 1, to: date)!])
         _expenses = FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], predicate: predicate, animation: .default)
     }
@@ -29,7 +31,7 @@ struct ExpenseListView: View {
             List {
                 ForEach(expenses, id: \.self) { expense in
                     NavigationLink {
-                        ExpenseDetailsView(expense: expense /*settings: $settings*/)
+                        ExpenseDetailsView(expense: expense, model: $model, settings: $settings)
                     } label: {
                         HStack {
                             Text("\(expense.viewItemName)")

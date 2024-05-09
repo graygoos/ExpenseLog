@@ -12,14 +12,14 @@ struct ExpenseDetailsView: View {
     @Environment(\.dismiss) var dismiss
     var expense: ExpensesEntity
     
-    @State private var model = ExpenseParameters()
+//    @State private var model = ExpenseParameters()
+    @Binding var model: ExpenseParameters
     
     @State private var showModal = false
     
-//    @Binding var settings: Settings
+    @Binding var settings: Settings
     
     var body: some View {
-//        NavigationStack {
             VStack {
                 HStack {
                     Text(expense.viewItemName)
@@ -45,21 +45,20 @@ struct ExpenseDetailsView: View {
             .navigationTitle("Expense Details")
             .navigationBarTitleDisplayMode(.inline)
             .padding()
-//            .toolbar {
-//                ToolbarItem {
-//                    Button(action: {
-//                        self.showModal.toggle()
-//                    }) {
-//                        Text("Edit")
-//                    }
-//                    .sheet(isPresented: $showModal, onDismiss: {
-////                        print("expenseEntryView dismissed")
-//                    }, content: {
-//                        ExpenseEditScreen(expense: expense, model: $model, settings: $settings)
-//                    })
-//                }
-//            }
-//        }
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {
+                        self.showModal.toggle()
+                    }) {
+                        Text("Edit")
+                    }
+                    .sheet(isPresented: $showModal, onDismiss: {
+//                        print("expenseEntryView dismissed")
+                    }, content: {
+                        ExpenseEditScreen(expense: expense, model: $model, settings: $settings)
+                    })
+                }
+            }
         .onAppear {
             self.model.expense = self.expense
             self.model.moc = self.moc
