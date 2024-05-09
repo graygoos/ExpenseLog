@@ -57,7 +57,7 @@ extension ExpenseLogContainer {
         try? moc.save()
     }
     
-    func addExpense(moc: NSManagedObjectContext, itemName: String, itemAmount: Decimal, itemQuantity: Double, itemDescription: String, payee: String, expenseTotal: 
+    func addExpense(moc: NSManagedObjectContext, itemName: String, itemAmount: Decimal, itemQuantity: Double, itemDescription: String, payee: String, expenseTotal:
                     Decimal, expenseCurrency: String, expenseDate: Date?, paymentType: String, itemUnit: String) {
         let expense = ExpensesEntity(context: moc)
         
@@ -67,12 +67,14 @@ extension ExpenseLogContainer {
         expense.itemDescription = itemDescription
         expense.payee = payee
         expense.expenseTotal = NSDecimalNumber(decimal: expenseTotal)
-//        expense.dailyTotal = dailyTotal
         expense.expenseCurrency = expenseCurrency
         expense.paymentType = paymentType
         expense.itemUnit = itemUnit
-//        expense.expenseDate = expenseDate
-        expense.expenseDate = convertToUTC(from: expenseDate!)
+        if let date = expenseDate {
+            expense.expenseDate = convertToUTC(from: date)
+        }
+        
+        try? moc.save()
     }
     
     

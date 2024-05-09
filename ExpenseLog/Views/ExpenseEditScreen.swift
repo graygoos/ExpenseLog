@@ -17,6 +17,16 @@ struct ExpenseEditScreen: View {
     @Environment(\.dismiss) var dismiss
     @State private var showAlert = false
     
+//    init(expense: ExpensesEntity?, model: Binding<ExpenseParameters>, settings: Binding<Settings>) {
+//        self.expense = expense
+//        self._model = model
+//        self._settings = settings
+//        if let expense = expense {
+//            self._model.wrappedValue = ExpenseParameters(expense: expense)
+//        }
+//    }
+
+    
     var body: some View {
         NavigationStack {
             ExpenseFormView(model: $model, settings: $settings)

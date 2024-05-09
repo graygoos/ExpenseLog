@@ -94,9 +94,13 @@ struct ExpenseFormView: View {
                         }
                     }
                 }
+//                Section("Expense date") {
+//                    DatePicker("Date", selection: $model.expenseDate)
+//                }
                 Section("Expense date") {
-                    DatePicker("Date", selection: $model.expenseDate)
+                    DatePicker("Date", selection: $model.expenseDate, displayedComponents: .date)
                 }
+
             }
         }
     }
