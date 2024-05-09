@@ -8,8 +8,8 @@
 import Foundation
 import CoreData
 
-//@Observable
-class ExpenseParameters: ObservableObject {
+@Observable
+class ExpenseParameters {
     var moc: NSManagedObjectContext?
     var expense: ExpensesEntity? {
         didSet {
@@ -40,20 +40,20 @@ class ExpenseParameters: ObservableObject {
         print("expenseParameters init 🤣 ") // 3
     }
     
-    @Published var itemName = ""
-    @Published var itemAmount: Double = 0.00
-    @Published var itemDescription = ""
-    @Published var itemUnit = "Non"
-    @Published var payee = ""
-    @Published var expenseLocation = ""
-    @Published var itemQuantity: Int = 1
-    @Published var paymentType = "Debit Card"
-    @Published var expenseDate = Date()
-    @Published var recurringExpense = false
-    @Published var isBudgeted = false
-    @Published var expenseFrequency = "One-time"
-    @Published var expenseCurrency = "NGN"
-    @Published var expenseCategory = "Non"
+    var itemName = ""
+    var itemAmount: Double = 0.00
+    var itemDescription = ""
+    var itemUnit = "Non"
+    var payee = ""
+    var expenseLocation = ""
+    var itemQuantity: Int = 1
+    var paymentType = "Debit Card"
+    var expenseDate = Date()
+    var recurringExpense = false
+    var isBudgeted = false
+    var expenseFrequency = "One-time"
+    var expenseCurrency = "NGN"
+    var expenseCategory = "Non"
     
     var itemUnits = ["Non", "Pack", "Tin", "Carton", "Bag", "Box", "Bar", "Bottle", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrapper", "Foil", "Container", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Kilogram", "Roll", "Pound", "Ounce", "Litre", "Centilitre", "Tube", "Bucket", "Sachet", "Cup", "Other"]
     
