@@ -21,15 +21,18 @@ class ExpenseParameters {
             self.expenseLocation = expense?.viewExpenseLocation ?? ""
             self.itemQuantity = Int(expense?.viewItemQuantity ?? "0")!
             self.paymentType = expense?.viewPaymentType ?? ""
-            if let dateString = expense?.viewExpenseDate {
-                let maybeDate = try? Date(dateString , strategy: .dateTime) //ISO8601 - database/record //fixing date format
-                if let maybeDate {
-                    self.expenseDate = maybeDate
+            if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "dd-MM-yyyy"
+                if let date = formatter.date(from: dateString) {
+                    self.expenseDate = date
+                    print("Parsed Expense Date: \(date)") // Debugging statement
                 } else {
-                    self.expenseDate = Date.now
+                    print("Error: Unable to parse date string: \(dateString)")
+                    self.expenseDate = Date()
                 }
             } else {
-                self.expenseDate = Date.now
+                self.expenseDate = Date()
             }
             
         }

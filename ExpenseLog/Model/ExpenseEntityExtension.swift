@@ -54,6 +54,13 @@ extension ExpensesEntity {
     }
     
     var viewExpenseDate: String {
-        return "Expense Date: " + (timeEntered?.formatted(date: .numeric, time: .omitted) ?? "N/A")
+        if let expenseDate = expenseDate {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy" // Ensure this matches the format expected
+            
+            return dateFormatter.string(from: expenseDate)
+        } else {
+            return "N/A"
+        }
     }
 }
