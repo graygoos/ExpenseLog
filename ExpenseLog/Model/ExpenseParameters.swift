@@ -75,7 +75,7 @@ class ExpenseParameters {
         guard let moc else {
             return
         }
-        var expense = self.expense ?? ExpensesEntity(context: moc)
+        let expense = self.expense ?? ExpensesEntity(context: moc)
         
         expense.itemName = itemName
         expense.itemAmount = NSDecimalNumber(decimal: Decimal(itemAmount))
