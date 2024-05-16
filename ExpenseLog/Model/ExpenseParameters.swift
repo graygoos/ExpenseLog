@@ -24,6 +24,7 @@ class ExpenseParameters {
             if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "dd-MM-yyyy"
+                formatter.timeZone = TimeZone.current
                 if let date = formatter.date(from: dateString) {
                     self.expenseDate = date
                     print("Parsed Expense Date: \(date)") // Debugging statement
