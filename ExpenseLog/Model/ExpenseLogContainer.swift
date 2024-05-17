@@ -67,11 +67,9 @@ extension ExpenseLogContainer {
         expense.itemDescription = itemDescription
         expense.payee = payee
         expense.expenseTotal = NSDecimalNumber(decimal: expenseTotal)
-//        expense.dailyTotal = dailyTotal
         expense.expenseCurrency = expenseCurrency
         expense.paymentType = paymentType
         expense.itemUnit = itemUnit
-//        expense.expenseDate = expenseDate
         expense.expenseDate = convertToUTC(from: expenseDate!)
     }
     
