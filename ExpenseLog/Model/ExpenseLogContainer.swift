@@ -39,20 +39,20 @@ class ExpenseLogContainer {
 extension ExpenseLogContainer {
     
     func addMockData(moc: NSManagedObjectContext) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime, .withTimeZone]
         
-        addExpense(moc: moc, itemName: "Biscuits", itemAmount: 200, itemQuantity: 1, itemDescription: "Digestive Hobnobs", payee: "SHOPRITE", expenseTotal: 349, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "24-01-2024"), paymentType: "Cash", itemUnit: "Pack")
+        addExpense(moc: moc, itemName: "Biscuits", itemAmount: 200, itemQuantity: 1, itemDescription: "Digestive Hobnobs", payee: "SHOPRITE", expenseTotal: 349, expenseCurrency: "NGN", expenseDate: isoFormatter.date(from: "2024-01-24T00:00:00Z"), paymentType: "Cash", itemUnit: "Pack")
         
-        addExpense(moc: moc, itemName: "Chocolate", itemAmount: 650, itemQuantity: 2, itemDescription: "Mars Chocolate", payee: "SHOPRITE", expenseTotal: 1300, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "22-02-2024"), paymentType: "Debit Card", itemUnit: "Box")
+        addExpense(moc: moc, itemName: "Chocolate", itemAmount: 650, itemQuantity: 2, itemDescription: "Mars Chocolate", payee: "SHOPRITE", expenseTotal: 1300, expenseCurrency: "NGN", expenseDate: isoFormatter.date(from: "2024-02-22T00:00:00Z"), paymentType: "Debit Card", itemUnit: "Box")
         
-        addExpense(moc: moc, itemName: "Canoe Soap", itemAmount: 250, itemQuantity: 2, itemDescription: "Washing Soap", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "19-02-2024"), paymentType: "Cash", itemUnit: "Bar")
+        addExpense(moc: moc, itemName: "Canoe Soap", itemAmount: 250, itemQuantity: 2, itemDescription: "Washing Soap", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: isoFormatter.date(from: "2024-02-19T00:00:00Z"), paymentType: "Cash", itemUnit: "Bar")
         
-        addExpense(moc: moc, itemName: "AirPods", itemAmount: 1000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "25-01-2024"), paymentType: "Debit Card", itemUnit: "Pair")
+        addExpense(moc: moc, itemName: "AirPods", itemAmount: 1000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: isoFormatter.date(from: "2024-01-25T00:00:00Z"), paymentType: "Debit Card", itemUnit: "Pair")
         
-        addExpense(moc: moc, itemName: "AirPods Pro", itemAmount: 100000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "31-01-2024"), paymentType: "Debit Card", itemUnit: "Pair")
+        addExpense(moc: moc, itemName: "AirPods Pro", itemAmount: 100000, itemQuantity: 1, itemDescription: "Wireless Earphones", payee: "SHOPRITE", expenseTotal: 500, expenseCurrency: "NGN", expenseDate: isoFormatter.date(from: "2024-01-31T00:00:00Z"), paymentType: "Debit Card", itemUnit: "Pair")
         
-        addExpense(moc: moc, itemName: "Apple Vision Pro", itemAmount: 3500, itemQuantity: 1, itemDescription: "XR headset", payee: "www.apple.com", expenseTotal: 500, expenseCurrency: "USD", expenseDate: dateFormatter.date(from: "25-03-2024"), paymentType: "Debit Card", itemUnit: "Pair")
+        addExpense(moc: moc, itemName: "Apple Vision Pro", itemAmount: 3500, itemQuantity: 1, itemDescription: "XR headset", payee: "www.apple.com", expenseTotal: 500, expenseCurrency: "USD", expenseDate: isoFormatter.date(from: "2024-03-25T00:00:00Z"), paymentType: "Debit Card", itemUnit: "Pair")
         
         try? moc.save()
     }
@@ -70,7 +70,9 @@ extension ExpenseLogContainer {
         expense.expenseCurrency = expenseCurrency
         expense.paymentType = paymentType
         expense.itemUnit = itemUnit
-        expense.expenseDate = convertToUTC(from: expenseDate!)
+        if let date = expenseDate {
+            expense.expenseDate = convertToUTC(from: date)
+        }
     }
     
     

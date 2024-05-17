@@ -20,8 +20,6 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .medium
-//        dateFormatter.timeZone = TimeZone.current
-//        dateFormatter.timeZone = TimeZone.autoupdatingCurrent // see which is more optimal
         
         return dateFormatter.string(from: self)
     }
@@ -30,10 +28,31 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-//        dateFormatter.timeZone = TimeZone.current
-//        dateFormatter.timeZone = TimeZone.autoupdatingCurrent // see which is more optimal
         
         return dateFormatter.string(from: self)
     }
     
+    static func fromISO8601String(_ iso8601String: String) -> Date? {
+        let isoFormatter = ISO8601DateFormatter()
+        return isoFormatter.date(from: iso8601String)
+    }
+    
+    // Format dates to ISO8601 when logging or displaying them
+    func toISO8601String() -> String {
+        let formatter = ISO8601DateFormatter()
+//        formatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime, .withTimeZone]
+        formatter.formatOptions = [.withInternetDateTime]
+        return formatter.string(from: self)
+    }
+    
+    func toLocalTimeString(timeZone: TimeZone = .current) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.timeZone = timeZone
+        return dateFormatter.string(from: self)
+    }
+    
 }
+
+
+

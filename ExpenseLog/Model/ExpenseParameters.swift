@@ -23,14 +23,11 @@ class ExpenseParameters {
             self.paymentType = expense?.viewPaymentType ?? ""
             if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
                 let formatter = ISO8601DateFormatter()
-                formatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime];
+                formatter.formatOptions = [.withInternetDateTime];
                 formatter.timeZone = TimeZone.current
                 if let date = formatter.date(from: dateString) {
                     self.expenseDate = date
-                    print("Parsed Expense Date: \(date)") // Debugging statement
-                } else {
-                    print("Error: Unable to parse date string: \(dateString)")
-                    self.expenseDate = Date()
+                    print("Parsed Expense Date in UTC: \(date.toISO8601String())")
                 }
             } else {
                 self.expenseDate = Date()

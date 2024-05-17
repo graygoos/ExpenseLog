@@ -20,7 +20,7 @@ import Foundation
          
          for expense in expenses {
              if let date = expense.expenseDate {
-                 // Convert date to ISO8601 formatted string and then back to date
+                  Convert date to ISO8601 formatted string and then back to date
                  let dateString = isoFormatter.string(from: date)
                  if let newDate = isoFormatter.date(from: dateString) {
                      expense.expenseDate = newDate
@@ -32,6 +32,25 @@ import Foundation
          print("Migration to ISO8601 format completed successfully.")
      } catch {
          print("Failed to migrate dates to ISO8601 format: \(error)")
+     }
+ }
+ 
+ func migrateDatesToISO8601() {
+     guard let moc = moc else { return }
+     let fetchRequest: NSFetchRequest<ExpensesEntity> = ExpensesEntity.fetchRequest()
+     
+     do {
+         let expenses = try moc.fetch(fetchRequest)
+         for expense in expenses {
+             if let dateString = expense.expenseDateString {
+                 if let date = Date.fromISO8601String(dateString) {
+                     expense.expenseDate = date
+                 }
+             }
+         }
+         try moc.save()
+     } catch {
+         print("Error migrating dates: \(error)")
      }
  }
  */

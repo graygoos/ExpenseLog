@@ -55,10 +55,7 @@ extension ExpensesEntity {
     
     var viewExpenseDate: String {
         if let expenseDate = expenseDate {
-            let dateFormatter = ISO8601DateFormatter()
-            dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
-            
-            return dateFormatter.string(from: expenseDate)
+            return expenseDate.toISO8601String()
         } else {
             return "N/A"
         }
