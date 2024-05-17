@@ -55,8 +55,8 @@ extension ExpensesEntity {
     
     var viewExpenseDate: String {
         if let expenseDate = expenseDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy" // Ensure this matches the format expected
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
             
             return dateFormatter.string(from: expenseDate)
         } else {

@@ -22,8 +22,8 @@ class ExpenseParameters {
             self.itemQuantity = Int(expense?.viewItemQuantity ?? "0")!
             self.paymentType = expense?.viewPaymentType ?? ""
             if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd-MM-yyyy"
+                let formatter = ISO8601DateFormatter()
+                formatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime];
                 formatter.timeZone = TimeZone.current
                 if let date = formatter.date(from: dateString) {
                     self.expenseDate = date
@@ -89,9 +89,20 @@ class ExpenseParameters {
         expense.expenseLocation = expenseLocation
         expense.itemDescription = itemDescription
         expense.expenseFrequency = expenseFrequency
-        expense.expenseDate = expenseDate
+        expense.expenseDate = convertToUTC(from: expenseDate)
         
         try? moc.save()
+    }
+    
+    func convertToUTC(from date: Date) -> Date {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents(in: TimeZone.current, from: date)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        let utcCalendar = Calendar(identifier: .gregorian)
+        
+        return utcCalendar.date(from: components)!
     }
 }
 

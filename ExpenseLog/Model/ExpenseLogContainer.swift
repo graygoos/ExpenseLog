@@ -39,8 +39,8 @@ class ExpenseLogContainer {
 extension ExpenseLogContainer {
     
     func addMockData(moc: NSManagedObjectContext) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
         
         addExpense(moc: moc, itemName: "Biscuits", itemAmount: 200, itemQuantity: 1, itemDescription: "Digestive Hobnobs", payee: "SHOPRITE", expenseTotal: 349, expenseCurrency: "NGN", expenseDate: dateFormatter.date(from: "24-01-2024"), paymentType: "Cash", itemUnit: "Pack")
         
