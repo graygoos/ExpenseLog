@@ -9,11 +9,7 @@ import SwiftUI
 
 struct AboutScreen: View {
     let aboutText = """
-Welcome to ExpenseLog – your personal expense tracking companion! Developed to simplify daily expense recording, ExpenseLog was born out of a personal need to manage expenses more effectively. 
-As one of our esteemed testers, you're among the first to experience ExpenseLog's intuitive features and functionalities as they develop. Over the next 90 days, we're committed to delivering weekly updates, introducing new features, refining existing ones, and addressing your valuable feedback. Our ultimate aim? To launch ExpenseLog on the App Store, complete with versions optimized for iPadOS and macOS.
-Rest assured, your data's safety is our priority. ExpenseLog enables seamless data export, with robust security measures in place to protect your information.
-We value your insights and invite you to actively participate in testing ExpenseLog. Your feedback plays a crucial role in shaping the app's future. Together, let's redefine expense tracking.
-Thank you for joining us on this journey!
+Welcome to ExpenseLog – your personal expense tracking companion! We're dedicated to simplifying expense recording for your convenience. Join us as we develop and refine ExpenseLog over the next 90 days, delivering weekly updates and incorporating your valuable feedback. Our goal? To launch ExpenseLog on the App Store, ensuring your data's safety with seamless export and robust security measures. Your insights are crucial in shaping ExpenseLog's future. Let's redefine expense tracking together. Thank you for joining us on this journey!
 
 Femi
 
