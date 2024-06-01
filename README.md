@@ -3,6 +3,9 @@
 
 ExpenseLog is a SwiftUI app designed to help you log your expenses effortlessly. Utilizing Core Data for robust data management, ExpenseLog allows you to keep track of your spending, view a detailed history of expenses, and export your data to a CSV file. Additionally, you can choose the granularity of the data you wish to log, ensuring a customized and efficient tracking experience.
 
+<p align="center">
+    <img src="![ExpenseLog-white](https://github.com/graygoos/ExpenseLog/assets/52054174/743a577b-7804-470a-8b05-08eac505a863)" width="250" height="250">
+</p>
 
 
 
