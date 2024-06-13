@@ -22,7 +22,7 @@ struct SettingsTabView: View {
                     ShowOrHideSectionsView(settings: $settings)
                 }
                 Section {
-                    NavigationLink(destination: ExportDataScreen()) {
+                    NavigationLink(destination: ExportDataScreen(settings: $settings)) {
                         Text("Export Data")
                     }
                 }
@@ -43,12 +43,3 @@ struct SettingsTabView: View {
     @State var settings = Settings(moc: moc)
     return SettingsTabView(settings: $settings)
 }
-
-
-/*
- ```swift
- if UserDefaults.includePaymentMethod {
-   // payment method field
- }
- ```
- */

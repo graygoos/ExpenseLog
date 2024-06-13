@@ -13,6 +13,7 @@ struct ExportDataScreen: View {
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State private var filteredExpenses: FetchRequest<ExpensesEntity>?
+    @Binding var settings: Settings
     
     @FetchRequest(
         entity: ExpensesEntity.entity(),
@@ -59,7 +60,33 @@ struct ExportDataScreen: View {
     }
     
     func generateCSV() -> URL? {
-        // Filter expenses based on the selected date range
+        // Define CSV header based on user's selected settings
+        var csvHeader = "Date, Item Name, Expense Amount, Description, Payment Method, Recurring Expense, Budgeted, Quantity, Unit, Vendor, Location, Category, Frequency\n"
+
+        if settings.showPaymentDetailsSection {
+//            csvHeader += ", Payment Method"
+        }
+        if settings.showQuantitySection {
+//            csvHeader += ", Quantity, Unit"
+        }
+        if settings.showVendorSection {
+//            csvHeader += ", Vendor"
+        }
+        if settings.showLocationSection {
+//            csvHeader += ", Location"
+        }
+        if settings.showDescriptionSection {
+//            csvHeader += ", Description"
+        }
+        if settings.showFrequencySection {
+//            csvHeader += ", Frequency"
+        }
+        if settings.showCategorySection {
+//            csvHeader += ", Category"
+        }
+//        csvHeader += ", Currency, Amount\n"
+        
+        // Filter and sort expenses
         let filteredExpenses = expenses.filter { expense in
             if let expenseDate = expense.expenseDate {
                 return expenseDate >= startDate && expenseDate <= endDate
@@ -69,29 +96,44 @@ struct ExportDataScreen: View {
         
         // Sort the filtered expenses by date
         let sortedExpenses = filteredExpenses.sorted { expense1, expense2 in
-            guard let date1 = expense1.expenseDate, let date2 = expense2.expenseDate else {
-                return false
+            if let date1 = expense1.expenseDate, let date2 = expense2.expenseDate {
+                return date1 > date2
             }
-            return date1 < date2
+            return false
         }
         
         // Create CSV content
-//        var csvString = "Expense Date, Item Amount\n"
-        var csvString = "Expense Date, Item Name, Currency, Amount\n"
+        var csvString = csvHeader
         for expense in sortedExpenses {
-            if let expenseDate = expense.expenseDate {
-                csvString += "\(expenseDate), \(String(describing: expense.itemAmount))\n"
-            }
+            // Format optional values
+            let itemName = expense.itemName ?? ""
+            let expenseDate = expense.expenseDate?.description ?? ""
+            let itemDescription = expense.itemDescription ?? ""
+            let paymentMethod = expense.paymentType ?? ""
+            let recurringExpense = expense.recurringExpense ? "Yes" : "No"
+            let budgeted = expense.isBudgeted ? "Yes" : "No"
+            let quantity = settings.showQuantitySection ? "\(expense.itemQuantity)" : ""
+            let unit = settings.showQuantitySection ? "\(expense.itemUnit ?? "")" : ""
+            let vendor = settings.showVendorSection ? "\(expense.payee ?? "")" : ""
+            let location = settings.showLocationSection ? "\(expense.expenseLocation ?? "")" : ""
+            let category = settings.showCategorySection ? "\(expense.expenseCategory ?? "")" : ""
+            let frequency = settings.showFrequencySection ? "\(expense.expenseFrequency ?? "")" : ""
+            let amount = "\(expense.expenseCurrency ?? "") \(expense.itemAmount ?? 0)"
+            
+            // Create CSV row
+            let expenseRow = "\(expenseDate), \(itemName), \(amount), \(itemDescription), \(paymentMethod), \(recurringExpense), \(budgeted), \(quantity), \(unit), \(vendor), \(location), \(category), \(frequency)\n"
+            
+            csvString += expenseRow
         }
         
-        // Print the contents of the CSV file
+        // Print and write CSV content to file
         print("CSV File Content:")
         print(csvString)
         
-        // Write the CSV content to a file
         do {
             let path = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let fileURL = path.appendingPathComponent("Expenses.csv")
+            // rename file to "Expenses for 05/02/22 to 13/06/24" - dates used in picker
             
             // Write CSV content to file
             try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
@@ -105,6 +147,51 @@ struct ExportDataScreen: View {
 
 
 /*
+ 
+ func generateCSV() -> URL? {
+     // Filter expenses based on the selected date range
+     let filteredExpenses = expenses.filter { expense in
+         if let expenseDate = expense.expenseDate {
+             return expenseDate >= startDate && expenseDate <= endDate
+         }
+         return false
+     }
+     
+     // Sort the filtered expenses by date
+     let sortedExpenses = filteredExpenses.sorted { expense1, expense2 in
+         guard let date1 = expense1.expenseDate, let date2 = expense2.expenseDate else {
+             return false
+         }
+         return date1 < date2
+     }
+     
+     // Create CSV content
+//        var csvString = "Expense Date, Item Amount\n"
+     var csvString = "Expense Date, Item Name, Currency, Amount\n"
+     for expense in sortedExpenses {
+         if let expenseDate = expense.expenseDate {
+             csvString += "\(expenseDate), \(String(describing: expense.itemAmount))\n"
+         }
+     }
+     
+     // Print the contents of the CSV file
+     print("CSV File Content:")
+     print(csvString)
+     
+     // Write the CSV content to a file
+     do {
+         let path = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+         let fileURL = path.appendingPathComponent("Expenses.csv")
+         
+         // Write CSV content to file
+         try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
+         return fileURL
+     } catch {
+         print("Error generating CSV file: \(error)")
+         return nil
+     }
+ }
+ 
 enum ExportFormat {
     case csv
     case json
@@ -221,5 +308,7 @@ struct ExportDataScreen: View {
 }
 */
 #Preview {
-    ExportDataScreen()
+    @Environment(\.managedObjectContext) var moc
+    @State var settings = Settings(moc: moc)
+    return ExportDataScreen(settings: $settings)
 }
