@@ -61,31 +61,8 @@ struct ExportDataScreen: View {
     
     func generateCSV() -> URL? {
         // Define CSV header based on user's selected settings
-        var csvHeader = "Date, Item Name, Expense Amount, Description, Payment Method, Recurring Expense, Budgeted, Quantity, Unit, Vendor, Location, Category, Frequency\n"
+        let csvHeader = "No., Date, Item Name, Expense Amount, Description, Payment Method, Recurring Expense, Budgeted, Quantity, Unit, Vendor, Location, Category, Frequency\n"
 
-        if settings.showPaymentDetailsSection {
-//            csvHeader += ", Payment Method"
-        }
-        if settings.showQuantitySection {
-//            csvHeader += ", Quantity, Unit"
-        }
-        if settings.showVendorSection {
-//            csvHeader += ", Vendor"
-        }
-        if settings.showLocationSection {
-//            csvHeader += ", Location"
-        }
-        if settings.showDescriptionSection {
-//            csvHeader += ", Description"
-        }
-        if settings.showFrequencySection {
-//            csvHeader += ", Frequency"
-        }
-        if settings.showCategorySection {
-//            csvHeader += ", Category"
-        }
-//        csvHeader += ", Currency, Amount\n"
-        
         // Filter and sort expenses
         let filteredExpenses = expenses.filter { expense in
             if let expenseDate = expense.expenseDate {
@@ -104,7 +81,7 @@ struct ExportDataScreen: View {
         
         // Create CSV content
         var csvString = csvHeader
-        for expense in sortedExpenses {
+        for (index, expense) in sortedExpenses.enumerated() {
             // Format optional values
             let itemName = expense.itemName ?? ""
             let expenseDate = expense.expenseDate?.description ?? ""
@@ -121,7 +98,7 @@ struct ExportDataScreen: View {
             let amount = "\(expense.expenseCurrency ?? "") \(expense.itemAmount ?? 0)"
             
             // Create CSV row
-            let expenseRow = "\(expenseDate), \(itemName), \(amount), \(itemDescription), \(paymentMethod), \(recurringExpense), \(budgeted), \(quantity), \(unit), \(vendor), \(location), \(category), \(frequency)\n"
+            let expenseRow = "\(index + 1), \(expenseDate), \(itemName), \(amount), \(itemDescription), \(paymentMethod), \(recurringExpense), \(budgeted), \(quantity), \(unit), \(vendor), \(location), \(category), \(frequency)\n"
             
             csvString += expenseRow
         }
@@ -132,8 +109,7 @@ struct ExportDataScreen: View {
         
         do {
             let path = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            let fileURL = path.appendingPathComponent("Expenses.csv")
-            // rename file to "Expenses for 05/02/22 to 13/06/24" - dates used in picker
+            let fileURL = path.appendingPathComponent("Expenses for \(formattedDate(startDate)) to \(formattedDate(endDate)).csv")
             
             // Write CSV content to file
             try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
@@ -142,6 +118,12 @@ struct ExportDataScreen: View {
             print("Error generating CSV file: \(error)")
             return nil
         }
+    }
+    
+    func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        return formatter.string(from: date)
     }
 }
 

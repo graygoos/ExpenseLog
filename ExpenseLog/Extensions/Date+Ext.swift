@@ -17,11 +17,14 @@ extension Date {
     }
     
     var formatted: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .medium
-        
-        return dateFormatter.string(from: self)
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter.string(from: self)
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = .medium
+//        dateFormatter.timeStyle = .medium
+//        
+//        return dateFormatter.string(from: self)
     }
     
     var formattedDay: String {
