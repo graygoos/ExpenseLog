@@ -13,6 +13,7 @@ struct FeedbackForm: View {
         Text("You can send the developer feedback at: femialiu713@gmail.com or use the Google form below. Gracias 🙏🏽")
         WebView(urlString: "https://docs.google.com/forms/d/e/1FAIpQLScdKRWA8d4NC6nc3_2w62jJhQMZzNL-18_WERSHtMLwPMluXw/viewform?usp=sf_link")
             .edgesIgnoringSafeArea(.all)
+            .toolbar(.hidden, for: .tabBar)
     }
 }
 
