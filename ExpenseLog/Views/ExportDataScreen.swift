@@ -49,6 +49,7 @@ struct ExportDataScreen: View {
             Spacer()
             Spacer()
         }
+        .toolbar(.hidden, for: .tabBar)
         .padding()
     }
     
