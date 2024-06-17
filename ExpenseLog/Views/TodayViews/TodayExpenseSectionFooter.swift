@@ -32,7 +32,7 @@ struct TodayExpenseSectionFooter: View {
                 HStack {
                     Spacer()
                     Text("\(total, format: .currency(code: currency))")
-                        .font(.bold(.title2)())
+                        .font(currency == Locale.current.currency?.identifier ? .bold(.title2)() : .headline)
                 }
             }
         }
