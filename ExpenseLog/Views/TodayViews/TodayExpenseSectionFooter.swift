@@ -24,15 +24,26 @@ struct TodayExpenseSectionFooter: View {
     }
     
     var body: some View {
+        let primaryCurrency = Locale.current.currency?.identifier ?? "NGN"
+        let sortedTotals = totalsByCurrency().sorted { (lhs, rhs) in
+            if lhs.key == primaryCurrency {
+                return true
+            } else if rhs.key == primaryCurrency {
+                return false
+            } else {
+                return lhs.key < rhs.key
+            }
+        }
+        
         VStack(alignment: .leading) {
             Text("Total")
                 .font(.bold(.title2)())
             
-            ForEach(totalsByCurrency().sorted(by: { $0.key < $1.key }), id: \.key) { currency, total in
+            ForEach(sortedTotals, id: \.key) { currency, total in 
                 HStack {
                     Spacer()
                     Text("\(total, format: .currency(code: currency))")
-                        .font(currency == Locale.current.currency?.identifier ? .bold(.title2)() : .headline)
+                        .font(currency == primaryCurrency ? .bold(.title2)() : .headline)
                 }
             }
         }
