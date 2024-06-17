@@ -36,14 +36,18 @@ struct TodayExpenseSectionFooter: View {
         }
         
         VStack(alignment: .leading) {
-            Text("Total")
-                .font(.bold(.title2)())
-            
-            ForEach(sortedTotals, id: \.key) { currency, total in 
-                HStack {
-                    Spacer()
-                    Text("\(total, format: .currency(code: currency))")
-                        .font(currency == primaryCurrency ? .bold(.title2)() : .headline)
+            HStack {
+                Text("Total")
+                    .font(.bold(.title2)())
+                Spacer()
+                VStack(alignment: .trailing) {
+                    ForEach(sortedTotals, id: \.key) { currency, total in
+                        HStack {
+                            Spacer()
+                            Text("\(total, format: .currency(code: currency))")
+                                .font(currency == primaryCurrency ? .bold(.title2)() : .headline)
+                        }
+                    }
                 }
             }
         }
