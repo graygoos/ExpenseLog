@@ -44,6 +44,7 @@ struct ExpenseDetailsView: View {
             }
             .navigationTitle("Expense Details")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .tabBar)
             .padding()
             .toolbar {
                 ToolbarItem {
