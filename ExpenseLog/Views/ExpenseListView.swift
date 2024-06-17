@@ -47,6 +47,7 @@ struct ExpenseListView: View {
             }
             .navigationTitle("Expenses for \(date.formattedDay)")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .tabBar)
         }
     }
     
