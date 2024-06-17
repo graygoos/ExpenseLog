@@ -27,6 +27,7 @@ Copyright ©2024 Femi Aliu. All rights reserved.
         }
         .navigationTitle("About")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
