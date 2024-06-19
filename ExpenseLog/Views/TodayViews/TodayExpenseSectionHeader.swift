@@ -12,7 +12,7 @@ struct TodayExpenseSectionHeader: View {
         HStack {
             Text("Item")
             Spacer()
-            Text("Amount(₦)")
+            Text("Amount")
         }
     }
 }

@@ -21,6 +21,7 @@ struct ExpenseDetailsView: View {
     
     var body: some View {
             VStack {
+                TodayExpenseSectionHeader()
                 HStack {
                     Text(expense.viewItemName)
                     Spacer()
@@ -72,6 +73,20 @@ struct ExpenseDetailsView: View {
         try? moc.save()
     }
 }
+
+#Preview {
+    @Environment(\.managedObjectContext) var moc
+    // Create default instances for model and settings
+    @State var model = ExpenseParameters()
+    @State var settings = Settings(moc: moc)
+
+    // Create a mock expense
+    let expense = ExpensesEntity()
+
+    return ExpenseDetailsView(expense: expense, model: $model, settings: $settings)
+        .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
+}
+
 
 //#Preview {
 //    ExpenseDetailsView(expenses: ExpensesEntity())
