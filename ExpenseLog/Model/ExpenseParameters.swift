@@ -21,6 +21,7 @@ class ExpenseParameters {
             self.expenseLocation = expense?.viewExpenseLocation ?? ""
             self.itemQuantity = Int(expense?.viewItemQuantity ?? "0")!
             self.paymentType = expense?.viewPaymentType ?? ""
+            self.expenseCurrency = expense?.expenseCurrency ?? "NGN"
             if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
                 let formatter = ISO8601DateFormatter()
                 formatter.formatOptions = [.withInternetDateTime];

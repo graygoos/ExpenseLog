@@ -59,6 +59,9 @@ struct ExpenseEditScreen: View {
                     Text("Please fill in the item name and amount")
                 }
         }
+        .onAppear {
+            self.model.expense = self.expense
+        }
     }
 }
 
