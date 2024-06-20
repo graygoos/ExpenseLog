@@ -22,6 +22,7 @@ class ExpenseParameters {
             self.itemQuantity = Int(expense?.viewItemQuantity ?? "0")!
             self.paymentType = expense?.viewPaymentType ?? ""
             self.expenseCurrency = expense?.expenseCurrency ?? "NGN"
+            self.expenseCategory = expense?.expenseCategory ?? ""
             if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
                 let formatter = ISO8601DateFormatter()
                 formatter.formatOptions = [.withInternetDateTime];
@@ -87,6 +88,7 @@ class ExpenseParameters {
         expense.expenseLocation = expenseLocation
         expense.itemDescription = itemDescription
         expense.expenseFrequency = expenseFrequency
+        expense.expenseCategory = expenseCategory
         expense.expenseDate = convertToUTC(from: expenseDate)
         
         try? moc.save()

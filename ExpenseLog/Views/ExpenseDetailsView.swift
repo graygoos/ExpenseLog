@@ -32,31 +32,31 @@ struct ExpenseDetailsView: View {
             
             if settings.showDescriptionSection || !expense.viewItemDescription.isEmpty {
                 Text("Description")
-                Text(expense.viewItemDescription)
+                Text(expense.viewItemDescription.isEmpty ? "nil" : expense.viewItemDescription)
                 Divider()
             }
             
             if settings.showLocationSection || !expense.viewExpenseLocation.isEmpty {
                 Text("Location")
-                Text(expense.viewExpenseLocation)
+                Text(expense.viewExpenseLocation.isEmpty ? "nil" : expense.viewExpenseLocation)
                 Divider()
             }
             
             if settings.showQuantitySection || (expense.viewItemQuantity > String(0) && expense.itemUnit != nil) {
                 Text("Quantity")
-                Text("\(expense.viewItemQuantity) \(expense.itemUnit ?? "")")
+                Text("\(expense.viewItemQuantity) \(expense.itemUnit ?? "nil")")
                 Divider()
             }
             
             if settings.showVendorSection || !expense.viewPayee.isEmpty {
                 Text("Vendor")
-                Text(expense.viewPayee)
+                Text(expense.viewPayee.isEmpty ? "nil" : expense.viewPayee)
                 Divider()
             }
             
             if settings.showPaymentDetailsSection || !expense.viewPaymentType.isEmpty || expense.recurringExpense || expense.isBudgeted {
                 Text("Payment Method")
-                Text(expense.viewPaymentType)
+                Text(expense.viewPaymentType.isEmpty ? "nil" : expense.viewPaymentType)
                 Divider()
                 
                 Text("Recurring Expense")
@@ -66,17 +66,37 @@ struct ExpenseDetailsView: View {
                 Text("Budgeted")
                 Text(expense.isBudgeted ? "Yes" : "No")
                 Divider()
+            } else {
+                Text("Payment Method")
+                Text("nil")
+                Divider()
+                
+                Text("Recurring Expense")
+                Text("nil")
+                Divider()
+                
+                Text("Budgeted")
+                Text("nil")
+                Divider()
             }
             
             if settings.showCategorySection || ((expense.expenseCategory?.isEmpty) == nil) {
                 Text("Category")
-                Text(expense.expenseCategory ?? "Non")
+                Text(expense.expenseCategory?.isEmpty ?? true ? "nil" : expense.expenseCategory ?? "nil")
+                Divider()
+            } else {
+                Text("Category")
+                Text("nil")
                 Divider()
             }
             
             if settings.showFrequencySection || ((expense.expenseFrequency?.isEmpty) == nil) {
                 Text("Frequency")
-                Text(expense.expenseFrequency ?? "One-time")
+                Text(expense.expenseFrequency?.isEmpty ?? true ? "nil" : expense.expenseFrequency ?? "nil")
+                Divider()
+            } else {
+                Text("Frequency")
+                Text("nil")
                 Divider()
             }
             
@@ -120,6 +140,7 @@ struct ExpenseDetailsView: View {
         try? moc.save()
     }
 }
+
 
 
 #Preview {
