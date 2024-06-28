@@ -89,7 +89,7 @@ struct ExpenseFormView: View {
                     Section {
                         Picker("Expense Frequency", selection: $model.expenseFrequency) {
                             ForEach(model.frequency, id: \.self) { item in
-                                Text(item)
+                                Text(item ?? "(None)")
                             }
                         }
                     }

@@ -23,6 +23,7 @@ class ExpenseParameters {
             self.paymentType = expense?.viewPaymentType ?? ""
             self.expenseCurrency = expense?.expenseCurrency ?? "NGN"
             self.expenseCategory = expense?.expenseCategory ?? ""
+            self.expenseFrequency = expense?.expenseFrequency
             if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
                 let formatter = ISO8601DateFormatter()
                 formatter.formatOptions = [.withInternetDateTime];
@@ -54,15 +55,15 @@ class ExpenseParameters {
     var expenseDate = Date()
     var recurringExpense = false
     var isBudgeted = false
-    var expenseFrequency = "One-time"
+    var expenseFrequency: String?
     var expenseCurrency = "NGN"
     var expenseCategory = "Non"
     
-    var itemUnits = ["Non", "Pack", "Tin", "Carton", "Bag", "Box", "Bar", "Loaf", "Card", "Bottle", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrapper", "Foil", "Container", "Canister", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Kilogram", "Roll", "Pound", "Ounce", "Litre", "Centilitre", "Tube", "Bucket", "Sachet", "Cup", "Other"]
+    var itemUnits = ["Non", "Pack", "Tin", "Carton", "Crate", "Bag", "Box", "Bar", "Loaf", "Card", "Bottle", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrap", "Wrapper", "Foil", "Container", "Canister", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Kilogram", "Roll", "Pound", "Ounce", "Litre", "Centilitre", "Tube", "Bucket", "Sachet", "Cup", "Other"]
     
     var paymentMethod = ["Debit Card", "Cash", "Electronic Funds Transfer", "Credit Card", "Cheque",  "Cryptocurrency", "Bank App", "USSD"]
     
-    var frequency = ["Hourly", "Daily", "Weekly", "Monthly", "Quarterly", "Annually", "One-time"]
+    var frequency: [String?] = [nil, "Hourly", "Daily", "Weekly", "Monthly", "Quarterly", "Annually", "One-time"]
     
     var category = ["Non", "Food & Dining", "Groceries", "Transportation", "Utilities (Electricity, Water, Gas)", "Rent",
                     "Mortgage", "Entertainment", "Healthcare", "Health & Fitness", "Shopping", "Personal Care", "Travel", "Insurance", "Education", "Debt Payments", "Investments", "Gifts & Donations", "Home Maintenance", "Pet Care", "Taxes", "Subscriptions & Memberships", "Miscellaneous"]

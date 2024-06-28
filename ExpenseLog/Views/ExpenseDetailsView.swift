@@ -11,130 +11,129 @@ struct ExpenseDetailsView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     var expense: ExpensesEntity
-
+    
     @Binding var model: ExpenseParameters
-
+    
     @State private var showModal = false
-
+    
     @Binding var settings: Settings
-
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            TodayExpenseSectionHeader()
-            Divider()
-            
-            HStack {
+        ScrollView {
+            VStack(alignment: .leading) {
+                //            TodayExpenseSectionHeader()
+                //            Divider()
+                Text("Date")
+                    .font(.headline)
+                Text(expense.viewExpenseDate)
+    //                .font(.headline)
+                Spacer()
+                
+                Text("Item name")
+                    .font(.headline)
                 Text(expense.viewItemName)
                 Spacer()
+                
+                Text("Amount")
+                    .font(.headline)
                 Text(Decimal(string: expense.viewItemAmount) ?? 0, format: .currency(code: expense.expenseCurrency ?? "NGN"))
-            }
-            Divider()
-            
-            if settings.showDescriptionSection || !expense.viewItemDescription.isEmpty {
-                Text("Description")
-                Text(expense.viewItemDescription.isEmpty ? "nil" : expense.viewItemDescription)
-                Divider()
-            }
-            
-            if settings.showLocationSection || !expense.viewExpenseLocation.isEmpty {
-                Text("Location")
-                Text(expense.viewExpenseLocation.isEmpty ? "nil" : expense.viewExpenseLocation)
-                Divider()
-            }
-            
-            if settings.showQuantitySection || (expense.viewItemQuantity > String(0) && expense.itemUnit != nil) {
-                Text("Quantity")
-                Text("\(expense.viewItemQuantity) \(expense.itemUnit ?? "nil")")
-                Divider()
-            }
-            
-            if settings.showVendorSection || !expense.viewPayee.isEmpty {
-                Text("Vendor")
-                Text(expense.viewPayee.isEmpty ? "nil" : expense.viewPayee)
-                Divider()
-            }
-            
-            if settings.showPaymentDetailsSection || !expense.viewPaymentType.isEmpty || expense.recurringExpense || expense.isBudgeted {
-                Text("Payment Method")
-                Text(expense.viewPaymentType.isEmpty ? "nil" : expense.viewPaymentType)
-                Divider()
+                Spacer()
                 
-                Text("Recurring Expense")
-                Text(expense.recurringExpense ? "Yes" : "No")
-                Divider()
-                
-                Text("Budgeted")
-                Text(expense.isBudgeted ? "Yes" : "No")
-                Divider()
-            } else {
-                Text("Payment Method")
-                Text("nil")
-                Divider()
-                
-                Text("Recurring Expense")
-                Text("nil")
-                Divider()
-                
-                Text("Budgeted")
-                Text("nil")
-                Divider()
-            }
-            
-            if settings.showCategorySection || ((expense.expenseCategory?.isEmpty) == nil) {
-                Text("Category")
-                Text(expense.expenseCategory?.isEmpty ?? true ? "nil" : expense.expenseCategory ?? "nil")
-                Divider()
-            } else {
-                Text("Category")
-                Text("nil")
-                Divider()
-            }
-            
-            if settings.showFrequencySection || ((expense.expenseFrequency?.isEmpty) == nil) {
-                Text("Frequency")
-                Text(expense.expenseFrequency?.isEmpty ?? true ? "nil" : expense.expenseFrequency ?? "nil")
-                Divider()
-            } else {
-                Text("Frequency")
-                Text("nil")
-                Divider()
-            }
-            
-            Spacer()
-            VStack(alignment: .center) {
-                Button(action: {
-                    deleteExpense()
-                    dismiss()
-                }) {
-                    Text("Delete Entry")
+                if settings.showPaymentDetailsSection || !expense.viewPaymentType.isEmpty || expense.recurringExpense || expense.isBudgeted {
+                    Text("Payment Method")
+                        .font(.headline)
+                    Text(expense.viewPaymentType.isEmpty ? "nil" : expense.viewPaymentType)
+                    Spacer()
+                    Text("Recurring Expense")
+                        .font(.headline)
+                    Text(expense.recurringExpense ? "Yes" : "No")
+                    Spacer()
+                    Text("Budgeted")
+                        .font(.headline)
+                    Text(expense.isBudgeted ? "Yes" : "No")
                 }
-            }
-            Spacer()
-        }
-        .navigationTitle("Expense Details")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar(.hidden, for: .tabBar)
-        .padding()
-        .toolbar {
-            ToolbarItem {
-                Button(action: {
-                    self.showModal.toggle()
-                }) {
-                    Text("Edit")
+                
+                Spacer()
+                
+                if settings.showQuantitySection || (expense.viewItemQuantity > String(0) && expense.itemUnit != nil) {
+                    Text("Quantity")
+                        .font(.headline)
+                    Text(expense.viewItemQuantity)
+                    Spacer()
+                    Text("Unit")
+                        .font(.headline)
+                    Text("\(expense.viewItemUnit)")
                 }
-                .sheet(isPresented: $showModal, onDismiss: {
 
-                }, content: {
-                    ExpenseEditScreen(expense: expense, model: $model, settings: $settings)
-                })
+                Spacer()
+                if settings.showVendorSection || !expense.viewPayee.isEmpty {
+                    Text("Vendor")
+                        .font(.headline)
+                    Text(expense.viewPayee.isEmpty ? "nil" : expense.viewPayee)
+
+                }
+                
+                Spacer()
+                
+                if settings.showLocationSection || !expense.viewExpenseLocation.isEmpty {
+                    Text("Location")
+                        .font(.headline)
+                    Text(expense.viewExpenseLocation.isEmpty ? "nil" : expense.viewExpenseLocation)
+                }
+                Spacer()
+                if settings.showDescriptionSection || !expense.viewItemDescription.isEmpty {
+                    Text("Description")
+                        .font(.headline)
+                    Text(expense.viewItemDescription.isEmpty ? "nil" : expense.viewItemDescription)
+                }
+                
+                Spacer()
+                
+                Text("Category")
+                    .font(.headline)
+                Text(expense.expenseCategory ?? "non")
+                Spacer()
+                
+                Text("Frequency")
+                    .font(.headline)
+                Text("nil")
+                
+                Spacer()
+//                VStack(alignment: .center) {
+                    Button(action: {
+                        deleteExpense()
+                        dismiss()
+                    }) {
+                        Text("Delete Entry")
+                    }
+//                }
+                Spacer()
             }
+            .navigationTitle("Expense Details")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .tabBar)
+            .padding()
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {
+                        self.showModal.toggle()
+                    }) {
+                        Text("Edit")
+                    }
+                    .sheet(isPresented: $showModal, onDismiss: {
+                        
+                    }, content: {
+                        ExpenseEditScreen(expense: expense, model: $model, settings: $settings)
+                    })
+                }
+            }
+            .onAppear {
+                self.model.expense = self.expense
+                self.model.moc = self.moc
         }
-        .onAppear {
-            self.model.expense = self.expense
-            self.model.moc = self.moc
         }
     }
-
+    
     private func deleteExpense() {
         moc.delete(expense)
         try? moc.save()
@@ -156,6 +155,18 @@ struct ExpenseDetailsView: View {
         .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
 }
 
+
+/*
+ if let expenseFrequency = expense.expenseFrequency {
+     Text("Frequency")
+     Text(expenseFrequency)
+     Divider()
+ } else if settings.showFrequencySection {
+     Text("Frequency")
+     Text("No value")
+     Divider()
+ }
+ */
 
 //#Preview {
 //    ExpenseDetailsView(expenses: ExpensesEntity())
