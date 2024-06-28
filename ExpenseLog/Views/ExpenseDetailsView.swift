@@ -96,7 +96,7 @@ struct ExpenseDetailsView: View {
                 
                 Text("Frequency")
                     .font(.headline)
-                Text("nil")
+                Text("Non set")
                 
                 Spacer()
 //                VStack(alignment: .center) {
