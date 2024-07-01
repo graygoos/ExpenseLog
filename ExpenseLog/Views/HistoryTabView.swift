@@ -131,7 +131,18 @@ struct HistoryTabView: View {
         return Section(header: Text(title)) {
             ForEach(groupedExpenses, id: \.date) { groupedExpense in
                 NavigationLink(destination: ExpenseListView(date: groupedExpense.date, settings: $settings)) {
-                    Text(groupedExpense.date.formattedDay) // format date
+                    VStack(alignment: .leading) {
+                        Text(groupedExpense.date.formattedDay) //format date - locale
+                        HStack {
+                            Text("Number of expenses: \(groupedExpense.expenses.count)")
+                                .font(.footnote)
+                                .foregroundStyle(.gray)
+                            Spacer()
+                            Text("Total: \(groupedExpense.expensesTotal, format: .currency(code: "NGN"))")
+                                .font(.footnote)
+                                .foregroundStyle(.gray)
+                        }
+                    }
                 }
             }
             .onDelete(perform: deleteExpense)
@@ -173,6 +184,15 @@ struct HistoryTabView: View {
     return HistoryTabView(settings: $settings)
 }
 
+
+// Extension to calculate total amount for grouped expenses
+extension GroupedExpense {
+    var expensesTotal: Decimal {
+        expenses.reduce(Decimal(0)) { total, expense in
+            (total as NSDecimalNumber).adding(expense.itemAmount ?? 0).decimalValue
+        }
+    }
+}
 
 /* 4 types of comments:
  1. documentation comments
