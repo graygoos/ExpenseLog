@@ -34,9 +34,15 @@ struct ExpenseListView: View {
                         ExpenseDetailsView(expense: expense, model: $model, settings: $settings)
                     } label: {
                         HStack {
-                            Text("\(expense.viewItemName)")
-                                .truncationMode(.tail)
+                            VStack(alignment: .leading) {
+                                Text("\(expense.viewItemName)")
+                                    .font(.title3)
+                                    .truncationMode(.tail)
                                 .lineLimit(1)
+                                Text(expense.viewExpenseDate)
+                                    .font(.footnote)
+                                    .foregroundStyle(.gray)
+                            }
                             Spacer()
                             Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
                         }
