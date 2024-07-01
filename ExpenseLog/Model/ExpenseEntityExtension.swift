@@ -68,4 +68,11 @@ extension ExpensesEntity {
             return "N/A"
         }
     }
+    
+    var timeEnteredFormatted: String {
+        guard let timeEntered = self.timeEntered else { return "No time entered" }
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter.string(from: timeEntered)
+    }
 }
