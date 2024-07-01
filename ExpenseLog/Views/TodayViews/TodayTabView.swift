@@ -7,7 +7,6 @@
 import SwiftUI
 
 struct TodayTabView: View {
-    @State private var navPath: [String] = []
     @Environment(\.managedObjectContext) var moc
     
     @Binding var settings: Settings
@@ -89,8 +88,6 @@ struct TodayTabView: View {
     }
 }
 
-// Locale.current.currency?.identifier ?? "NGN"
-
 #Preview {
     @Environment(\.managedObjectContext) var moc
     @State var settings = Settings(moc: moc)
@@ -99,10 +96,3 @@ struct TodayTabView: View {
             .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
     }
 }
-
-// ExpenseDetailsView
-// ExpenseEditView
-// ExpenseEntryView
-// ExpenseFormView
-
-// ExpenseFormModel

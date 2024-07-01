@@ -24,10 +24,14 @@ struct ExpenseDetailsView: View {
                 //            TodayExpenseSectionHeader()
                 //            Divider()
                 Text("Date")
-                    .font(.headline)
+//                    .font(.title3)
+                    .foregroundStyle(.gray)
                 Text(expense.viewExpenseDate)
+//                    .foregroundStyle(.gray)
+                    .font(.title3)
     //                .font(.headline)
                 Spacer()
+                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .leading)
                 
                 Text("Item name")
                     .font(.headline)
@@ -99,15 +103,6 @@ struct ExpenseDetailsView: View {
                 Text("Non set")
                 
                 Spacer()
-//                VStack(alignment: .center) {
-                    Button(action: {
-                        deleteExpense()
-                        dismiss()
-                    }) {
-                        Text("Delete Entry")
-                    }
-//                }
-                Spacer()
             }
             .navigationTitle("Expense Details")
             .navigationBarTitleDisplayMode(.inline)
@@ -126,6 +121,12 @@ struct ExpenseDetailsView: View {
                         ExpenseEditScreen(expense: expense, model: $model, settings: $settings)
                     })
                 }
+            }
+            Button(action: {
+                deleteExpense()
+                dismiss()
+            }) {
+                Text("Delete Entry")
             }
             .onAppear {
                 self.model.expense = self.expense
