@@ -35,6 +35,7 @@ struct ExpenseListView: View {
                     } label: {
                         HStack {
                             Image(systemName: symbolForPaymentType(expense.paymentType ?? ""))
+                                .foregroundStyle(.gray)
                             VStack(alignment: .leading) {
                                 Text("\(expense.viewItemName)")
                                     .font(.title3)
