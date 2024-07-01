@@ -11,13 +11,13 @@ struct TodayTabView: View {
     
     @Binding var settings: Settings
     @State private var model = ExpenseParameters()
-
-
+    
+    
     @FetchRequest<ExpensesEntity>(
         sortDescriptors: [],
-            predicate: NSPredicate(format: "%K >= %@ AND %K <= %@", argumentArray: [#keyPath(ExpensesEntity.expenseDate), Date().startOfDay as NSDate, #keyPath(ExpensesEntity.expenseDate), Date().endDayOf as NSDate]),
-            animation: .default
-        ) private var expenses
+        predicate: NSPredicate(format: "%K >= %@ AND %K <= %@", argumentArray: [#keyPath(ExpensesEntity.expenseDate), Date().startOfDay as NSDate, #keyPath(ExpensesEntity.expenseDate), Date().endDayOf as NSDate]),
+        animation: .default
+    ) private var expenses
     
     @State private var newExpense = false
     @State private var showModal = false
@@ -40,11 +40,16 @@ struct TodayTabView: View {
                                 ExpenseDetailsView(expense: expense, model: $model, settings: $settings)
                             } label: {
                                 HStack {
-                                    Text(expense.viewItemName)
-                                        .truncationMode(.tail)
-                                        .lineLimit(1)
+                                    VStack(alignment: .leading) {
+                                        Text(expense.viewItemName)
+                                            .truncationMode(.tail)
+                                            .lineLimit(1)
+                                        Text(expense.timeEnteredFormatted)
+                                            .font(.footnote)
+                                            .foregroundColor(.gray)
+                                    }
                                     Spacer()
-                                    Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
+                                    Text((expense.itemAmount ?? 0) as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
                                 }
                             }
                         }
@@ -67,12 +72,12 @@ struct TodayTabView: View {
                             ExpenseEntryView(settings: $settings)
                         })
                     }
-//                    ToolbarItem(placement: .topBarLeading) {
-//                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-//                            Image(systemName: "calendar.circle.fill")
-//                                .imageScale(.large)
-//                        })
-//                    }
+                    //                    ToolbarItem(placement: .topBarLeading) {
+                    //                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    //                            Image(systemName: "calendar.circle.fill")
+                    //                                .imageScale(.large)
+                    //                        })
+                    //                    }
                 }
             } else {
                 TodayEmptyView(settings: $settings)
