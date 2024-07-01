@@ -91,6 +91,7 @@ class ExpenseParameters {
         expense.expenseFrequency = expenseFrequency
         expense.expenseCategory = expenseCategory
         expense.expenseDate = convertToUTC(from: expenseDate)
+        expense.timeEntered = Date()
         
         try? moc.save()
     }

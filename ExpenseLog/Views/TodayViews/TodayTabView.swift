@@ -46,7 +46,7 @@ struct TodayTabView: View {
                                             .lineLimit(1)
                                         Text(expense.timeEnteredFormatted)
                                             .font(.footnote)
-                                            .foregroundColor(.gray)
+                                            .foregroundStyle(.gray)
                                     }
                                     Spacer()
                                     Text((expense.itemAmount ?? 0) as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
