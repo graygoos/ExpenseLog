@@ -60,4 +60,12 @@ extension ExpensesEntity {
             return "N/A"
         }
     }
+    
+    var viewFormattedExpenseDate: String {
+        if let expenseDate = expenseDate {
+            return expenseDate.formattedDay
+        } else {
+            return "N/A"
+        }
+    }
 }

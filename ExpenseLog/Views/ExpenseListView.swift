@@ -15,7 +15,7 @@ struct ExpenseListView: View {
     
     @Binding var settings: Settings
     @State private var model = ExpenseParameters()
-
+    
     
     @FetchRequest var expenses: FetchedResults<ExpensesEntity>
     
@@ -25,7 +25,7 @@ struct ExpenseListView: View {
         let predicate = NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", argumentArray: [date, Calendar.current.date(byAdding: .day, value: 1, to: date)!])
         _expenses = FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], predicate: predicate, animation: .default)
     }
-
+    
     var body: some View {
         VStack {
             List {
@@ -38,11 +38,19 @@ struct ExpenseListView: View {
                                 Text("\(expense.viewItemName)")
                                     .font(.title3)
                                     .truncationMode(.tail)
-                                .lineLimit(1)
-                                Text(expense.viewItemDescription)
-                                    .font(.footnote)
-                                    .foregroundStyle(.gray)
-                                    .truncationMode(.tail)
+                                    .lineLimit(1)
+                                if expense.viewItemDescription.isEmpty {
+                                    Text(expense.viewFormattedExpenseDate)
+                                        .font(.footnote)
+                                        .foregroundStyle(.gray)
+                                        .truncationMode(.tail)
+                                } else {
+                                    Text(expense.viewItemDescription)
+                                        .font(.footnote)
+                                        .foregroundStyle(.gray)
+                                        .truncationMode(.tail)
+                                        .lineLimit(1)
+                                }
                             }
                             Spacer()
                             Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
