@@ -25,7 +25,7 @@ struct ExpenseDetailsView: View {
                 //            Divider()
                 Text("Date")
 //                    .font(.title3)
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.secondary)
                 Text(expense.viewExpenseDate)
 //                    .foregroundStyle(.gray)
                     .font(.title3)
