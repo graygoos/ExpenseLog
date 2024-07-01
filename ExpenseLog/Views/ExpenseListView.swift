@@ -39,9 +39,10 @@ struct ExpenseListView: View {
                                     .font(.title3)
                                     .truncationMode(.tail)
                                 .lineLimit(1)
-                                Text(expense.viewExpenseDate)
+                                Text(expense.viewItemDescription)
                                     .font(.footnote)
                                     .foregroundStyle(.gray)
+                                    .truncationMode(.tail)
                             }
                             Spacer()
                             Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
