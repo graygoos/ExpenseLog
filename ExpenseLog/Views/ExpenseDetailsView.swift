@@ -21,88 +21,35 @@ struct ExpenseDetailsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                //            TodayExpenseSectionHeader()
-                //            Divider()
-                Text("Date")
-//                    .font(.title3)
-                    .foregroundStyle(.secondary)
-                Text(expense.viewExpenseDate)
-//                    .foregroundStyle(.gray)
-                    .font(.title3)
-    //                .font(.headline)
-                Spacer()
-                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .leading)
-                
-                Text("Item name")
-                    .font(.headline)
-                Text(expense.viewItemName)
-                Spacer()
-                
-                Text("Amount")
-                    .font(.headline)
-                Text(Decimal(string: expense.viewItemAmount) ?? 0, format: .currency(code: expense.expenseCurrency ?? "NGN"))
-                Spacer()
+                ExpenseDetailTextView(title: "Date", detail: expense.viewExpenseDate)
+                ExpenseDetailTextView(title: "Item name", detail: expense.viewItemName)
+                ExpenseDetailTextView(title: "Amount", detail: expense.viewItemAmount, isCurrency: true, currencyCode: expense.expenseCurrency)
                 
                 if settings.showPaymentDetailsSection || !expense.viewPaymentType.isEmpty || expense.recurringExpense || expense.isBudgeted {
-                    Text("Payment Method")
-                        .font(.headline)
-                    Text(expense.viewPaymentType.isEmpty ? "nil" : expense.viewPaymentType)
-                    Spacer()
-                    Text("Recurring Expense")
-                        .font(.headline)
-                    Text(expense.recurringExpense ? "Yes" : "No")
-                    Spacer()
-                    Text("Budgeted")
-                        .font(.headline)
-                    Text(expense.isBudgeted ? "Yes" : "No")
+                    ExpenseDetailTextView(title: "Payment Method", detail: expense.viewPaymentType.isEmpty ? "nil" : expense.viewPaymentType)
+                    ExpenseDetailTextView(title: "Recurring Expense", detail: expense.recurringExpense ? "Yes" : "No")
+                    ExpenseDetailTextView(title: "Budgeted", detail: expense.isBudgeted ? "Yes" : "No")
                 }
-                
-                Spacer()
                 
                 if settings.showQuantitySection || (expense.viewItemQuantity > String(0) && expense.itemUnit != nil) {
-                    Text("Quantity")
-                        .font(.headline)
-                    Text(expense.viewItemQuantity)
-                    Spacer()
-                    Text("Unit")
-                        .font(.headline)
-                    Text("\(expense.viewItemUnit)")
-                }
-
-                Spacer()
-                if settings.showVendorSection || !expense.viewPayee.isEmpty {
-                    Text("Vendor")
-                        .font(.headline)
-                    Text(expense.viewPayee.isEmpty ? "nil" : expense.viewPayee)
-
+                    ExpenseDetailTextView(title: "Quantity", detail: expense.viewItemQuantity)
+                    ExpenseDetailTextView(title: "Unit", detail: expense.viewItemUnit)
                 }
                 
-                Spacer()
+                if settings.showVendorSection || !expense.viewPayee.isEmpty {
+                    ExpenseDetailTextView(title: "Vendor", detail: expense.viewPayee.isEmpty ? "nil" : expense.viewPayee)
+                }
                 
                 if settings.showLocationSection || !expense.viewExpenseLocation.isEmpty {
-                    Text("Location")
-                        .font(.headline)
-                    Text(expense.viewExpenseLocation.isEmpty ? "nil" : expense.viewExpenseLocation)
+                    ExpenseDetailTextView(title: "Location", detail: expense.viewExpenseLocation.isEmpty ? "nil" : expense.viewExpenseLocation)
                 }
-                Spacer()
+                
                 if settings.showDescriptionSection || !expense.viewItemDescription.isEmpty {
-                    Text("Description")
-                        .font(.headline)
-                    Text(expense.viewItemDescription.isEmpty ? "nil" : expense.viewItemDescription)
+                    ExpenseDetailTextView(title: "Description", detail: expense.viewItemDescription.isEmpty ? "nil" : expense.viewItemDescription)
                 }
                 
-                Spacer()
-                
-                Text("Category")
-                    .font(.headline)
-                Text(expense.expenseCategory ?? "non")
-                Spacer()
-                
-                Text("Frequency")
-                    .font(.headline)
-                Text("Non set")
-                
-                Spacer()
+                ExpenseDetailTextView(title: "Category", detail: expense.expenseCategory ?? "non")
+                ExpenseDetailTextView(title: "Frequency", detail: "Non set")
             }
             .navigationTitle("Expense Details")
             .navigationBarTitleDisplayMode(.inline)
@@ -131,7 +78,7 @@ struct ExpenseDetailsView: View {
             .onAppear {
                 self.model.expense = self.expense
                 self.model.moc = self.moc
-        }
+            }
         }
     }
     

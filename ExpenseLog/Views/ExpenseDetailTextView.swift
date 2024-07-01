@@ -17,6 +17,7 @@ struct ExpenseDetailTextView: View {
         VStack(alignment: .leading) {
             Text(title)
                 .foregroundStyle(.secondary)
+                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .leading)
             if isCurrency, let code = currencyCode {
                 Text(Decimal(string: detail) ?? 0, format: .currency(code: code))
             } else {
