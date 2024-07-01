@@ -22,6 +22,7 @@
 		05586D832BD18F890029A4A3 /* CurrencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05586D822BD18F890029A4A3 /* CurrencyManager.swift */; };
 		0559A1282B27311500001FCD /* TodayExpenseSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559A1272B27311500001FCD /* TodayExpenseSectionHeader.swift */; };
 		0559A12A2B27312C00001FCD /* TodayExpenseSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559A1292B27312C00001FCD /* TodayExpenseSectionFooter.swift */; };
+		055DE4802C32C61700605547 /* ExpenseDetailTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DE47F2C32C61700605547 /* ExpenseDetailTextView.swift */; };
 		05765C0A2B6D3C87005D2DA9 /* FilteringHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */; };
 		0583888E2B7E5988005AC0BB /* ExpenseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */; };
 		058740042BA1967900C5B4F9 /* StepperWithTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058740032BA1967900C5B4F9 /* StepperWithTextFieldView.swift */; };
@@ -85,6 +86,7 @@
 		05586D822BD18F890029A4A3 /* CurrencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyManager.swift; sourceTree = "<group>"; };
 		0559A1272B27311500001FCD /* TodayExpenseSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayExpenseSectionHeader.swift; sourceTree = "<group>"; };
 		0559A1292B27312C00001FCD /* TodayExpenseSectionFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayExpenseSectionFooter.swift; sourceTree = "<group>"; };
+		055DE47F2C32C61700605547 /* ExpenseDetailTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailTextView.swift; sourceTree = "<group>"; };
 		05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringHistory.swift; sourceTree = "<group>"; };
 		0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsView.swift; sourceTree = "<group>"; };
 		058740032BA1967900C5B4F9 /* StepperWithTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperWithTextFieldView.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				058740032BA1967900C5B4F9 /* StepperWithTextFieldView.swift */,
 				05B842B02B7121D80015DD14 /* ExpenseListView.swift */,
 				0583888D2B7E5988005AC0BB /* ExpenseDetailsView.swift */,
+				055DE47F2C32C61700605547 /* ExpenseDetailTextView.swift */,
 				05A637512ADEE3A000C47313 /* HistoryTabView.swift */,
 				05A637532ADEE3B500C47313 /* SettingsTabView.swift */,
 				058EBB842BB1E2E900AA2871 /* FeedbackForm.swift */,
@@ -417,6 +420,7 @@
 				05A637522ADEE3A000C47313 /* HistoryTabView.swift in Sources */,
 				05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */,
 				05528CFC2BAF5BF400DE277B /* ToggleView.swift in Sources */,
+				055DE4802C32C61700605547 /* ExpenseDetailTextView.swift in Sources */,
 				0559A12A2B27312C00001FCD /* TodayExpenseSectionFooter.swift in Sources */,
 				05528D002BB1DA4600DE277B /* AboutScreen.swift in Sources */,
 				05528CFE2BAF63EE00DE277B /* SettingKeys.swift in Sources */,
