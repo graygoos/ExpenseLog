@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		050F22AD2B28A8C000632451 /* TodayExpenseListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050F22AC2B28A8C000632451 /* TodayExpenseListRowView.swift */; };
 		0519DA862C340FF100978EED /* SFSymbolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0519DA852C340FF100978EED /* SFSymbolManager.swift */; };
+		0519DA882C34465D00978EED /* Inflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0519DA872C34465D00978EED /* Inflection.swift */; };
 		051C99BB2ADD836000B60C65 /* ExpenseLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051C99BA2ADD836000B60C65 /* ExpenseLogApp.swift */; };
 		051C99BD2ADD836000B60C65 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051C99BC2ADD836000B60C65 /* ContentView.swift */; };
 		051C99BF2ADD836000B60C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051C99BE2ADD836000B60C65 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 /* Begin PBXFileReference section */
 		050F22AC2B28A8C000632451 /* TodayExpenseListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayExpenseListRowView.swift; sourceTree = "<group>"; };
 		0519DA852C340FF100978EED /* SFSymbolManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolManager.swift; sourceTree = "<group>"; };
+		0519DA872C34465D00978EED /* Inflection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inflection.swift; sourceTree = "<group>"; };
 		051C99B72ADD836000B60C65 /* ExpenseLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		051C99BA2ADD836000B60C65 /* ExpenseLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogApp.swift; sourceTree = "<group>"; };
 		051C99BC2ADD836000B60C65 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				05CC27A22B17996200D47F4D /* CurrencyPicker.swift */,
 				05765C092B6D3C87005D2DA9 /* FilteringHistory.swift */,
 				059BA5F52BF7FC89009C9AF8 /* MigrationToISO8601.swift */,
+				0519DA872C34465D00978EED /* Inflection.swift */,
 			);
 			path = Experiments;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				05FF4A692BC035E1007F2CF5 /* HistoryEmptyScreen.swift in Sources */,
 				051C99BB2ADD836000B60C65 /* ExpenseLogApp.swift in Sources */,
 				05AC0DB02B61574E00DE0F0D /* Decimal+Ext.swift in Sources */,
+				0519DA882C34465D00978EED /* Inflection.swift in Sources */,
 				0519DA862C340FF100978EED /* SFSymbolManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
