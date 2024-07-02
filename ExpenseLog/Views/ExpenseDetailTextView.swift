@@ -19,10 +19,16 @@ struct ExpenseDetailTextView: View {
             Text(title)
                 .foregroundStyle(.secondary)
                 .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .leading)
-            if isCurrency, let code = currencyCode {
-                Text(Decimal(string: detail) ?? 0, format: .currency(code: code))
-            } else {
-                Text(detail)
+            HStack {
+                if let symbolName = symbolName {
+                    Image(systemName: symbolName)
+                        .foregroundStyle(.secondary)
+                }
+                if isCurrency, let code = currencyCode {
+                    Text(Decimal(string: detail) ?? 0, format: .currency(code: code))
+                } else {
+                    Text(detail)
+                }
             }
         }
     }
