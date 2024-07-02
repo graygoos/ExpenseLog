@@ -12,7 +12,9 @@ struct ExpenseDetailTextView: View {
     var detail: String
     var isCurrency: Bool = false
     var currencyCode: String? = nil
-    var symbolName: String?
+    var symbolName: String? = nil
+    var quantity: Int? = nil
+    var unit: String? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,11 +28,14 @@ struct ExpenseDetailTextView: View {
                 }
                 if isCurrency, let code = currencyCode {
                     Text(Decimal(string: detail) ?? 0, format: .currency(code: code))
+                } else if let quantity = quantity, let unit = unit {
+                    Text("^[\(quantity) \(unit)](inflect: true)")
                 } else {
                     Text(detail)
                 }
             }
         }
+        .padding(.bottom)
     }
 }
 
