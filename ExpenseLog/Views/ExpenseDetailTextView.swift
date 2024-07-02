@@ -12,6 +12,7 @@ struct ExpenseDetailTextView: View {
     var detail: String
     var isCurrency: Bool = false
     var currencyCode: String? = nil
+    var symbolName: String?
     
     var body: some View {
         VStack(alignment: .leading) {
