@@ -39,7 +39,7 @@ struct ExportDataScreen: View {
                     updateFetchRequestPredicate()
                 }
             Spacer()
-            Text("\(expenses.count) expenses logged in ExpenseLog")
+            Text("^[\(expenses.count) expense](inflect: true) logged in ExpenseLog")
             Spacer()
             if let fileURL = generateCSV() {
                 ShareLink(item: fileURL) {
