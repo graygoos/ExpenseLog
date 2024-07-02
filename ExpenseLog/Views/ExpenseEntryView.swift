@@ -49,7 +49,7 @@ struct ExpenseEntryView: View {
                     }
                 }
                 .alert(
-                    "Title",
+                    "Please add details",
                     isPresented: $showAlert
                 ) {
                     Button(role: .cancel) {
