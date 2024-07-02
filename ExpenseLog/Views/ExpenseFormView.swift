@@ -47,6 +47,8 @@ struct ExpenseFormView: View {
                         Picker("Item Unit", selection: $model.itemUnit) {
                             ForEach(model.itemUnits, id: \.self) { unit in
                                 Text(unit)
+//                                Text("^[\(unit) (inflect: true)")
+                                // Text("^[\(groupedExpense.expenses.count) Expense](inflect: true)")
                             }
                         }
                     }
