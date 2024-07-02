@@ -48,7 +48,7 @@ struct ExpenseDetailsView: View {
                     ExpenseDetailTextView(title: "Description", detail: expense.viewItemDescription.isEmpty ? "nil" : expense.viewItemDescription)
                 }
                 
-                ExpenseDetailTextView(title: "Category", detail: expense.expenseCategory ?? "non")
+                ExpenseDetailTextView(title: "Category", detail: expense.expenseCategory ?? "Non", symbolName: SFSymbolManager.symbolForCategory(expense.expenseCategory ?? "Non"))
                 ExpenseDetailTextView(title: "Frequency", detail: "Non set")
             }
             .navigationTitle("Expense Details")
