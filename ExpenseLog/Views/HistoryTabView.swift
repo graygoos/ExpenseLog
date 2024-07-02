@@ -134,7 +134,7 @@ struct HistoryTabView: View {
                     VStack(alignment: .leading) {
                         Text(groupedExpense.date.formattedDay) //format date - locale
                         HStack {
-                            Text("Number of expenses: \(groupedExpense.expenses.count)")
+                            Text("^[\(groupedExpense.expenses.count) Expense](inflect: true)")
                                 .font(.footnote)
                                 .foregroundStyle(.gray)
                             Spacer()
