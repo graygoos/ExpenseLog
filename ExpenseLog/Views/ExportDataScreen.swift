@@ -12,8 +12,9 @@ struct ExportDataScreen: View {
     @Environment(\.managedObjectContext) var moc
     @State private var startDate = Date()
     @State private var endDate = Date()
-    @State private var filteredExpenses: FetchRequest<ExpensesEntity>?
+    @State private var filteredExpenses: [ExpensesEntity] = []
     @Binding var settings: Settings
+    @State private var csvFileURL: URL?
     
     @FetchRequest(
         entity: ExpensesEntity.entity(),
@@ -24,26 +25,30 @@ struct ExportDataScreen: View {
         VStack {
             DatePicker("Start Date", selection: $startDate, in: ...endDate, displayedComponents: .date)
                 .onChange(of: startDate) { oldValue, newValue in
-                    updateFetchRequestPredicate()
+                    updateFilteredExpenses()
                 }
                 .onAppear {
                     // Set the default start date to the date of the first expense
                     if let firstExpenseDate = expenses.first?.expenseDate {
                         startDate = firstExpenseDate
-                        updateFetchRequestPredicate()
+                        updateFilteredExpenses()
                     }
                 }
 
             DatePicker("End Date", selection: $endDate, in: startDate..., displayedComponents: .date)
                 .onChange(of: endDate) { oldValue, newValue in
-                    updateFetchRequestPredicate()
+                    updateFilteredExpenses()
                 }
             Spacer()
             Text("^[\(expenses.count) expense](inflect: true) logged in ExpenseLog")
             Spacer()
-            if let fileURL = generateCSV() {
+            if let fileURL = csvFileURL {
                 ShareLink(item: fileURL) {
                     Label("Export CSV", systemImage: "square.and.arrow.up.fill")
+                }
+            } else {
+                Button(action: generateCSV) {
+                    Label("Generate CSV", systemImage: "doc.text.fill")
                 }
             }
             Spacer()
@@ -53,16 +58,32 @@ struct ExportDataScreen: View {
         .padding()
     }
     
-    func updateFetchRequestPredicate() {
+    func updateFilteredExpenses() {
+//        print("Updating filtered expenses")
         let predicate = NSPredicate(format: "(expenseDate >= %@) AND (expenseDate <= %@)", argumentArray: [startDate, endDate])
-        filteredExpenses = FetchRequest(
-            entity: ExpensesEntity.entity(),
-            sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: true)],
-            predicate: predicate
-        )
+        
+        let request = NSFetchRequest<ExpensesEntity>(entityName: "ExpensesEntity")
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: true)]
+        request.predicate = predicate
+        
+        do {
+            filteredExpenses = try moc.fetch(request)
+//            print("Filtered expenses count: \(filteredExpenses.count)")
+        } catch {
+            print("Failed to fetch filtered expenses: \(error)")
+        }
     }
     
-    func generateCSV() -> URL? {
+    func generateCSV() {
+        DispatchQueue.global(qos: .background).async {
+            let fileURL = generateCSVFile()
+            DispatchQueue.main.async {
+                csvFileURL = fileURL
+            }
+        }
+    }
+
+    func generateCSVFile() -> URL? {
         // Define CSV header based on user's selected settings
         let csvHeader = "No., Date, Item Name, Expense Amount, Description, Payment Method, Recurring Expense, Budgeted, Quantity, Unit, Vendor, Location, Category, Frequency\n"
 
@@ -106,10 +127,6 @@ struct ExportDataScreen: View {
             csvString += expenseRow
         }
         
-        // Print and write CSV content to file
-        print("CSV File Content:")
-        print(csvString)
-        
         do {
             let path = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let fileName = "Expenses for \(formattedDate(startDate)) to \(formattedDate(endDate)).csv"
@@ -117,6 +134,7 @@ struct ExportDataScreen: View {
             
             // Write CSV content to file
             try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
+            print("CSV file generated at: \(fileURL)")
             return fileURL
         } catch {
             print("Error generating CSV file: \(error)")
