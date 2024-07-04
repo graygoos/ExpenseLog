@@ -73,15 +73,20 @@ struct ExpenseDetailsView: View {
                     })
                 }
             }
-            Button(action: {
-                deleteExpense()
-                dismiss()
-            }) {
-                Text("Delete Entry")
-            }
-            .onAppear {
-                self.model.expense = self.expense
-                self.model.moc = self.moc
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    Button(role: .destructive, action: {
+                        deleteExpense()
+                        dismiss()
+                    }) {
+                        Image(systemName: "trash")
+                        Text("Delete Entry")
+                    }
+                    .onAppear {
+                        self.model.expense = self.expense
+                        self.model.moc = self.moc
+                    }
+                }
             }
         }
     }
