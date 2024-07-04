@@ -21,12 +21,6 @@ struct ToggleView: View {
                 key.updateSetting(using: moc, key: key, value: newValue)
 
             }
-//            .onAppear {
-//                self.isOn = key.fetchSetting(using: settings)
-//            }
-//            .onChange(of: isOn) { oldVal, newValue in 
-//                key.updateSetting(using: moc, value: newValue)
-//            }
     }
     
     
@@ -52,14 +46,6 @@ struct ToggleView: View {
         case .category:         return settings.showCategorySection
         }
     }
-    
-//    private func saveSettings() {
-//        do {
-//            try settings.managedObjectContext?.save()
-//        } catch {
-//            print("Error saving settings: \(error.localizedDescription)")
-//        }
-//    }
 }
 
 //#Preview {
