@@ -18,6 +18,8 @@ struct ExpenseDetailsView: View {
     
     @Binding var settings: Settings
     
+    @State private var showingDeleteAlert = false
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -76,8 +78,7 @@ struct ExpenseDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button(role: .destructive, action: {
-                        deleteExpense()
-                        dismiss()
+                        showingDeleteAlert = true
                     }) {
                         Image(systemName: "trash")
                         Text("Delete Entry")
@@ -88,6 +89,15 @@ struct ExpenseDetailsView: View {
                     }
                 }
             }
+        }
+        .alert("Delete Expense", isPresented: $showingDeleteAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Delete", role: .destructive) {
+                deleteExpense()
+                dismiss()
+            }
+        } message: {
+            Text("Are you sure you want to delete this expense?")
         }
     }
     
