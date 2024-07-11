@@ -125,27 +125,52 @@ struct HistoryTabView: View {
     // specify sort - sort before grouping❓
     private func section(for title: String, predicate: NSPredicate) -> some View {
         let filteredExpenses = expenses.filter { predicate.evaluate(with: $0) }
-        
         let groupedExpenses = self.groupedExpenses(for: filteredExpenses)
         
         return Section(header: Text(title)) {
             ForEach(groupedExpenses, id: \.date) { groupedExpense in
                 NavigationLink(destination: ExpenseListView(date: groupedExpense.date, settings: $settings)) {
                     VStack(alignment: .leading) {
-                        Text(groupedExpense.date.formattedDay) //format date - locale
+                        Text(groupedExpense.date.formattedDay)
                         HStack {
                             Text("^[\(groupedExpense.expenses.count) Expense](inflect: true)")
                                 .font(.footnote)
                                 .foregroundStyle(.gray)
                             Spacer()
-                            Text("Total: \(groupedExpense.expensesTotal, format: .currency(code: "NGN"))")
+                            Text(formatCurrencies(for: groupedExpense.expenses))
                                 .font(.footnote)
                                 .foregroundStyle(.gray)
+                                .lineLimit(1)
                         }
                     }
                 }
             }
-            .onDelete(perform: deleteExpense)
+        }
+    }
+
+    private func formatCurrencies(for expenses: [ExpensesEntity]) -> String {
+        let currencyTotals = expenses.reduce(into: [String: Decimal]()) { result, expense in
+            guard let currency = expense.expenseCurrency, let amount = expense.itemAmount as Decimal? else { return }
+            result[currency, default: 0] += amount
+        }
+        
+        let defaultCurrency = settings.defaultCurrency // Assume this is how you store the default currency
+        
+        let sortedCurrencies = currencyTotals.keys.sorted { lhs, rhs in
+            if lhs == defaultCurrency { return true }
+            if rhs == defaultCurrency { return false }
+            return lhs < rhs
+        }
+        
+        let formattedTotals = sortedCurrencies.prefix(2).map { currency in
+            let total = currencyTotals[currency] ?? 0
+            return "\(currency) \(total.formatted(.currency(code: currency)))"
+        }
+        
+        if sortedCurrencies.count <= 2 {
+            return formattedTotals.joined(separator: ", ")
+        } else {
+            return formattedTotals.joined(separator: ", ") + "..."
         }
     }
     

@@ -23,6 +23,7 @@
         <attribute name="weeklyTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
     </entity>
     <entity name="SettingsEntity" representedClassName="SettingsEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="defaultCurrency" optional="YES" attributeType="String"/>
         <attribute name="showCategorySection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="showDescriptionSection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="showFrequencySection" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

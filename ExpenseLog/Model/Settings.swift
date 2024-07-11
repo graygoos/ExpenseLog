@@ -19,6 +19,7 @@ class Settings: ObservableObject, Equatable {
         lhs.showPaymentDetailsSection == rhs.showPaymentDetailsSection &&
         lhs.showFrequencySection == rhs.showFrequencySection &&
         lhs.showCategorySection == rhs.showCategorySection
+        return lhs.defaultCurrency == rhs.defaultCurrency
     }
     
     var showQuantitySection =       false
@@ -28,6 +29,7 @@ class Settings: ObservableObject, Equatable {
     var showPaymentDetailsSection = false
     var showFrequencySection =      false
     var showCategorySection =       false
+    var defaultCurrency: String
 
     init(moc: NSManagedObjectContext) {
         let fetchRequest: NSFetchRequest<SettingsEntity> = SettingsEntity.fetchRequest()
@@ -41,9 +43,21 @@ class Settings: ObservableObject, Equatable {
                 self.showPaymentDetailsSection = entity.showPaymentDetailsSection
                 self.showFrequencySection = entity.showFrequencySection
                 self.showCategorySection = entity.showCategorySection
+                self.defaultCurrency = entity.defaultCurrency ?? Settings.getDeviceDefaultCurrency()
+            } else {
+                // If no settings entity exists, create one with device default currency
+                let newEntity = SettingsEntity(context: moc)
+                self.defaultCurrency = Settings.getDeviceDefaultCurrency()
+                newEntity.defaultCurrency = self.defaultCurrency
+                try moc.save()
             }
         } catch {
-            print("Eror")
+            print("Error initializing Settings: \(error)")
+            self.defaultCurrency = Settings.getDeviceDefaultCurrency()
         }
+    }
+    
+    static func getDeviceDefaultCurrency() -> String {
+        return Locale.current.currency?.identifier ?? "USD"
     }
 }

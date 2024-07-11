@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ToggleView: View {
-//    @State private var isOn: Bool = false
-//    @ObservedObject var settings: SettingsEntity
     var key: SettingKeys
     @Environment(\.managedObjectContext) private var moc
     
@@ -18,11 +16,9 @@ struct ToggleView: View {
     var body: some View {
         Toggle(key.title, isOn: self.toggleBinding(for: key))
             .onChange(of: self.keySetting(for: key)) { oldValue, newValue in
-                key.updateSetting(using: moc, key: key, value: newValue)
-
+                key.updateSetting(using: moc, value: newValue)
             }
     }
-    
     
     private func toggleBinding(for key: SettingKeys) -> Binding<Bool> {
         switch key {
@@ -33,8 +29,12 @@ struct ToggleView: View {
         case .paymentDetails:   return $settings.showPaymentDetailsSection
         case .frequency:        return $settings.showFrequencySection
         case .category:         return $settings.showCategorySection
+        case .defaultCurrency:
+            // This case shouldn't be used for toggles, but we need to handle it
+            return Binding.constant(false)
         }
     }
+    
     private func keySetting(for key: SettingKeys) -> Bool {
         switch key {
         case .quantity:         return settings.showQuantitySection
@@ -44,6 +44,9 @@ struct ToggleView: View {
         case .paymentDetails:   return settings.showPaymentDetailsSection
         case .frequency:        return settings.showFrequencySection
         case .category:         return settings.showCategorySection
+        case .defaultCurrency:
+            // This case shouldn't be used for toggles, but we need to handle it
+            return false
         }
     }
 }
