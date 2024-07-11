@@ -28,21 +28,21 @@ struct HistoryTabView: View {
             if expenses.isEmpty {
                 HistoryEmptyScreen(settings: $settings)
             } else {
-                List {          // offset ❓
-                    if hasExpensesForLastNDays(7) {
-                        section(for: "Previous 7 Days", predicate: predicate(forLastNDays: 7, offset: 1))
+                List {
+                    if hasExpensesForRange(start: 1, end: 7) {
+                        section(for: "Previous 7 Days", predicate: predicate(forRange: 1, end: 8))
                     }
-                    if hasExpensesForLastNDays(30) {
-                        section(for: "Previous 30 Days", predicate: predicate(forLastNDays: 31, offset: 8))
+                    if hasExpensesForRange(start: 8, end: 37) {
+                        section(for: "Previous 30 Days", predicate: predicate(forRange: 8, end: 38))
                     }
-                    if hasExpensesForLastNDays(90) {
-                        section(for: "Previous 90 Days", predicate: predicate(forLastNDays: 91, offset: 31))
+                    if hasExpensesForRange(start: 38, end: 127) {
+                        section(for: "Previous 90 Days", predicate: predicate(forRange: 38, end: 128))
                     }
-                    if hasExpensesForLastNDays(180) {
-                        section(for: "Previous 180 Days", predicate: predicate(forLastNDays: 181, offset: 91))
+                    if hasExpensesForRange(start: 128, end: 307) {
+                        section(for: "Previous 180 Days", predicate: predicate(forRange: 128, end: 309))
                     }
-                    if hasExpensesOlderThan(180) {
-                        section(for: "Older", predicate: predicate(forOlderThan: 181))
+                    if hasExpensesForRange(start: 309, end: 3650) {  // Roughly 10 years
+                        section(for: "Older", predicate: predicateForOlderThan(days: 309))
                     }
                 }
                 .navigationTitle("History")
@@ -66,19 +66,18 @@ struct HistoryTabView: View {
     }           // ❓always test for boundaries // view that shows all the records
     
     private var shouldShowEmptyState: Bool {
-        return !hasExpensesForLastNDays(1) && !hasExpensesOlderThan(1)
+        return !hasExpensesForRange(start: 0, end: 3650)  // Check for any expenses in the last ~10 years
     }
     
-    private func hasExpensesForLastNDays(_ days: Int) -> Bool {
+    private func hasExpensesForRange(start: Int, end: Int) -> Bool {
         let calendar = Calendar.current
         let now = Date()
-        let startDate = calendar.date(byAdding: .day, value: -days, to: now)!
-        let endDate = calendar.startOfDay(for: now)
+        let startDate = calendar.date(byAdding: .day, value: -end, to: now)!
+        let endDate = calendar.date(byAdding: .day, value: -start, to: now)!
         
         return expenses.contains { expense in
             guard let expenseDate = expense.expenseDate else { return false }
-            let expenseDateStartOfDay = calendar.startOfDay(for: expenseDate)
-            return expenseDateStartOfDay >= startDate && expenseDateStartOfDay < endDate
+            return expenseDate >= startDate && expenseDate < endDate
         }
     }
     
@@ -96,11 +95,11 @@ struct HistoryTabView: View {
     }
     
     // Create a predicate for expenses in the last N days
-    private func predicate(forLastNDays days: Int, offset: Int = 1) -> NSPredicate {
+    private func predicate(forRange start: Int, end: Int) -> NSPredicate {
         let calendar = Calendar.current
         let now = Date()
-        let startDate = calendar.date(byAdding: .day, value: -days, to: now)!
-        let endDate = calendar.date(byAdding: .day, value: -offset, to: now)!
+        let startDate = calendar.date(byAdding: .day, value: -end, to: now)!
+        let endDate = calendar.date(byAdding: .day, value: -start, to: now)!
         
         if searchText.isEmpty {
             return NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", startDate as NSDate, endDate as NSDate)
@@ -110,15 +109,16 @@ struct HistoryTabView: View {
     }
     
     // Function to create a predicate for expenses for older than  a given number of days
-    private func predicate(forOlderThan days: Int) -> NSPredicate {
+    private func predicateForOlderThan(days: Int) -> NSPredicate {
         let calendar = Calendar.current
         let now = Date()
-        let endDate = calendar.date(byAdding: .day, value: -days, to: now)!
+        let date = calendar.date(byAdding: .day, value: -days, to: now)!
         
         if searchText.isEmpty {
-            return NSPredicate(format: "expenseDate < %@", endDate as NSDate)
+            return NSPredicate(format: "expenseDate < %@", date as NSDate)
         }
-        return NSPredicate(format: "expenseDate < %@ AND (itemName CONTAINS[cd] %@ OR itemDescription CONTAINS[cd] %@ OR itemUnit CONTAINS[cd] %@ OR payee CONTAINS[cd] %@ OR expenseLocation CONTAINS[cd] %@ OR paymentType CONTAINS[cd] %@)", endDate as NSDate, searchText, searchText, searchText, searchText, searchText, searchText)
+        
+        return NSPredicate(format: "expenseDate < %@ AND (itemName CONTAINS[cd] %@ OR itemDescription CONTAINS[cd] %@ OR itemUnit CONTAINS[cd] %@ OR payee CONTAINS[cd] %@ OR expenseLocation CONTAINS[cd] %@ OR paymentType CONTAINS[cd] %@)", date as NSDate, searchText, searchText, searchText, searchText, searchText, searchText)
     }
     
     // Create a section for specific time range
