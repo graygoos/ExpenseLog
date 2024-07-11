@@ -25,7 +25,7 @@ struct HistoryTabView: View {
     
     var body: some View {
         NavigationStack {
-            if shouldShowEmptyState {
+            if expenses.isEmpty {
                 HistoryEmptyScreen(settings: $settings)
             } else {
                 List {          // offset ❓
