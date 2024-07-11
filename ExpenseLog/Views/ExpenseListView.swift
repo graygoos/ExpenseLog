@@ -16,6 +16,8 @@ struct ExpenseListView: View {
     @Binding var settings: Settings
     @State private var model = ExpenseParameters()
     
+    @State private var showingDeleteAlert = false
+    @State private var expenseToDelete: ExpensesEntity?
     
     @FetchRequest var expenses: FetchedResults<ExpensesEntity>
     
@@ -59,21 +61,35 @@ struct ExpenseListView: View {
                         }
                     }
                 }
-                .onDelete(perform: deleteExpense)
+                .onDelete { indexSet in
+                    guard let index = indexSet.first else { return }
+                    expenseToDelete = expenses[index]
+                    showingDeleteAlert = true
+                }
                 TodayExpenseSectionFooter(expenses: expenses)
             }
             .navigationTitle("Expenses for \(date.formattedDay)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .tabBar)
         }
+        .alert("Delete Expense", isPresented: $showingDeleteAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Delete", role: .destructive) {
+                if let expense = expenseToDelete {
+                    deleteExpense(expense: expense)
+                }
+            }
+        } message: {
+            Text("Are you sure you want to delete this expense?")
+        }
     }
     
-    private func deleteExpense(offsets: IndexSet) {
-        for offset in offsets {
-            moc.delete(expenses[offset])
-        }
+    private func deleteExpense(expense: ExpensesEntity) {
+        moc.delete(expense)
         try? moc.save()
-        dismiss()
+        if expenses.isEmpty {
+            dismiss()
+        }
     }
     
     private func symbolForPaymentType(_ paymentType: String) -> String {
