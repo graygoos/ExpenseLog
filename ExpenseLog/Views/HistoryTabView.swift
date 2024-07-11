@@ -19,6 +19,9 @@ struct HistoryTabView: View {
     @State private var showModal = false
     @State private var searchText = ""
     
+    @State private var showingDeleteAlert = false
+    @State private var dateToDelete: Date?
+    
     @Binding var settings: Settings
     
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
@@ -62,6 +65,20 @@ struct HistoryTabView: View {
                     }
                 }
             }
+        }
+        .alert("Delete Expenses", isPresented: $showingDeleteAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                if let date = dateToDelete {
+                    let expensesToDelete = expenses.filter { Calendar.current.isDate($0.expenseDate!, inSameDayAs: date) }
+                    for expense in expensesToDelete {
+                        moc.delete(expense)
+                    }
+                    try? moc.save()
+                }
+            }
+        } message: {
+            Text("Are you sure you want to delete all expenses for this day?")
         }
     }           // ❓always test for boundaries // view that shows all the records
     
@@ -144,6 +161,13 @@ struct HistoryTabView: View {
                         }
                     }
                 }
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button(role: .destructive) {
+                        deleteExpense(for: groupedExpense.date)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
             }
         }
     }
@@ -173,12 +197,10 @@ struct HistoryTabView: View {
             return formattedTotals.joined(separator: ", ") + "..."
         }
     }
-    
-    private func deleteExpense(offsets: IndexSet) {
-        for offset in offsets {
-            moc.delete(expenses[offset])
-        }
-        try? moc.save()
+
+    private func deleteExpense(for date: Date) {
+        dateToDelete = date
+        showingDeleteAlert = true
     }
     
     // Function to group expenses by date
