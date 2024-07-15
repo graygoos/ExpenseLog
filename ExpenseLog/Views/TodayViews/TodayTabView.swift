@@ -10,7 +10,7 @@ struct TodayTabView: View {
     @Environment(\.managedObjectContext) var moc
     
     @Binding var settings: Settings
-    @State private var model = ExpenseParameters()
+    @State private var model = ExpenseParameters(expenseDate: Date())
     
     @State private var showingDeleteAlert = false
     @State private var expenseToDelete: ExpensesEntity?

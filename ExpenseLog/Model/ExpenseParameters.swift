@@ -59,6 +59,10 @@ class ExpenseParameters {
     var expenseCurrency = "NGN"
     var expenseCategory = "Non"
     
+    init(expenseDate: Date = Date()) {
+        self.expenseDate = expenseDate
+    }
+    
     var itemUnits = ["Non", "Pack", "Tin", "Carton", "Crate", "Bag", "Box", "Bar", "Loaf", "Card", "Bottle", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrap", "Wrapper", "Foil", "Container", "Canister", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Portion", "Kilogram", "Roll", "Pound", "Ounce", "Litre", "Centilitre", "Tube", "Bucket", "Sachet", "Cup", "Page", "Stick", "Unit", "Other"]
     
     var paymentMethod = ["Debit Card", "Cash", "Electronic Funds Transfer", "Credit Card", "Cheque",  "Cryptocurrency", "Bank App", "USSD"]

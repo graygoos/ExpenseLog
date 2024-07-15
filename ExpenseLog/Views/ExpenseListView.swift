@@ -14,10 +14,11 @@ struct ExpenseListView: View {
     let date: Date
     
     @Binding var settings: Settings
-    @State private var model = ExpenseParameters()
+    @State private var model = ExpenseParameters(expenseDate: Date())
     
     @State private var showingDeleteAlert = false
     @State private var expenseToDelete: ExpensesEntity?
+    @State private var showingExpenseEntryView = false
     
     @FetchRequest var expenses: FetchedResults<ExpensesEntity>
     
@@ -71,6 +72,18 @@ struct ExpenseListView: View {
             .navigationTitle("Expenses for \(date.formattedDay)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .tabBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        showingExpenseEntryView = true
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $showingExpenseEntryView) {
+                ExpenseEntryView(settings: $settings, initialDate: date)
+            }
         }
         .alert("Delete Expense", isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) {}

@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct ExpenseEntryView: View {
-    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    @State private var model = ExpenseParameters()
+    @State private var model: ExpenseParameters
     @State private var showAlert = false
     
     @Binding var settings: Settings
-
+    
+    init(settings: Binding<Settings>, initialDate: Date? = nil) {
+        self._settings = settings
+        self._model = State(initialValue: ExpenseParameters(expenseDate: initialDate ?? Date()))
+    }
+    
     var body: some View {
         NavigationStack {
             ExpenseFormView(model: $model, settings: $settings)
@@ -67,8 +71,7 @@ struct ExpenseEntryView: View {
 #Preview {
     @Environment(\.managedObjectContext) var moc
     @State var settings = Settings(moc: moc)
-    return ExpenseEntryView(settings: $settings)
-//    ExpenseEntryView()
+    return ExpenseEntryView(settings: $settings, initialDate: Date())
 }
 
 

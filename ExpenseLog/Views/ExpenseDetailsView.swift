@@ -112,7 +112,7 @@ struct ExpenseDetailsView: View {
 #Preview {
     @Environment(\.managedObjectContext) var moc
     // Create default instances for model and settings
-    @State var model = ExpenseParameters()
+    @State var model = ExpenseParameters(expenseDate: Date())
     @State var settings = Settings(moc: moc)
 
     // Create a mock expense
