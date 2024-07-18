@@ -193,7 +193,7 @@ struct HistoryTabView: View {
             result[currency, default: 0] += amount
         }
         
-        let defaultCurrency = settings.defaultCurrency // Assume this is how you store the default currency
+        let defaultCurrency = settings.defaultCurrency
         
         let sortedCurrencies = currencyTotals.keys.sorted { lhs, rhs in
             if lhs == defaultCurrency { return true }
@@ -203,7 +203,8 @@ struct HistoryTabView: View {
         
         let formattedTotals = sortedCurrencies.prefix(2).map { currency in
             let total = currencyTotals[currency] ?? 0
-            return "\(currency) \(total.formatted(.currency(code: currency)))"
+            let symbol = Locale.current.currencySymbol(forCurrencyCode: currency) ?? currency
+            return "\(symbol)\(total)"
         }
         
         if sortedCurrencies.count <= 2 {

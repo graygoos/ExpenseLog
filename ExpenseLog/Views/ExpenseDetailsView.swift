@@ -25,7 +25,10 @@ struct ExpenseDetailsView: View {
             VStack(alignment: .leading) {
                 ExpenseDetailTextView(title: "Date", detail: expense.viewExpenseDate)
                 ExpenseDetailTextView(title: "Item name", detail: expense.viewItemName)
-                ExpenseDetailTextView(title: "Amount", detail: expense.viewItemAmount, isCurrency: true, currencyCode: expense.expenseCurrency)
+                ExpenseDetailTextView(
+                    title: "Amount",
+                    detail: formatAmount(amount: (expense.itemAmount ?? 0) as Decimal, currencyCode: expense.expenseCurrency ?? "USD")
+                )
                 
                 if settings.showPaymentDetailsSection || !expense.viewPaymentType.isEmpty || expense.recurringExpense || expense.isBudgeted {
                     ExpenseDetailTextView(title: "Payment Method", detail: expense.viewPaymentType.isEmpty ? "nil" : expense.viewPaymentType)
@@ -104,6 +107,16 @@ struct ExpenseDetailsView: View {
     private func deleteExpense() {
         moc.delete(expense)
         try? moc.save()
+    }
+    
+    private func formatAmount(amount: Decimal, currencyCode: String) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = currencyCode
+        
+        let formattedAmount = formatter.string(from: amount as NSNumber) ?? ""
+        
+        return "\(formattedAmount) (\(currencyCode))"
     }
 }
 
