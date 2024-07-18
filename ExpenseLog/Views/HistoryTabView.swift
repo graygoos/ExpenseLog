@@ -139,40 +139,6 @@ struct HistoryTabView: View {
         return NSPredicate(format: "expenseDate < %@ AND (itemName CONTAINS[cd] %@ OR itemDescription CONTAINS[cd] %@ OR itemUnit CONTAINS[cd] %@ OR payee CONTAINS[cd] %@ OR expenseLocation CONTAINS[cd] %@ OR paymentType CONTAINS[cd] %@)", date as NSDate, searchText, searchText, searchText, searchText, searchText, searchText)
     }
     
-    // Create a section for specific time range
-    // specify sort - sort before grouping❓
-//    private func section(for title: String, predicate: NSPredicate) -> some View {
-//        let filteredExpenses = expenses.filter { predicate.evaluate(with: $0) }
-//        let groupedExpenses = self.groupedExpenses(for: filteredExpenses)
-//        
-//        return Section(header: Text(title)) {
-//            ForEach(groupedExpenses, id: \.date) { groupedExpense in
-//                NavigationLink(destination: ExpenseListView(date: groupedExpense.date, settings: $settings)) {
-//                    VStack(alignment: .leading) {
-//                        Text(groupedExpense.date.formattedDay)
-//                        HStack {
-//                            Text("^[\(groupedExpense.expenses.count) Expense](inflect: true)")
-//                                .font(.footnote)
-//                                .foregroundStyle(.gray)
-//                            Spacer()
-//                            Text(formatCurrencies(for: groupedExpense.expenses))
-//                                .font(.footnote)
-//                                .foregroundStyle(.gray)
-//                                .lineLimit(1)
-//                        }
-//                    }
-//                }
-//                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-//                    Button(role: .destructive) {
-//                        deleteExpense(for: groupedExpense.date)
-//                    } label: {
-//                        Label("Delete", systemImage: "trash")
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     private func collapsibleSection(title: String, predicate: NSPredicate) -> some View {
         Section {
             if expandedSections.contains(title) {
@@ -220,7 +186,7 @@ struct HistoryTabView: View {
             }
         }
     }
-
+    
     private func formatCurrencies(for expenses: [ExpensesEntity]) -> String {
         let currencyTotals = expenses.reduce(into: [String: Decimal]()) { result, expense in
             guard let currency = expense.expenseCurrency, let amount = expense.itemAmount as Decimal? else { return }
@@ -246,7 +212,7 @@ struct HistoryTabView: View {
             return formattedTotals.joined(separator: ", ") + "..."
         }
     }
-
+    
     private func deleteExpense(for date: Date) {
         dateToDelete = date
         showingDeleteAlert = true
@@ -256,7 +222,7 @@ struct HistoryTabView: View {
     private func groupedExpenses(for expenses: [ExpensesEntity]) -> [GroupedExpense] {
         let groupedDictionary = Dictionary(grouping: expenses) { (expense) -> Date in
             guard let date = expense.expenseDate else {
-//                return Date()
+                //                return Date()
                 return Calendar.current.startOfDay(for: Date())
             }
             return Calendar.current.startOfDay(for: date)
