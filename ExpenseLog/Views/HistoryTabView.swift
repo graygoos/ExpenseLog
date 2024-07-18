@@ -22,6 +22,8 @@ struct HistoryTabView: View {
     @State private var showingDeleteAlert = false
     @State private var dateToDelete: Date?
     
+    @State private var expandedSections: Set<String> = []
+    
     @Binding var settings: Settings
     
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
@@ -33,21 +35,22 @@ struct HistoryTabView: View {
             } else {
                 List {
                     if hasExpensesForRange(start: 1, end: 7) {
-                        section(for: "Previous 7 Days", predicate: predicate(forRange: 1, end: 8))
+                        collapsibleSection(title: "Previous 7 Days", predicate: predicate(forRange: 1, end: 8))
                     }
                     if hasExpensesForRange(start: 8, end: 37) {
-                        section(for: "Previous 30 Days", predicate: predicate(forRange: 8, end: 38))
+                        collapsibleSection(title: "Previous 30 Days", predicate: predicate(forRange: 8, end: 38))
                     }
                     if hasExpensesForRange(start: 38, end: 127) {
-                        section(for: "Previous 90 Days", predicate: predicate(forRange: 38, end: 128))
+                        collapsibleSection(title: "Previous 90 Days", predicate: predicate(forRange: 38, end: 128))
                     }
                     if hasExpensesForRange(start: 128, end: 307) {
-                        section(for: "Previous 180 Days", predicate: predicate(forRange: 128, end: 309))
+                        collapsibleSection(title: "Previous 180 Days", predicate: predicate(forRange: 128, end: 309))
                     }
-                    if hasExpensesForRange(start: 309, end: 3650) {  // Roughly 10 years
-                        section(for: "Older", predicate: predicateForOlderThan(days: 309))
+                    if hasExpensesForRange(start: 309, end: 3650) {
+                        collapsibleSection(title: "Older", predicate: predicateForOlderThan(days: 309))
                     }
                 }
+                .listStyle(.sidebar )
                 .navigationTitle("History")
                 .searchable(text: $searchText)
                 .toolbar {
@@ -57,12 +60,10 @@ struct HistoryTabView: View {
                         }) {
                             Image(systemName: "plus")
                         }
-                        .sheet(isPresented: $showModal, onDismiss: {
-                            print("expenseEntryView dismissed")
-                        }, content: {
-                            ExpenseEntryView(settings: $settings)
-                        })
                     }
+                }
+                .sheet(isPresented: $showModal) {
+                    ExpenseEntryView(settings: $settings)
                 }
             }
         }
@@ -140,33 +141,81 @@ struct HistoryTabView: View {
     
     // Create a section for specific time range
     // specify sort - sort before grouping❓
-    private func section(for title: String, predicate: NSPredicate) -> some View {
-        let filteredExpenses = expenses.filter { predicate.evaluate(with: $0) }
-        let groupedExpenses = self.groupedExpenses(for: filteredExpenses)
-        
-        return Section(header: Text(title)) {
-            ForEach(groupedExpenses, id: \.date) { groupedExpense in
-                NavigationLink(destination: ExpenseListView(date: groupedExpense.date, settings: $settings)) {
-                    VStack(alignment: .leading) {
-                        Text(groupedExpense.date.formattedDay)
-                        HStack {
-                            Text("^[\(groupedExpense.expenses.count) Expense](inflect: true)")
-                                .font(.footnote)
-                                .foregroundStyle(.gray)
-                            Spacer()
-                            Text(formatCurrencies(for: groupedExpense.expenses))
-                                .font(.footnote)
-                                .foregroundStyle(.gray)
-                                .lineLimit(1)
+//    private func section(for title: String, predicate: NSPredicate) -> some View {
+//        let filteredExpenses = expenses.filter { predicate.evaluate(with: $0) }
+//        let groupedExpenses = self.groupedExpenses(for: filteredExpenses)
+//        
+//        return Section(header: Text(title)) {
+//            ForEach(groupedExpenses, id: \.date) { groupedExpense in
+//                NavigationLink(destination: ExpenseListView(date: groupedExpense.date, settings: $settings)) {
+//                    VStack(alignment: .leading) {
+//                        Text(groupedExpense.date.formattedDay)
+//                        HStack {
+//                            Text("^[\(groupedExpense.expenses.count) Expense](inflect: true)")
+//                                .font(.footnote)
+//                                .foregroundStyle(.gray)
+//                            Spacer()
+//                            Text(formatCurrencies(for: groupedExpense.expenses))
+//                                .font(.footnote)
+//                                .foregroundStyle(.gray)
+//                                .lineLimit(1)
+//                        }
+//                    }
+//                }
+//                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//                    Button(role: .destructive) {
+//                        deleteExpense(for: groupedExpense.date)
+//                    } label: {
+//                        Label("Delete", systemImage: "trash")
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    private func collapsibleSection(title: String, predicate: NSPredicate) -> some View {
+        Section {
+            if expandedSections.contains(title) {
+                let filteredExpenses = expenses.filter { predicate.evaluate(with: $0) }
+                let groupedExpenses = self.groupedExpenses(for: filteredExpenses)
+                
+                ForEach(groupedExpenses, id: \.date) { groupedExpense in
+                    NavigationLink(destination: ExpenseListView(date: groupedExpense.date, settings: $settings)) {
+                        VStack(alignment: .leading) {
+                            Text(groupedExpense.date.formattedDay)
+                            HStack {
+                                Text("^[\(groupedExpense.expenses.count) Expense](inflect: true)")
+                                    .font(.footnote)
+                                    .foregroundStyle(.gray)
+                                Spacer()
+                                Text(formatCurrencies(for: groupedExpense.expenses))
+                                    .font(.footnote)
+                                    .foregroundStyle(.gray)
+                                    .lineLimit(1)
+                            }
+                        }
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button(role: .destructive) {
+                            deleteExpense(for: groupedExpense.date)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
                         }
                     }
                 }
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button(role: .destructive) {
-                        deleteExpense(for: groupedExpense.date)
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
+            }
+        } header: {
+            HStack {
+                Text(title)
+                Spacer()
+                Image(systemName: expandedSections.contains(title) ? "chevron.down" : "chevron.right")
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if expandedSections.contains(title) {
+                    expandedSections.remove(title)
+                } else {
+                    expandedSections.insert(title)
                 }
             }
         }
