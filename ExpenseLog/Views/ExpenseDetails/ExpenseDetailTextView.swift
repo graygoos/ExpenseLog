@@ -13,7 +13,7 @@ struct ExpenseDetailTextView: View {
     var isCurrency: Bool = false
     var currencyCode: String? = nil
     var symbolName: String? = nil
-    var quantity: Int? = nil
+    var quantity: Double? = nil
     var unit: String? = nil
     
     var body: some View {
@@ -29,7 +29,7 @@ struct ExpenseDetailTextView: View {
                 if isCurrency, let code = currencyCode {
                     Text(Decimal(string: detail) ?? 0, format: .currency(code: code))
                 } else if let quantity = quantity, let unit = unit {
-                    Text("^[\(quantity) \(unit)](inflect: true)")
+                    Text("^[\(quantity, specifier: "%.2f") \(unit)](inflect: true)")
                 } else {
                     Text(detail)
                 }
@@ -42,3 +42,5 @@ struct ExpenseDetailTextView: View {
 #Preview {
     ExpenseDetailTextView(title: "", detail: "")
 }
+
+//Text("^[\(quantity) \(unit)](inflect: true)")

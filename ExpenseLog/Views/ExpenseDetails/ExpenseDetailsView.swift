@@ -37,7 +37,7 @@ struct ExpenseDetailsView: View {
                 }
                 
                 if settings.showQuantitySection || (expense.viewItemQuantity > String(0) && expense.itemUnit != nil) {
-                    if let quantity = Int(expense.viewItemQuantity), let unit = expense.itemUnit {
+                    if let quantity = Double(expense.viewItemQuantity), let unit = expense.itemUnit {
                         ExpenseDetailTextView(title: "Quantity", detail: "\(quantity)", quantity: quantity, unit: unit)
                     } else {
                         ExpenseDetailTextView(title: "Quantity", detail: expense.viewItemQuantity)

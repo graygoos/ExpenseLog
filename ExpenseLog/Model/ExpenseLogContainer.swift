@@ -10,6 +10,11 @@ import CoreData
 class ExpenseLogContainer {
     let persistentContainer: NSPersistentContainer
     
+    let options = [
+        NSMigratePersistentStoresAutomaticallyOption: true,
+        NSInferMappingModelAutomaticallyOption: true
+    ]
+    
     init() {
         persistentContainer = NSPersistentContainer(name: "ExpensesDataModel")
         persistentContainer.loadPersistentStores { _, _ in }
@@ -63,7 +68,7 @@ extension ExpenseLogContainer {
         
         expense.itemName = itemName
         expense.itemAmount = NSDecimalNumber(decimal: itemAmount)
-        expense.itemQuantity = Int16(itemQuantity)
+        expense.itemQuantity = Double(itemQuantity)
         expense.itemDescription = itemDescription
         expense.payee = payee
         expense.expenseTotal = NSDecimalNumber(decimal: expenseTotal)
@@ -74,7 +79,6 @@ extension ExpenseLogContainer {
             expense.expenseDate = convertToUTC(from: date)
         }
     }
-    
     
     func convertToUTC(from date: Date) -> Date {
         let calendar = Calendar.current

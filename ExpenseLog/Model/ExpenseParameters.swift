@@ -19,7 +19,7 @@ class ExpenseParameters {
             self.itemUnit = expense?.itemUnit ?? ""
             self.payee = expense?.viewPayee ?? ""
             self.expenseLocation = expense?.viewExpenseLocation ?? ""
-            self.itemQuantity = Int(expense?.viewItemQuantity ?? "0")!
+            self.itemQuantity = Double(expense?.viewItemQuantity ?? "0")!
             self.paymentType = expense?.viewPaymentType ?? ""
             self.expenseCurrency = expense?.expenseCurrency ?? "NGN"
             self.expenseCategory = expense?.expenseCategory ?? ""
@@ -50,7 +50,7 @@ class ExpenseParameters {
     var itemUnit = "Non"
     var payee = ""
     var expenseLocation = ""
-    var itemQuantity: Int = 1
+    var itemQuantity: Double = 1
     var paymentType = "Debit Card"
     var expenseDate = Date()
     var recurringExpense = false
@@ -63,7 +63,7 @@ class ExpenseParameters {
         self.expenseDate = expenseDate
     }
     
-    var itemUnits = ["Non", "Pack", "Tin", "Carton", "Crate", "Bag", "Box", "Bar", "Loaf", "Card", "Bottle", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrap", "Wrapper", "Foil", "Container", "Canister", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Portion", "Kilogram", "Roll", "Pound", "Ounce", "Litre", "Centilitre", "Tube", "Bucket", "Sachet", "Cup", "Page", "Stick", "Unit", "Other"]
+    var itemUnits = ["Non", "Pack", "Tin", "Carton", "Crate", "Bag", "Box", "Bar", "Loaf", "Card", "Bottle", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrap", "Wrapper", "Foil", "Container", "Canister", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Portion", "Kilogram", "Roll", "Pound", "Ounce", "Litre", "Centilitre", "Tube", "Bucket", "Basket", "Sachet", "Cup", "Page", "Stick", "Unit", "Other"]
     
     var paymentMethod = ["Debit Card", "Cash", "Electronic Funds Transfer", "Credit Card", "Cheque",  "Cryptocurrency", "Bank App", "USSD"]
     
@@ -87,7 +87,7 @@ class ExpenseParameters {
         expense.paymentType = paymentType
         expense.recurringExpense = recurringExpense
         expense.isBudgeted = isBudgeted
-        expense.itemQuantity = Int16(itemQuantity)
+        expense.itemQuantity = Double(itemQuantity)
         expense.itemUnit = itemUnit
         expense.payee = payee
         expense.expenseLocation = expenseLocation
