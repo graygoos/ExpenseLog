@@ -61,6 +61,11 @@ struct ExpenseEditScreen: View {
         }
         .onAppear {
             self.model.expense = self.expense
+            if let expense = self.expense {
+                self.model.expenseDate = expense.expenseDate ?? Date()
+                // If you want to show the original entry time in the form:
+                // self.model.timeEntered = expense.timeEntered ?? Date()
+            }
         }
     }
 }

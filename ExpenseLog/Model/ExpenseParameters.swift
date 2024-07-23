@@ -95,20 +95,15 @@ class ExpenseParameters {
         expense.expenseFrequency = expenseFrequency
         expense.expenseCategory = expenseCategory
         expense.expenseDate = convertToUTC(from: expenseDate)
-        expense.timeEntered = Date()
+        let now = Date()
+        expense.expenseDate = convertToUTC(from: expenseDate)
+        expense.timeEntered = now
         
         try? moc.save()
     }
     
     func convertToUTC(from date: Date) -> Date {
-        let calendar = Calendar.current
-        var components = calendar.dateComponents(in: TimeZone.current, from: date)
-        components.hour = 0
-        components.minute = 0
-        components.second = 0
-        let utcCalendar = Calendar(identifier: .gregorian)
-        
-        return utcCalendar.date(from: components)!
+        return date.timeIntervalSince1970.utcDate
     }
 }
 

@@ -20,11 +20,6 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         return formatter.string(from: self)
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = .medium
-//        dateFormatter.timeStyle = .medium
-//        
-//        return dateFormatter.string(from: self)
     }
     
     var formattedDay: String {
@@ -55,7 +50,19 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    // To display date in user's locale format
+    var localizedStringWithTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale.current
+        return dateFormatter.string(from: self)
+    }
 }
 
-
+extension TimeInterval {
+    var utcDate: Date {
+        return Date(timeIntervalSince1970: self)
+    }
+}
 

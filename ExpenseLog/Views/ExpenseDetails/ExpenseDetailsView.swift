@@ -23,7 +23,7 @@ struct ExpenseDetailsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                ExpenseDetailTextView(title: "Date", detail: expense.viewExpenseDate)
+                ExpenseDetailTextView(title: "Date", detail: expense.expenseDate?.localizedStringWithTime ?? "Unknown Date")
                 ExpenseDetailTextView(title: "Item name", detail: expense.viewItemName)
                 ExpenseDetailTextView(
                     title: "Amount",
@@ -133,4 +133,14 @@ struct ExpenseDetailsView: View {
 
     return ExpenseDetailsView(expense: expense, model: $model, settings: $settings)
         .environment(\.managedObjectContext, ExpenseLogContainer(forPreview: true).persistentContainer.viewContext)
+}
+
+
+extension ExpensesEntity {
+    var localizedExpenseDate: String {
+        return expenseDate?.localizedStringWithTime ?? "Unknown Date"
+    }
+    var localizedTimeEntered: String {
+        return timeEntered?.localizedStringWithTime ?? "Unknown Date"
+    }
 }
