@@ -15,21 +15,30 @@ struct TodayTabView: View {
     @State private var showingDeleteAlert = false
     @State private var expenseToDelete: ExpensesEntity?
     
-    @FetchRequest<ExpensesEntity>(
-        sortDescriptors: [],
-        predicate: NSPredicate(format: "%K >= %@ AND %K <= %@", argumentArray: [#keyPath(ExpensesEntity.expenseDate), Date().startOfDay as NSDate, #keyPath(ExpensesEntity.expenseDate), Date().endDayOf as NSDate]),
-        animation: .default
-    ) private var expenses
+    @State private var currentDateForFetch = Date()
+    
+    @FetchRequest private var expenses: FetchedResults<ExpensesEntity>
     
     @State private var newExpense = false
     @State private var showModal = false
     
-    let todayDate = Date()
+    init(settings: Binding<Settings>) {
+        self._settings = settings
+        self._expenses = FetchRequest<ExpensesEntity>(
+            sortDescriptors: [],
+            predicate: NSPredicate(format: "%K >= %@ AND %K <= %@",
+                                   argumentArray: [#keyPath(ExpensesEntity.expenseDate),
+                                                   Date().startOfDay as NSDate,
+                                                   #keyPath(ExpensesEntity.expenseDate),
+                                                   Date().endDayOf as NSDate]),
+            animation: .default
+        )
+    }
     
     var currentDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyy"
-        return dateFormatter.string(from: Date())
+        return dateFormatter.string(from: currentDateForFetch)
     }
     
     var body: some View {
@@ -91,6 +100,9 @@ struct TodayTabView: View {
                 TodayEmptyView(settings: $settings)
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            updateFetchRequest()
+        }
         .alert("Delete Expense", isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Delete", role: .destructive) {
@@ -101,6 +113,16 @@ struct TodayTabView: View {
         } message: {
             Text("Are you sure you want to delete this expense?")
         }
+    }
+    
+    private func updateFetchRequest() {
+        let newDate = Date()
+        currentDateForFetch = newDate
+        expenses.nsPredicate = NSPredicate(format: "%K >= %@ AND %K <= %@",
+                                           argumentArray: [#keyPath(ExpensesEntity.expenseDate),
+                                                           newDate.startOfDay as NSDate,
+                                                           #keyPath(ExpensesEntity.expenseDate),
+                                                           newDate.endDayOf as NSDate])
     }
     
     private func deleteExpense(expense: ExpensesEntity) {
