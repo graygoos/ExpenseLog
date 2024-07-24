@@ -27,14 +27,14 @@ struct DateSelectionView: View {
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .frame(maxHeight: 400)
                 .onChange(of: tempSelectedDate) { oldDate, newDate in
-                    if expenses.isEmpty {
-                        showNoExpenseAlert = true
-                    } else if hasExpenses(on: newDate) {
+                    if hasExpenses(on: newDate) {
                         selectedDate = newDate
                         dismiss()
                         onDismiss()
                     } else {
-                        showNoExpenseAlert = true
+                        selectedDate = newDate
+                        dismiss()
+                        onDismiss()
                     }
                 }
             }

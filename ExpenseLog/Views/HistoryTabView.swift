@@ -77,9 +77,6 @@ struct HistoryTabView: View {
                         }
                     }
                 }
-                //                .sheet(isPresented: $showModal) {
-                //                    ExpenseEntryView(settings: $settings)
-                //                }
             }
         }
         .sheet(isPresented: $isDatePickerPresented) {

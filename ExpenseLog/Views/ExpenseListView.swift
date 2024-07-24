@@ -27,16 +27,25 @@ struct ExpenseListView: View {
         self.date = date
         self._settings = settings
         self.isPresentedModally = isPresentedModally
-        let predicate = NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", argumentArray: [date, Calendar.current.date(byAdding: .day, value: 1, to: date)!])
-        _expenses = FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], predicate: predicate, animation: .default)
+        
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: date)
+        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+        
+        let predicate = NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", startOfDay as NSDate, endOfDay as NSDate)
+        _expenses = FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: true)], predicate: predicate, animation: .default)
     }
     
     var body: some View {
         NavigationStack {
-            VStack {
+            Group {
                 if expenses.isEmpty {
-                    Text("No expenses for this date")
-                        .foregroundColor(.secondary)
+                    VStack {
+                        Spacer()
+                        Text("No expenses for \(date.formatted(date: .long, time: .omitted))")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
                 } else {
                     List {
                         ForEach(expenses, id: \.self) { expense in
@@ -55,7 +64,7 @@ struct ExpenseListView: View {
                     }
                 }
             }
-            .navigationTitle("Expenses for \(date.formattedDay)")
+            .navigationTitle("Expenses for \(date.formatted(date: .long, time: .omitted))")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 if isPresentedModally {
