@@ -27,7 +27,9 @@ struct DateSelectionView: View {
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .frame(maxHeight: 400)
                 .onChange(of: tempSelectedDate) { oldDate, newDate in
-                    if hasExpenses(on: newDate) {
+                    if expenses.isEmpty {
+                        showNoExpenseAlert = true
+                    } else if hasExpenses(on: newDate) {
                         selectedDate = newDate
                         dismiss()
                         onDismiss()
@@ -51,7 +53,8 @@ struct DateSelectionView: View {
     
     private func hasExpenses(on date: Date) -> Bool {
         return expenses.contains { expense in
-            Calendar.current.isDate(expense.expenseDate!, inSameDayAs: date)
+            guard let expenseDate = expense.expenseDate else { return false }
+            return Calendar.current.isDate(expenseDate, inSameDayAs: date)
         }
     }
 }
