@@ -38,20 +38,24 @@ struct HistoryTabView: View {
                 HistoryEmptyScreen(settings: $settings)
             } else {
                 List {
-                    if hasExpensesForRange(start: 1, end: 7) {
-                        collapsibleSection(title: "Previous 7 Days", predicate: predicate(forRange: 1, end: 8))
-                    }
-                    if hasExpensesForRange(start: 8, end: 37) {
-                        collapsibleSection(title: "Previous 30 Days", predicate: predicate(forRange: 8, end: 38))
-                    }
-                    if hasExpensesForRange(start: 38, end: 127) {
-                        collapsibleSection(title: "Previous 90 Days", predicate: predicate(forRange: 38, end: 128))
-                    }
-                    if hasExpensesForRange(start: 128, end: 307) {
-                        collapsibleSection(title: "Previous 180 Days", predicate: predicate(forRange: 128, end: 309))
-                    }
-                    if hasExpensesForRange(start: 309, end: 3650) {
-                        collapsibleSection(title: "Older", predicate: predicateForOlderThan(days: 309))
+                    if searchText.isEmpty {
+                        if hasExpensesForRange(start: 1, end: 7) {
+                            collapsibleSection(title: "Previous 7 Days", predicate: predicate(forRange: 1, end: 8))
+                        }
+                        if hasExpensesForRange(start: 8, end: 37) {
+                            collapsibleSection(title: "Previous 30 Days", predicate: predicate(forRange: 8, end: 38))
+                        }
+                        if hasExpensesForRange(start: 38, end: 127) {
+                            collapsibleSection(title: "Previous 90 Days", predicate: predicate(forRange: 38, end: 128))
+                        }
+                        if hasExpensesForRange(start: 128, end: 307) {
+                            collapsibleSection(title: "Previous 180 Days", predicate: predicate(forRange: 128, end: 309))
+                        }
+                        if hasExpensesForRange(start: 309, end: 3650) {
+                            collapsibleSection(title: "Older", predicate: predicateForOlderThan(days: 309))
+                        }
+                    } else {
+                        searchResultsSection()
                     }
                 }
                 .listStyle(.sidebar )
@@ -73,9 +77,9 @@ struct HistoryTabView: View {
                         }
                     }
                 }
-//                .sheet(isPresented: $showModal) {
-//                    ExpenseEntryView(settings: $settings)
-//                }
+                //                .sheet(isPresented: $showModal) {
+                //                    ExpenseEntryView(settings: $settings)
+                //                }
             }
         }
         .sheet(isPresented: $isDatePickerPresented) {
@@ -209,6 +213,32 @@ struct HistoryTabView: View {
                     expandedSections.remove(title)
                 } else {
                     expandedSections.insert(title)
+                }
+            }
+        }
+    }
+    
+    private func searchResultsSection() -> some View {
+        let searchPredicate = NSPredicate(format: "itemName CONTAINS[cd] %@ OR itemDescription CONTAINS[cd] %@ OR itemUnit CONTAINS[cd] %@ OR payee CONTAINS[cd] %@ OR expenseLocation CONTAINS[cd] %@ OR paymentType CONTAINS[cd] %@", searchText, searchText, searchText, searchText, searchText, searchText)
+        let filteredExpenses = expenses.filter { searchPredicate.evaluate(with: $0) }
+        let groupedExpenses = self.groupedExpenses(for: filteredExpenses)
+        
+        return Section(header: Text("Search Results")) {
+            ForEach(groupedExpenses, id: \.date) { groupedExpense in
+                NavigationLink(destination: ExpenseListView(date: groupedExpense.date, settings: $settings)) {
+                    VStack(alignment: .leading) {
+                        Text(groupedExpense.date.formattedDay)
+                        HStack {
+                            Text("^[\(groupedExpense.expenses.count) Expense](inflect: true)")
+                                .font(.footnote)
+                                .foregroundStyle(.gray)
+                            Spacer()
+                            Text(formatCurrencies(for: groupedExpense.expenses))
+                                .font(.footnote)
+                                .foregroundStyle(.gray)
+                                .lineLimit(1)
+                        }
+                    }
                 }
             }
         }
