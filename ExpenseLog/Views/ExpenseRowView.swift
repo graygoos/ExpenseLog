@@ -38,6 +38,14 @@ struct ExpenseRowView: View {
     }
 }
 
-//#Preview {
-//    ExpenseRowView()
-//}
+#Preview {
+    let mockExpense = ExpensesEntity()
+    mockExpense.itemName = "Sample Expense"
+    mockExpense.itemAmount = NSDecimalNumber(string: "50.00")
+    mockExpense.expenseCurrency = "USD"
+    mockExpense.paymentType = "Credit Card"
+    mockExpense.expenseDate = Date()
+
+    return ExpenseRowView(expense: mockExpense)
+        .previewLayout(.sizeThatFits)
+}
