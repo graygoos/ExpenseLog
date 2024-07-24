@@ -19,61 +19,53 @@ struct ExpenseListView: View {
     @State private var showingDeleteAlert = false
     @State private var expenseToDelete: ExpensesEntity?
     @State private var showingExpenseEntryView = false
+    let isPresentedModally: Bool
     
     @FetchRequest var expenses: FetchedResults<ExpensesEntity>
     
-    init(date: Date, settings: Binding<Settings>) {
+    init(date: Date, settings: Binding<Settings>, isPresentedModally: Bool = false) {
         self.date = date
         self._settings = settings
+        self.isPresentedModally = isPresentedModally
         let predicate = NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", argumentArray: [date, Calendar.current.date(byAdding: .day, value: 1, to: date)!])
         _expenses = FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], predicate: predicate, animation: .default)
     }
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(expenses, id: \.self) { expense in
-                    NavigationLink {
-                        ExpenseDetailsView(expense: expense, model: $model, settings: $settings)
-                    } label: {
-                        HStack {
-                            Image(systemName: symbolForPaymentType(expense.paymentType ?? ""))
-                                .foregroundStyle(.gray)
-                            VStack(alignment: .leading) {
-                                Text("\(expense.viewItemName)")
-                                    .font(.title3)
-                                    .truncationMode(.tail)
-                                    .lineLimit(1)
-                                if expense.viewItemDescription.isEmpty {
-                                    Text(expense.viewFormattedExpenseDate)
-                                        .font(.footnote)
-                                        .foregroundStyle(.gray)
-                                        .truncationMode(.tail)
-                                } else {
-                                    Text(expense.viewItemDescription)
-                                        .font(.footnote)
-                                        .foregroundStyle(.gray)
-                                        .truncationMode(.tail)
-                                        .lineLimit(1)
-                                }
+        NavigationStack {
+            VStack {
+                if expenses.isEmpty {
+                    Text("No expenses for this date")
+                        .foregroundColor(.secondary)
+                } else {
+                    List {
+                        ForEach(expenses, id: \.self) { expense in
+                            NavigationLink {
+                                ExpenseDetailsView(expense: expense, model: $model, settings: $settings)
+                            } label: {
+                                ExpenseRowView(expense: expense)
                             }
-                            Spacer()
-                            Text(((expense.itemAmount))! as Decimal, format: .currency(code: expense.expenseCurrency ?? "NGN"))
                         }
+                        .onDelete { indexSet in
+                            guard let index = indexSet.first else { return }
+                            expenseToDelete = expenses[index]
+                            showingDeleteAlert = true
+                        }
+                        TodayExpenseSectionFooter(expenses: expenses)
                     }
                 }
-                .onDelete { indexSet in
-                    guard let index = indexSet.first else { return }
-                    expenseToDelete = expenses[index]
-                    showingDeleteAlert = true
-                }
-                TodayExpenseSectionFooter(expenses: expenses)
             }
             .navigationTitle("Expenses for \(date.formattedDay)")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar(.hidden, for: .tabBar)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                if isPresentedModally {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Done") {
+                            dismiss()
+                        }
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         showingExpenseEntryView = true
                     }) {
@@ -81,9 +73,9 @@ struct ExpenseListView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingExpenseEntryView) {
-                ExpenseEntryView(settings: $settings, initialDate: date)
-            }
+        }
+        .sheet(isPresented: $showingExpenseEntryView) {
+            ExpenseEntryView(settings: $settings, initialDate: date)
         }
         .alert("Delete Expense", isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) {}
@@ -104,31 +96,7 @@ struct ExpenseListView: View {
             dismiss()
         }
     }
-    
-    private func symbolForPaymentType(_ paymentType: String) -> String {
-            switch paymentType {
-            case "Debit Card":
-                return "creditcard.fill"
-            case "Cash":
-                return "banknote.fill"
-            case "Electronic Funds Transfer":
-                return "arrow.right.arrow.left.circle.fill"
-            case "Credit Card":
-                return "creditcard.fill"
-            case "Cheque":
-                return "checkmark.rectangle.fill"
-            case "Cryptocurrency":
-                return "bitcoinsign.circle.fill"
-            case "Bank App":
-                return "iphone.homebutton"
-            case "USSD":
-                return "number"
-            default:
-                return "creditcard.fill"
-            }
-        }
 }
-
 
 #Preview {
     @Environment(\.managedObjectContext) var moc

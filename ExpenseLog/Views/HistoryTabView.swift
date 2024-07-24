@@ -28,6 +28,10 @@ struct HistoryTabView: View {
     
     @FetchRequest(entity: ExpensesEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ExpensesEntity.expenseDate, ascending: false)], animation: .default) var expenses: FetchedResults<ExpensesEntity>
     
+    @State private var isDatePickerPresented = false
+    @State private var selectedDate: Date? = nil
+    @State private var showExpenseListView = false
+    
     var body: some View {
         NavigationStack {
             if expenses.isEmpty {
@@ -54,6 +58,13 @@ struct HistoryTabView: View {
                 .navigationTitle("History")
                 .searchable(text: $searchText)
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            isDatePickerPresented = true
+                        }) {
+                            Image(systemName: "calendar")
+                        }
+                    }
                     ToolbarItem {
                         Button(action: {
                             self.showModal.toggle()
@@ -62,10 +73,26 @@ struct HistoryTabView: View {
                         }
                     }
                 }
-                .sheet(isPresented: $showModal) {
-                    ExpenseEntryView(settings: $settings)
-                }
+//                .sheet(isPresented: $showModal) {
+//                    ExpenseEntryView(settings: $settings)
+//                }
             }
+        }
+        .sheet(isPresented: $isDatePickerPresented) {
+            DateSelectionView(selectedDate: $selectedDate, expenses: expenses, onDismiss: {
+                isDatePickerPresented = false
+                if selectedDate != nil {
+                    showExpenseListView = true
+                }
+            })
+        }
+        .sheet(isPresented: $showExpenseListView) {
+            if let date = selectedDate {
+                ExpenseListView(date: date, settings: $settings, isPresentedModally: true)
+            }
+        }
+        .sheet(isPresented: $showModal) {
+            ExpenseEntryView(settings: $settings)
         }
         .alert("Delete Expenses", isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) { }

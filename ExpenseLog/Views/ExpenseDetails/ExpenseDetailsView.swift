@@ -23,9 +23,9 @@ struct ExpenseDetailsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                // this shows when the user entered the expense
+                /// this shows when the user entered the expense
                 ExpenseDetailTextView(title: "Date", detail: expense.expenseDate?.localizedStringWithTime ?? "Unknown Date")
-                // this shows when entry was made or last edited
+                /// this shows when entry was made or last edited
                 // ExpenseDetailTextView(title: "Entered", detail: expense.timeEntered?.localizedStringWithTime ?? "Unknown Date")
                 ExpenseDetailTextView(title: "Item name", detail: expense.viewItemName)
                 ExpenseDetailTextView(

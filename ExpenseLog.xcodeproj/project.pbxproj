@@ -46,6 +46,8 @@
 		05D3ADB42B1F4FEB0023A0E3 /* TodaysExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D3ADB32B1F4FEB0023A0E3 /* TodaysExpensesView.swift */; };
 		05D3ADB62B24B1480023A0E3 /* TodayEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D3ADB52B24B1480023A0E3 /* TodayEmptyView.swift */; };
 		05D3ADB82B24B2020023A0E3 /* CurrentDayExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D3ADB72B24B2020023A0E3 /* CurrentDayExpenses.swift */; };
+		05D961192C502B7400207FEA /* DateSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D961182C502B7400207FEA /* DateSelectionView.swift */; };
+		05D9611B2C5133C600207FEA /* ExpenseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9611A2C5133C600207FEA /* ExpenseRowView.swift */; };
 		05F2AEA32B04CE7600AE7C7F /* ExpenseLogContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */; };
 		05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA92B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld */; };
 		05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */; };
@@ -113,6 +115,8 @@
 		05D3ADB32B1F4FEB0023A0E3 /* TodaysExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysExpensesView.swift; sourceTree = "<group>"; };
 		05D3ADB52B24B1480023A0E3 /* TodayEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayEmptyView.swift; sourceTree = "<group>"; };
 		05D3ADB72B24B2020023A0E3 /* CurrentDayExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDayExpenses.swift; sourceTree = "<group>"; };
+		05D961182C502B7400207FEA /* DateSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionView.swift; sourceTree = "<group>"; };
+		05D9611A2C5133C600207FEA /* ExpenseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRowView.swift; sourceTree = "<group>"; };
 		05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogContainer.swift; sourceTree = "<group>"; };
 		05F2AEAA2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensesDataModel.xcdatamodel; sourceTree = "<group>"; };
 		05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntryView.swift; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 				05528CFB2BAF5BF400DE277B /* ToggleView.swift */,
 				05FF4A682BC035E1007F2CF5 /* HistoryEmptyScreen.swift */,
 				053140C42B506514002E90D9 /* TodayViews */,
+				05D961182C502B7400207FEA /* DateSelectionView.swift */,
+				05D9611A2C5133C600207FEA /* ExpenseRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -457,7 +463,9 @@
 				05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */,
 				05D3ADB62B24B1480023A0E3 /* TodayEmptyView.swift in Sources */,
 				0590F99F2C49567500A699F5 /* Locale+Ext.swift in Sources */,
+				05D961192C502B7400207FEA /* DateSelectionView.swift in Sources */,
 				0583888E2B7E5988005AC0BB /* ExpenseDetailsView.swift in Sources */,
+				05D9611B2C5133C600207FEA /* ExpenseRowView.swift in Sources */,
 				05FF4A692BC035E1007F2CF5 /* HistoryEmptyScreen.swift in Sources */,
 				051C99BB2ADD836000B60C65 /* ExpenseLogApp.swift in Sources */,
 				05AC0DB02B61574E00DE0F0D /* Decimal+Ext.swift in Sources */,

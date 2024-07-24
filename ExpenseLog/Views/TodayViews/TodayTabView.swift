@@ -89,12 +89,6 @@ struct TodayTabView: View {
                             ExpenseEntryView(settings: $settings)
                         })
                     }
-                    //                    ToolbarItem(placement: .topBarLeading) {
-                    //                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    //                            Image(systemName: "calendar.circle.fill")
-                    //                                .imageScale(.large)
-                    //                        })
-                    //                    }
                 }
             } else {
                 TodayEmptyView(settings: $settings)
