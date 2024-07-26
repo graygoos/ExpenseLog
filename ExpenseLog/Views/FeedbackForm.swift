@@ -6,32 +6,42 @@
 //
 
 import SwiftUI
-import WebKit
 
 struct FeedbackForm: View {
     var body: some View {
-        Text("You can send the developer feedback at: femialiu713@gmail.com or use the Google form below. Gracias 🙏🏽")
+        Form {
+            Section(header: Text("via email app")) {
+                HStack {
+                    Image(systemName: "envelope")
+                    Text("Email Developer")
+                    Spacer()
+                }
+                //                .contentShape(Rectangle())
+                .onTapGesture {
+                    sendFeedback()
+                }
+            }
+            
+            
+            Section(header: Text("via Google form")) {
+                NavigationLink(destination: FeedbackFormView()) {
+                    Text("Fill Feedback form")
+                        .toolbar(.hidden, for: .tabBar)
+                }
+            }
             .toolbar(.hidden, for: .tabBar)
-        WebView(urlString: "https://docs.google.com/forms/d/e/1FAIpQLScdKRWA8d4NC6nc3_2w62jJhQMZzNL-18_WERSHtMLwPMluXw/viewform?usp=sf_link")
-            .edgesIgnoringSafeArea(.all)
+        }
+        .navigationTitle("Feedback")
+    }
+    
+    func sendFeedback() {
+        if let url = URL(string: "mailto:femialiu713@gmail.com") {
+            UIApplication.shared.open(url)
+        }
     }
 }
 
-struct WebView: UIViewRepresentable {
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        if let url = URL(string: urlString) {
-            let request = URLRequest(url: url)
-            uiView.load(request)
-        }
-    }
-    
-    let urlString: String
-    
-    func makeUIView(context: Context) -> some WKWebView {
-        let webView = WKWebView()
-        return webView
-    }
-}
+
 
 #Preview {
     FeedbackForm()
