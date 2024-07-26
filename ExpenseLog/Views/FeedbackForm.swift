@@ -16,12 +16,10 @@ struct FeedbackForm: View {
                     Text("Email Developer")
                     Spacer()
                 }
-                //                .contentShape(Rectangle())
                 .onTapGesture {
                     sendFeedback()
                 }
             }
-            
             
             Section(header: Text("via Google form")) {
                 NavigationLink(destination: FeedbackFormView()) {
