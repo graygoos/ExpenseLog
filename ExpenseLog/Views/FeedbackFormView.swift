@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FeedbackFormView: View {
-//    @State private var isLoading = true
+    @State private var isLoading = true
     
     var body: some View {
         ZStack {
