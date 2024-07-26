@@ -23,7 +23,7 @@ struct SettingsTabView: View {
                 }
                 Section {
                     NavigationLink(destination: ExportDataScreen(settings: $settings)) {
-                        Text("Export Data")
+                        Text("Manage Data")
                     }
                 }
                 Section {
