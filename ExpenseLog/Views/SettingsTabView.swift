@@ -31,7 +31,11 @@ struct SettingsTabView: View {
                         Text("Give developer feedback")
                     }
                 }
-                
+                Section {
+                    NavigationLink(destination: DeletedExpensesView()) {
+                        Text("View Deleted Expenses")
+                    }
+                }
             }
             .navigationTitle("Settings")
         }
