@@ -37,11 +37,24 @@ struct WebView: UIViewRepresentable {
         }
         
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            parent.isLoading = true
+            print("Web page started loading")
+            DispatchQueue.main.async {
+                self.parent.isLoading = true
+            }
         }
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            parent.isLoading = false
+            print("Web page finished loading")
+            DispatchQueue.main.async {
+                self.parent.isLoading = false
+            }
+        }
+        
+        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            print("Web page failed to load with error: \(error.localizedDescription)")
+            DispatchQueue.main.async {
+                self.parent.isLoading = false
+            }
         }
     }
 }
