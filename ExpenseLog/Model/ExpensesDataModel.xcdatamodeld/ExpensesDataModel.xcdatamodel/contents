@@ -10,6 +10,7 @@
         <attribute name="expenseLocation" optional="YES" attributeType="String"/>
         <attribute name="expenseTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="isBudgeted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isExpenseDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="itemAmount" optional="YES" attributeType="Decimal" defaultValueString="0"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="itemName" optional="YES" attributeType="String"/>
