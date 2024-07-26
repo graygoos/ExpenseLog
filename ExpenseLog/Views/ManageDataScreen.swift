@@ -60,7 +60,7 @@ struct ManageDataScreen: View {
                 Text("^[\(expenses.count) expense](inflect: true) logged in ExpenseLog")
             }
         }
-        .navigationTitle("Export Data")
+        .navigationTitle("Manage Data")
         .toolbar(.hidden, for: .tabBar)
     }
     
