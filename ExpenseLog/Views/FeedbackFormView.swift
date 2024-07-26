@@ -16,22 +16,6 @@ struct FeedbackFormView: View {
     }
 }
 
-struct WebView: UIViewRepresentable {
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        if let url = URL(string: urlString) {
-            let request = URLRequest(url: url)
-            uiView.load(request)
-        }
-    }
-    
-    let urlString: String
-    
-    func makeUIView(context: Context) -> some WKWebView {
-        let webView = WKWebView()
-        return webView
-    }
-}
-
 #Preview {
     FeedbackFormView()
 }

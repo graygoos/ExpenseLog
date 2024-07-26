@@ -49,6 +49,7 @@
 		05D961192C502B7400207FEA /* DateSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D961182C502B7400207FEA /* DateSelectionView.swift */; };
 		05D9611B2C5133C600207FEA /* ExpenseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9611A2C5133C600207FEA /* ExpenseRowView.swift */; };
 		05D9611D2C53D66200207FEA /* FeedbackFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9611C2C53D66200207FEA /* FeedbackFormView.swift */; };
+		05D9611F2C53DA0A00207FEA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9611E2C53DA0A00207FEA /* WebView.swift */; };
 		05F2AEA32B04CE7600AE7C7F /* ExpenseLogContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */; };
 		05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA92B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld */; };
 		05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */; };
@@ -119,6 +120,7 @@
 		05D961182C502B7400207FEA /* DateSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionView.swift; sourceTree = "<group>"; };
 		05D9611A2C5133C600207FEA /* ExpenseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRowView.swift; sourceTree = "<group>"; };
 		05D9611C2C53D66200207FEA /* FeedbackFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFormView.swift; sourceTree = "<group>"; };
+		05D9611E2C53DA0A00207FEA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogContainer.swift; sourceTree = "<group>"; };
 		05F2AEAA2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensesDataModel.xcdatamodel; sourceTree = "<group>"; };
 		05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntryView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				05A637532ADEE3B500C47313 /* SettingsTabView.swift */,
 				058EBB842BB1E2E900AA2871 /* FeedbackForm.swift */,
 				05D9611C2C53D66200207FEA /* FeedbackFormView.swift */,
+				05D9611E2C53DA0A00207FEA /* WebView.swift */,
 				05528D012BB1DD1F00DE277B /* ExportDataScreen.swift */,
 				058740092BAC974F00C5B4F9 /* ShowOrHideSectionsView.swift */,
 				05528CFB2BAF5BF400DE277B /* ToggleView.swift */,
@@ -457,6 +460,7 @@
 				055DE4802C32C61700605547 /* ExpenseDetailTextView.swift in Sources */,
 				0559A12A2B27312C00001FCD /* TodayExpenseSectionFooter.swift in Sources */,
 				05528D002BB1DA4600DE277B /* AboutScreen.swift in Sources */,
+				05D9611F2C53DA0A00207FEA /* WebView.swift in Sources */,
 				05528CFE2BAF63EE00DE277B /* SettingKeys.swift in Sources */,
 				05A637502ADEE36F00C47313 /* TodayTabView.swift in Sources */,
 				0559A1282B27311500001FCD /* TodayExpenseSectionHeader.swift in Sources */,
