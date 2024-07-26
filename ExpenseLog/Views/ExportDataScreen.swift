@@ -22,40 +22,46 @@ struct ExportDataScreen: View {
     ) var expenses: FetchedResults<ExpensesEntity>
 
     var body: some View {
-        VStack {
-            DatePicker("Start Date", selection: $startDate, in: ...endDate, displayedComponents: .date)
-                .onChange(of: startDate) { oldValue, newValue in
-                    updateFilteredExpenses()
+        Form {
+            Section(header: Text("Select date range to export data")) {
+                VStack {
+                    DatePicker("Start Date", selection: $startDate, in: ...endDate, displayedComponents: .date)
+                        .onChange(of: startDate) { oldValue, newValue in
+                            updateFilteredExpenses()
+                        }
+                        .onAppear {
+                            // Set the default start date to the date of the first expense
+                            if let firstExpenseDate = expenses.first?.expenseDate {
+                                startDate = firstExpenseDate
+                                updateFilteredExpenses()
+                            }
+                        }
+                    
+                    DatePicker("End Date", selection: $endDate, in: startDate..., displayedComponents: .date)
+                        .onChange(of: endDate) { oldValue, newValue in
+                            updateFilteredExpenses()
+                        }
                 }
-                .onAppear {
-                    // Set the default start date to the date of the first expense
-                    if let firstExpenseDate = expenses.first?.expenseDate {
-                        startDate = firstExpenseDate
-                        updateFilteredExpenses()
+                HStack {
+                    Spacer()
+                    if let fileURL = csvFileURL {
+                        ShareLink(item: fileURL) {
+                            Label("Export CSV", systemImage: "square.and.arrow.up.fill")
+                        }
+                    } else {
+                        Button(action: generateCSV) {
+                            Label("Generate CSV", systemImage: "doc.text.fill")
+                        }
                     }
-                }
-
-            DatePicker("End Date", selection: $endDate, in: startDate..., displayedComponents: .date)
-                .onChange(of: endDate) { oldValue, newValue in
-                    updateFilteredExpenses()
-                }
-            Spacer()
-            Text("^[\(expenses.count) expense](inflect: true) logged in ExpenseLog")
-            Spacer()
-            if let fileURL = csvFileURL {
-                ShareLink(item: fileURL) {
-                    Label("Export CSV", systemImage: "square.and.arrow.up.fill")
-                }
-            } else {
-                Button(action: generateCSV) {
-                    Label("Generate CSV", systemImage: "doc.text.fill")
+                    Spacer()
                 }
             }
-            Spacer()
-            Spacer()
+            Section(header: Text("Total number expenses logged")) {
+                Text("^[\(expenses.count) expense](inflect: true) logged in ExpenseLog")
+            }
         }
+        .navigationTitle("Export Data")
         .toolbar(.hidden, for: .tabBar)
-        .padding()
     }
     
     func updateFilteredExpenses() {
