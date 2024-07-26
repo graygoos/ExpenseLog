@@ -1,14 +1,14 @@
 //
-//  ExportDataScreen.swift
+//  ManageDataScreen.swift
 //  ExpenseLog
 //
 //  Created by Femi Aliu on 25/03/2024.
-//
+//  edited to ManageDataScreen from ExportDataScreen - 26/07/24
 
 import SwiftUI
 import CoreData
 
-struct ExportDataScreen: View {
+struct ManageDataScreen: View {
     @Environment(\.managedObjectContext) var moc
     @State private var startDate = Date()
     @State private var endDate = Date()
@@ -158,5 +158,5 @@ struct ExportDataScreen: View {
 #Preview {
     @Environment(\.managedObjectContext) var moc
     @State var settings = Settings(moc: moc)
-    return ExportDataScreen(settings: $settings)
+    return ManageDataScreen(settings: $settings)
 }

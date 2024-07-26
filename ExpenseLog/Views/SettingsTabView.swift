@@ -22,7 +22,7 @@ struct SettingsTabView: View {
                     ShowOrHideSectionsView(settings: $settings)
                 }
                 Section {
-                    NavigationLink(destination: ExportDataScreen(settings: $settings)) {
+                    NavigationLink(destination: ManageDataScreen(settings: $settings)) {
                         Text("Manage Data")
                     }
                 }
