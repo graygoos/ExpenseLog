@@ -50,6 +50,7 @@
 		05D9611B2C5133C600207FEA /* ExpenseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9611A2C5133C600207FEA /* ExpenseRowView.swift */; };
 		05D9611D2C53D66200207FEA /* FeedbackFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9611C2C53D66200207FEA /* FeedbackFormView.swift */; };
 		05D9611F2C53DA0A00207FEA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9611E2C53DA0A00207FEA /* WebView.swift */; };
+		05D961212C53F09400207FEA /* ImportDataScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D961202C53F09400207FEA /* ImportDataScreen.swift */; };
 		05F2AEA32B04CE7600AE7C7F /* ExpenseLogContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */; };
 		05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEA92B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld */; };
 		05F2AEAF2B050D9400AE7C7F /* ExpenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */; };
@@ -121,6 +122,7 @@
 		05D9611A2C5133C600207FEA /* ExpenseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRowView.swift; sourceTree = "<group>"; };
 		05D9611C2C53D66200207FEA /* FeedbackFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFormView.swift; sourceTree = "<group>"; };
 		05D9611E2C53DA0A00207FEA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		05D961202C53F09400207FEA /* ImportDataScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDataScreen.swift; sourceTree = "<group>"; };
 		05F2AEA22B04CE7600AE7C7F /* ExpenseLogContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogContainer.swift; sourceTree = "<group>"; };
 		05F2AEAA2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensesDataModel.xcdatamodel; sourceTree = "<group>"; };
 		05F2AEAE2B050D9400AE7C7F /* ExpenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntryView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				05B842B02B7121D80015DD14 /* ExpenseListView.swift */,
 				05A637512ADEE3A000C47313 /* HistoryTabView.swift */,
 				05A637532ADEE3B500C47313 /* SettingsTabView.swift */,
+				05D961202C53F09400207FEA /* ImportDataScreen.swift */,
 				058EBB842BB1E2E900AA2871 /* FeedbackForm.swift */,
 				05D9611C2C53D66200207FEA /* FeedbackFormView.swift */,
 				05D9611E2C53DA0A00207FEA /* WebView.swift */,
@@ -454,6 +457,7 @@
 				058740062BAB2DD800C5B4F9 /* ExpenseEditScreen.swift in Sources */,
 				05D3ADB22B1E1DE80023A0E3 /* ExpenseEntityExtension.swift in Sources */,
 				05586D832BD18F890029A4A3 /* CurrencyManager.swift in Sources */,
+				05D961212C53F09400207FEA /* ImportDataScreen.swift in Sources */,
 				05A637522ADEE3A000C47313 /* HistoryTabView.swift in Sources */,
 				05F2AEAB2B04F2B100AE7C7F /* ExpensesDataModel.xcdatamodeld in Sources */,
 				05528CFC2BAF5BF400DE277B /* ToggleView.swift in Sources */,
