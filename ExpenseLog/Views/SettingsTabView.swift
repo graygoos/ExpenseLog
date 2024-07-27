@@ -15,6 +15,7 @@ struct SettingsTabView: View {
             Form {
                 Section {
                     NavigationLink(destination: AboutScreen()) {
+                        Image(systemName: "info.circle")
                         Text("About")
                     }
                 }
@@ -23,17 +24,21 @@ struct SettingsTabView: View {
                 }
                 Section {
                     NavigationLink(destination: ManageDataScreen(settings: $settings)) {
-                        Text("Manage Data")
+                        Image(systemName: "cylinder.split.1x2")
+                        Text("Manage data")
                     }
                 }
                 Section {
                     NavigationLink(destination: FeedbackForm()) {
+                        Image(systemName: "bubble")
+//                        Image(systemName: "envelope")
                         Text("Give developer feedback")
                     }
                 }
                 Section {
                     NavigationLink(destination: DeletedExpensesView()) {
-                        Text("View Deleted Expenses")
+                        Image(systemName: "trash")
+                        Text("View deleted expenses")
                     }
                 }
             }

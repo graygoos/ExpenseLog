@@ -71,5 +71,3 @@ struct ExpenseRow: View {
 #Preview {
     DeletedExpensesView()
 }
-
-// I'd like any deleted expense to be permanently deleted after 30 days
