@@ -15,6 +15,7 @@ struct ToggleView: View {
     
     var body: some View {
         Toggle(key.title, isOn: self.toggleBinding(for: key))
+            .toggleStyle(SwitchToggleStyle(tint: .accent))
             .onChange(of: self.keySetting(for: key)) { oldValue, newValue in
                 key.updateSetting(using: moc, value: newValue)
             }

@@ -16,6 +16,7 @@ struct SettingsTabView: View {
                 Section {
                     NavigationLink(destination: AboutScreen()) {
                         Image(systemName: "info.circle")
+                            .foregroundStyle(.accent)
                         Text("About")
                     }
                 }
@@ -25,12 +26,14 @@ struct SettingsTabView: View {
                 Section {
                     NavigationLink(destination: ManageDataScreen(settings: $settings)) {
                         Image(systemName: "cylinder.split.1x2")
+                            .foregroundStyle(.accent)
                         Text("Manage data")
                     }
                 }
                 Section {
                     NavigationLink(destination: FeedbackForm()) {
                         Image(systemName: "bubble")
+                            .foregroundStyle(.accent)
 //                        Image(systemName: "envelope")
                         Text("Give developer feedback")
                     }
@@ -38,6 +41,7 @@ struct SettingsTabView: View {
                 Section {
                     NavigationLink(destination: DeletedExpensesView()) {
                         Image(systemName: "trash")
+                            .foregroundStyle(.accent)
                         Text("View deleted expenses")
                     }
                 }
