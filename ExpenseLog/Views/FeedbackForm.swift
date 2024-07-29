@@ -13,6 +13,7 @@ struct FeedbackForm: View {
             Section(header: Text("via email app")) {
                 HStack {
                     Image(systemName: "envelope")
+                        .foregroundStyle(.accent)
                     Text("Email Developer")
                     Spacer()
                 }
@@ -23,6 +24,8 @@ struct FeedbackForm: View {
             
             Section(header: Text("via Google form")) {
                 NavigationLink(destination: FeedbackFormView()) {
+                    Image(systemName: "doc.plaintext")
+                        .foregroundStyle(.accent)
                     Text("Fill Feedback form")
                         .toolbar(.hidden, for: .tabBar)
                 }
