@@ -52,7 +52,7 @@ struct TodayTabView: View {
                             } label: {
                                 HStack {
                                     Image(systemName: SFSymbolManager.symbolForPaymentType(expense.paymentType ?? ""))
-                                        .foregroundStyle(.gray)
+                                        .foregroundStyle(.accent)
                                     VStack(alignment: .leading) {
                                         Text(expense.viewItemName)
                                             .truncationMode(.tail)

@@ -13,7 +13,7 @@ struct ExpenseRowView: View {
     var body: some View {
         HStack {
             Image(systemName: SFSymbolManager.symbolForPaymentType(expense.paymentType ?? ""))
-                .foregroundStyle(.gray)
+                .foregroundStyle(.accent)
             VStack(alignment: .leading) {
                 Text("\(expense.viewItemName)")
                     .font(.title3)

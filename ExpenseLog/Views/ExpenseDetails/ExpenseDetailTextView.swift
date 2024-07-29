@@ -24,7 +24,7 @@ struct ExpenseDetailTextView: View {
             HStack {
                 if let symbolName = symbolName {
                     Image(systemName: symbolName)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.accent)
                 }
                 if isCurrency, let code = currencyCode {
                     Text(Decimal(string: detail) ?? 0, format: .currency(code: code))
