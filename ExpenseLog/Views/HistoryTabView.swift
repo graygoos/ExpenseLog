@@ -40,19 +40,19 @@ struct HistoryTabView: View {
                 List {
                     if searchText.isEmpty {
                         if hasExpensesForRange(start: 1, end: 7) {
-                            collapsibleSection(title: "Previous 7 Days", predicate: predicate(forRange: 1, end: 8))
+                            collapsibleSection(title: "Previous 7 Days", predicate: predicate(forRange: 1, end: 7))
                         }
                         if hasExpensesForRange(start: 8, end: 37) {
-                            collapsibleSection(title: "Previous 30 Days", predicate: predicate(forRange: 8, end: 38))
+                            collapsibleSection(title: "Previous 30 Days", predicate: predicate(forRange: 8, end: 37))
                         }
                         if hasExpensesForRange(start: 38, end: 127) {
-                            collapsibleSection(title: "Previous 90 Days", predicate: predicate(forRange: 38, end: 128))
+                            collapsibleSection(title: "Previous 90 Days", predicate: predicate(forRange: 38, end: 127))
                         }
                         if hasExpensesForRange(start: 128, end: 307) {
-                            collapsibleSection(title: "Previous 180 Days", predicate: predicate(forRange: 128, end: 309))
+                            collapsibleSection(title: "Previous 180 Days", predicate: predicate(forRange: 128, end: 307))
                         }
-                        if hasExpensesForRange(start: 309, end: 3650) {
-                            collapsibleSection(title: "Older", predicate: predicateForOlderThan(days: 309))
+                        if hasExpensesForRange(start: 308, end: 3650) {
+                            collapsibleSection(title: "Older", predicate: predicateForOlderThan(days: 308))
                         }
                     } else {
                         searchResultsSection()
