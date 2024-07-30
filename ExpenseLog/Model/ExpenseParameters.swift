@@ -97,6 +97,7 @@ class ExpenseParameters {
         expense.expenseDate = convertToUTC(from: expenseDate)
         let now = Date()
         expense.expenseDate = convertToUTC(from: expenseDate)
+        print("Saving expense with date: \(expense.expenseDate?.description ?? "nil")")
         expense.timeEntered = now
         
         try? moc.save()

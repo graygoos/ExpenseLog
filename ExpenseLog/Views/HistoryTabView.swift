@@ -117,9 +117,9 @@ struct HistoryTabView: View {
     
     private func hasExpensesForRange(start: Int, end: Int) -> Bool {
         let calendar = Calendar.current
-        let now = Date()
+        let now = calendar.startOfDay(for: Date())
         let startDate = calendar.date(byAdding: .day, value: -end, to: now)!
-        let endDate = calendar.date(byAdding: .day, value: -start, to: now)!
+        let endDate = calendar.date(byAdding: .day, value: -start + 1, to: now)!
         
         return expenses.contains { expense in
             guard let expenseDate = expense.expenseDate else { return false }
@@ -143,9 +143,11 @@ struct HistoryTabView: View {
     // Create a predicate for expenses in the last N days
     private func predicate(forRange start: Int, end: Int) -> NSPredicate {
         let calendar = Calendar.current
-        let now = Date()
+        let now = calendar.startOfDay(for: Date())
         let startDate = calendar.date(byAdding: .day, value: -end, to: now)!
-        let endDate = calendar.date(byAdding: .day, value: -start, to: now)!
+        let endDate = calendar.date(byAdding: .day, value: -start + 1, to: now)!
+        
+        print("Fetching expenses from \(startDate) to \(endDate)")
         
         if searchText.isEmpty {
             return NSPredicate(format: "expenseDate >= %@ AND expenseDate < %@", startDate as NSDate, endDate as NSDate)
