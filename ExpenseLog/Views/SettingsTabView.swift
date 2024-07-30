@@ -38,13 +38,13 @@ struct SettingsTabView: View {
                         Text("Give developer feedback")
                     }
                 }
-                Section {
-                    NavigationLink(destination: DeletedExpensesView()) {
-                        Image(systemName: "trash")
-                            .foregroundStyle(.accent)
-                        Text("View deleted expenses")
-                    }
-                }
+//                Section {
+//                    NavigationLink(destination: DeletedExpensesView()) {
+//                        Image(systemName: "trash")
+//                            .foregroundStyle(.accent)
+//                        Text("View deleted expenses")
+//                    }
+//                }
             }
             .navigationTitle("Settings")
         }
