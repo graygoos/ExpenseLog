@@ -12,23 +12,23 @@ import CoreData
 @Observable
 class Settings: ObservableObject, Equatable {
     static func == (lhs: Settings, rhs: Settings) -> Bool {
-        lhs.showQuantitySection == rhs.showQuantitySection &&
-        lhs.showVendorSection == rhs.showVendorSection &&
-        lhs.showLocationSection == rhs.showLocationSection &&
-        lhs.showDescriptionSection == rhs.showDescriptionSection &&
-        lhs.showPaymentDetailsSection == rhs.showPaymentDetailsSection &&
-        lhs.showFrequencySection == rhs.showFrequencySection &&
-        lhs.showCategorySection == rhs.showCategorySection
-        return lhs.defaultCurrency == rhs.defaultCurrency
+        return lhs.showQuantitySection == rhs.showQuantitySection &&
+               lhs.showVendorSection == rhs.showVendorSection &&
+               lhs.showLocationSection == rhs.showLocationSection &&
+               lhs.showDescriptionSection == rhs.showDescriptionSection &&
+               lhs.showPaymentDetailsSection == rhs.showPaymentDetailsSection &&
+               lhs.showFrequencySection == rhs.showFrequencySection &&
+               lhs.showCategorySection == rhs.showCategorySection &&
+               lhs.defaultCurrency == rhs.defaultCurrency
     }
     
-    var showQuantitySection =       false
-    var showVendorSection =         false
-    var showLocationSection =       false
-    var showDescriptionSection =    false
+    var showQuantitySection = false
+    var showVendorSection = false
+    var showLocationSection = false
+    var showDescriptionSection = false
     var showPaymentDetailsSection = false
-    var showFrequencySection =      false
-    var showCategorySection =       false
+    var showFrequencySection = false
+    var showCategorySection = false
     var defaultCurrency: String
 
     init(moc: NSManagedObjectContext) {
