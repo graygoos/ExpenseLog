@@ -20,7 +20,7 @@ struct ExpenseFormView: View {
                 Section("Item purchased") {
                     TextField("Item name", text: $model.itemName)
                 }
-                Section("Enter item amount (Unit Price)") {
+                Section("Item amount") {
                     TextField("Item Amount", value: $model.itemAmount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
                         .keyboardType(.decimalPad)
                     Picker("Currency", selection: $model.expenseCurrency) {
