@@ -14,6 +14,10 @@ struct ExpenseFormView: View {
     @Binding var settings: Settings
     @ObservedObject var currencyManager = CurrencyManager()
     
+    var currentCurrencyCode: String {
+        return Locale.current.currency?.identifier ?? "USD"
+    }
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -21,11 +25,16 @@ struct ExpenseFormView: View {
                     TextField("Item name", text: $model.itemName)
                 }
                 Section("Item amount") {
-                    TextField("Item Amount", value: $model.itemAmount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
+                    TextField("Item Amount", value: $model.itemAmount, format: .currency(code: currentCurrencyCode))
                         .keyboardType(.decimalPad)
                     Picker("Currency", selection: $model.expenseCurrency) {
                         ForEach(currencyManager.allCurrencies, id: \.self) { unit in
                             Text(unit)
+                        }
+                    }
+                    .onAppear {
+                        if model.expenseCurrency.isEmpty {
+                            model.expenseCurrency = currentCurrencyCode
                         }
                     }
                 }

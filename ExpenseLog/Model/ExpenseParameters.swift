@@ -21,7 +21,7 @@ class ExpenseParameters {
             self.expenseLocation = expense?.viewExpenseLocation ?? ""
             self.itemQuantity = Double(expense?.viewItemQuantity ?? "0")!
             self.paymentType = expense?.viewPaymentType ?? ""
-            self.expenseCurrency = expense?.expenseCurrency ?? "NGN"
+            self.expenseCurrency = Locale.current.currency?.identifier ?? "USD"
             self.expenseCategory = expense?.expenseCategory ?? ""
             self.expenseFrequency = expense?.expenseFrequency
             if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
@@ -40,6 +40,7 @@ class ExpenseParameters {
     
     init(moc: NSManagedObjectContext? = nil) {
         self.moc = moc
+        self.expenseCurrency = Locale.current.currency?.identifier ?? "USD"
         print("expenseParameters init 🤣 ") // 3
     }
     
@@ -60,6 +61,7 @@ class ExpenseParameters {
     
     init(expenseDate: Date = Date()) {
         self.expenseDate = expenseDate
+        self.expenseCurrency = Locale.current.currency?.identifier ?? "USD"
     }
     
     var itemUnits = ["Non", "Pack", "Tin", "Carton", "Crate", "Bag", "Box", "Bar", "Loaf", "Card", "Bottle", "Jar", "Can", "Bowl", "Piece", "Plate", "Case", "Bulk Container", "Pouch", "Blister Pack", "Wrap", "Wrapper", "Foil", "Container", "Canister", "Envelope", "Cellophane/Plastic wrap", "Bushel", "Pair", "Portion", "Kilogram", "Roll", "Pound", "Ounce", "Litre", "Centilitre", "Millilitre", "Yard", "Meter", "Tube", "Bucket", "Basket", "Sachet", "Cup", "Page", "Stick", "Measure", "Day", "Week", "Month", "Year", "Unit", "Other"]
