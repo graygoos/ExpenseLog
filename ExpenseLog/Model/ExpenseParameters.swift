@@ -35,7 +35,6 @@ class ExpenseParameters {
             } else {
                 self.expenseDate = Date()
             }
-            
         }
     }
     
