@@ -21,7 +21,7 @@ class ExpenseParameters {
             self.expenseLocation = expense?.viewExpenseLocation ?? ""
             self.itemQuantity = Double(expense?.viewItemQuantity ?? "0")!
             self.paymentType = expense?.viewPaymentType ?? ""
-            self.expenseCurrency = Locale.current.currency?.identifier ?? "USD"
+            self.expenseCurrency = expense?.expenseCurrency ?? Locale.current.currency?.identifier ?? "USD"
             self.expenseCategory = expense?.expenseCategory ?? ""
             self.expenseFrequency = expense?.expenseFrequency
             if let dateString = expense?.viewExpenseDate, dateString != "N/A" {
