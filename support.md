@@ -1,4 +1,4 @@
-# Support for ExpenseLog
+# Support for ExpenseLog app
 
 ## How to Get Help
 
