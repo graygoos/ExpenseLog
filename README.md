@@ -90,7 +90,8 @@ We welcome contributions to enhance ExpenseLog. To contribute:
 
 ## License
 
-This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License. See the LICENSE file for details.
+Copyright 2023-2024 Femi Aliu. All Rights Reserved.
+
 ## Contact
 
 For any questions or suggestions, feel free to email me: femialiu713@gmail.com
